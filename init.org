@@ -128,6 +128,14 @@ disable those too
 
 #+END_SRC
 ** TODO multiple-cursors
+** paredit
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package paredit
+      :ensure t
+      :config
+      (add-hook 'prog-mode-hook 'paredit-mode)
+      :diminish "")
+#+END_SRC
 ** TODO undo-tree
 ** TODO uniquify
 ** TODO hydra
