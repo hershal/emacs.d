@@ -78,7 +78,6 @@ disable those too
     :init (bind-key "M-p" 'ace-window hb-mode-map))
 #+END_SRC
 ** TODO auto-complete
-** TODO battery
 ** bind-key
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package bind-key
@@ -95,6 +94,13 @@ disable those too
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package expand-region
     :ensure t)
+#+END_SRC
+** fancy-battery
+#+BEGIN_SRC emacs-lisp :tangle yes
+    (use-package fancy-battery
+      :ensure t
+      :config (fancy-battery-mode 1))
+
 #+END_SRC
 ** TODO multiple-cursors
 ** TODO undo-tree
