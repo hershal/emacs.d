@@ -75,13 +75,25 @@ disable those too
     (setq aw-leading-char-style 'path
           aw-keys (number-sequence 97 (+ 97 26))))
 #+END_SRC
-
+** auto-complete
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (use-package ace-window
-    :ensure t
-    :init (bind-key "M-p" 'ace-window hb-mode-map))
+    (use-package auto-complete
+      :ensure t
+
+      :init
+      (setq ac-use-menu-map t)
+
+      :config
+      (ac-config-default)
+      (setq-default ac-auto-show-menu 0.1)
+      (setq-default ac-sources (append '(ac-source-imenu) ac-sources))
+      (define-key ac-menu-map (kbd "C-n") nil)
+      (define-key ac-menu-map (kbd "C-p") nil)
+      (global-auto-complete-mode)
+
+      :diminish "")
+
 #+END_SRC
-** TODO auto-complete
 ** bind-key
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package bind-key
