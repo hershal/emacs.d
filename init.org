@@ -1,0 +1,154 @@
+* init.org
+** introduction
+** use-package
+First we must initialize use-package.
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (require 'package)
+  (setq package-enable-at-startup nil)
+  (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+
+  (package-initialize)
+
+  ;; Bootstrap `use-package'
+  (unless (package-installed-p 'use-package)
+    (package-refresh-contents)
+    (package-install 'use-package))
+
+  (require 'use-package)
+#+END_SRC
+** whoami
+Who am I?
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+(setq user-full-name "Hershal Bhave"
+      user-mail-address "hershal.bhave@gmail.com")
+#+END_SRC
+** misc-defaults
+Let's set some (sensible) defaults that don't go anywhere else.
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (setq ring-bell-function 'ignore)
+#+END_SRC
+** hb-mode
+Set up hb-mode and hb-mode-map.
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defvar hb-mode-map (make-keymap) "hb-mode keymap.")
+  (define-minor-mode hb-mode
+    "Toggle hb-mode.
+       A minor mode so that my key settings override any major modes'."
+    t " hb" 'hb-mode-map)
+  (hb-mode 1)               ;enable my minor mode, except in minibuffer
+  (add-hook 'minibuffer-setup-hook (lambda() (hb-mode 0)))
+#+END_SRC
+** test-map
+#
+* os-specific
+** linux
+** general
+These usually exist when using a window system. Let's make that not
+so.
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (if (window-system)
+      (progn (scroll-bar-mode 0)
+             (tool-bar-mode 0)
+             (blink-cursor-mode 0)
+             (set-fringe-mode 0)))
+#+END_SRC
+
+This exists regardless of whether we use a windowing system, so
+disable those too
+#+BEGIN_SRC emacs-lisp :tangle yes
+(menu-bar-mode 0)
+#+END_SRC
+
+* packages
+** TODO ace-jump and ace-window
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+    (use-package ace-jump-mode
+      :ensure t
+      :init (bind-key "C-z" 'ace-jump-mode hb-mode-map))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package ace-window
+    :ensure t
+    :init (bind-key "M-p" 'ace-window hb-mode-map))
+#+END_SRC
+** TODO auto-complete
+** TODO battery
+** bind-key
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package bind-key
+    :ensure t)
+#+END_SRC
+** bliss-theme
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package bliss-theme
+    :ensure t
+    :config (load-theme 'bliss t))
+#+END_SRC
+** TODO desktop-mode
+** expand-region
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package expand-region
+    :ensure t)
+#+END_SRC
+** TODO multiple-cursors
+** TODO undo-tree
+** TODO uniquify
+** TODO hydra
+#+BEGIN_SRC emacs-lisp :tangle yes
+     (use-package hydra
+       :ensure t)
+#+END_SRC
+** magit
+#+BEGIN_SRC emacs-lisp :tangle yes
+      (use-package magit
+        :commands magit-status
+        :init (bind-key "C-c g" 'magit-status hb-mode-map))
+#+END_SRC
+** winner-mode
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package winner
+    :ensure t
+    :defer t
+    :idle (winner-mode 1))
+#+END_SRC
+** windmove
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package windmove
+    :ensure t
+    :config (windmove-default-keybindings))
+#+END_SRC
+** TODO writegood-mode
+#+BEGIN_SRC emacs-lisp
+  (use-package writegood-mode
+    :idle-priority 5)
+#+END_SRC
+* major modes
+** TODO org-mode
+* minor modes
+*** customization
+* macros
+* conclusion
+#+BEGIN_SRC emacs-lisp
+
+#+END_SRC
+
+* [0/12] todos
+** TODO :general: convert current configs to use-package
+** TODO :hydra:org: add keybinding for org-do-promote and org-do-demote
+** TODO :hydra: configure hydras
+** TODO :hydra: insert delimeters (), [], {}, etc
+** TODO :acewindow: fix ace-window
+** TODO :emacs: macro to create 'BEGIN_SRC emacs-lisp :tangle yes' blocks
+** TODO :autocomplete: get auto-complete working
+** TODO :autocomplete:org: get ac-complete-org working
+** TODO :org: find out how to use orgmode tags properly
+Reference [[http://orgmode.org/manual/Tags.html][the org manual]].
+** TODO :esc:ponder:general: take a look at writeroom mode
+** TODO :magit:hydra: investigate if magit needs hydras
+** TODO :magit: find out why magit doesn't work
