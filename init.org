@@ -183,14 +183,14 @@ disable those too
 
 #+END_SRC
 
-* [0/13] todos
+* [#B] [0/15]g todos
 ** TODO :general: convert current configs to use-package
 ** TODO :hydra:org: add keybinding for org-do-promote and org-do-demote
 ** TODO :hydra: configure hydras
 ** TODO :hydra: insert delimeters (), [], {}, etc
 ** TODO :acewindow: fix ace-window
 ** TODO :emacs: macro to create 'BEGIN_SRC emacs-lisp :tangle yes' blocks
-** TODO :autocomplete: get auto-complete working
+** TODO :autocomplete: test if auto-complete is working
 ** TODO :autocomplete:org: get ac-complete-org working
 ** TODO :org: find out how to use orgmode tags properly
 Reference [[http://orgmode.org/manual/Tags.html][the org manual]].
@@ -198,3 +198,5 @@ Reference [[http://orgmode.org/manual/Tags.html][the org manual]].
 ** TODO :magit:hydra: investigate if magit needs hydras
 ** TODO :magit: find out why magit doesn't work
 ** TODO :annoy:makefile: add hook to makefile-mode to tabify
+** TODO :annoy:org: don't allow 'org-edit-special' to clobber my window config
+** TODO :annoy: make something similar to esc's should-have functions
