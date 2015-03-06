@@ -41,6 +41,7 @@ Set up hb-mode and hb-mode-map.
        A minor mode so that my key settings override any major modes'."
     t " hb" 'hb-mode-map)
   (hb-mode 1)               ;enable my minor mode, except in minibuffer
+  (diminish 'hb-mode)
   (add-hook 'minibuffer-setup-hook (lambda() (hb-mode 0)))
 #+END_SRC
 ** test-map
