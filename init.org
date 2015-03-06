@@ -66,12 +66,14 @@ disable those too
 #+END_SRC
 
 * packages
-** ace-jump and ace-window
+** ace-window
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (use-package ace-jump-mode
+  (use-package ace-window
     :ensure t
-    :init (progn (bind-key "C-z" 'ace-jump-char-mode hb-mode-map)
-                 (bind-key "M-z" 'ace-jump-word-mode hb-mode-map)))
+    :init
+    (bind-key "M-p" 'ace-window hb-mode-map)
+    (setq aw-leading-char-style 'path
+          aw-keys (number-sequence 97 (+ 97 26))))
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp :tangle yes
