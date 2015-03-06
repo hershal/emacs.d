@@ -64,12 +64,12 @@ disable those too
 #+END_SRC
 
 * packages
-** TODO ace-jump and ace-window
-
+** ace-jump and ace-window
 #+BEGIN_SRC emacs-lisp :tangle yes
-    (use-package ace-jump-mode
-      :ensure t
-      :init (bind-key "C-z" 'ace-jump-mode hb-mode-map))
+  (use-package ace-jump-mode
+    :ensure t
+    :init (progn (bind-key "C-z" 'ace-jump-char-mode hb-mode-map)
+                 (bind-key "M-z" 'ace-jump-word-mode hb-mode-map)))
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp :tangle yes
