@@ -150,7 +150,7 @@ disable those too
 
 #+END_SRC
 
-* [0/12] todos
+* [0/13] todos
 ** TODO :general: convert current configs to use-package
 ** TODO :hydra:org: add keybinding for org-do-promote and org-do-demote
 ** TODO :hydra: configure hydras
@@ -164,3 +164,4 @@ Reference [[http://orgmode.org/manual/Tags.html][the org manual]].
 ** TODO :esc:ponder:general: take a look at writeroom mode
 ** TODO :magit:hydra: investigate if magit needs hydras
 ** TODO :magit: find out why magit doesn't work
+** TODO :annoy:makefile: add hook to makefile-mode to tabify
