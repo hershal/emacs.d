@@ -106,10 +106,19 @@ disable those too
     :config (load-theme 'bliss t))
 #+END_SRC
 ** TODO desktop-mode
+** diminish
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package diminish
+    :ensure t
+    :commands diminish)
+#+END_SRC
 ** expand-region
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package expand-region
-    :ensure t)
+      :ensure t
+      :config
+      (bind-key "C-=" 'er/expand-region hb-mode-map )
+      (bind-key "C-+" 'er/contract-region) hb-mode-map )
 #+END_SRC
 ** fancy-battery
 #+BEGIN_SRC emacs-lisp :tangle yes
