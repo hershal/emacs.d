@@ -71,6 +71,24 @@ Activate display-battery-mode.
 #+BEGIN_SRC emacs-lisp :tangle yes
   (display-battery-mode 1)
 #+END_SRC
+
+** nuisances
+Remove the yes-or-no prompts and replace them with y-or-n.
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defalias 'yes-or-no-p 'y-or-n-p)
+#+END_SRC
+
+Also remove all dialog boxes
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defadvice yes-or-no-p (around prevent-dialog activate)
+    "Prevent yes-or-no-p from activating a dialog"
+    (let ((use-dialog-box nil))
+      ad-do-it))
+  (defadvice y-or-n-p (around prevent-dialog-yorn activate)
+    "Prevent y-or-n-p from activating a dialog"
+    (let ((use-dialog-box nil))
+      ad-do-it))
+#+END_SRC
 * packages
 ** ace-window
 #+BEGIN_SRC emacs-lisp :tangle yes
