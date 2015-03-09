@@ -66,6 +66,11 @@ disable those too.
 (menu-bar-mode 0)
 #+END_SRC
 
+** portables
+Activate display-battery-mode.
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (display-battery-mode 1)
+#+END_SRC
 * packages
 ** ace-window
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -120,12 +125,6 @@ disable those too.
       :config
       (bind-key "C-=" 'er/expand-region hb-mode-map )
       (bind-key "C-+" 'er/contract-region) hb-mode-map )
-#+END_SRC
-** fancy-battery
-#+BEGIN_SRC emacs-lisp :tangle yes
-    (use-package fancy-battery
-      :ensure t
-      :config (fancy-battery-mode 1))
 #+END_SRC
 ** TODO multiple-cursors
 ** paredit
