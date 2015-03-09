@@ -89,6 +89,22 @@ Also remove all dialog boxes
     (let ((use-dialog-box nil))
       ad-do-it))
 #+END_SRC
+
+** general-general
+Very general stuff here. I don't know where to categorize this, so
+general-general.
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (setq vc-follow-symlinks t)
+  (setq ediff-auto-refine 'on)
+  (global-auto-revert-mode t)
+  (setq ring-bell-function 'ignore)
+  (setq backup-directory-alist `((".*" . , "~/.emacs-backups/")))
+  (setq tramp-auto-save-directory "~/.emacs-backups/")
+  (set-buffer-file-coding-system 'unix)
+  (setq-default indent-tabs-mode nil)
+  (setq kill-whole-line t)
+#+END_SRC
+
 * packages
 ** ace-window
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -116,7 +132,6 @@ Also remove all dialog boxes
       (global-auto-complete-mode)
 
       :diminish "")
-
 #+END_SRC
 ** bind-key
 #+BEGIN_SRC emacs-lisp :tangle yes
