@@ -48,7 +48,8 @@ Set up hb-mode and hb-mode-map.
 #
 * os-specific
 ** linux
-** general
+* general
+** window system
 These usually exist when using a window system. Let's make that not
 so.
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -60,7 +61,7 @@ so.
 #+END_SRC
 
 This exists regardless of whether we use a windowing system, so
-disable those too
+disable those too.
 #+BEGIN_SRC emacs-lisp :tangle yes
 (menu-bar-mode 0)
 #+END_SRC
