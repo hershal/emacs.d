@@ -125,7 +125,6 @@ disable those too
     (use-package fancy-battery
       :ensure t
       :config (fancy-battery-mode 1))
-
 #+END_SRC
 ** TODO multiple-cursors
 ** paredit
@@ -183,7 +182,7 @@ disable those too
 
 #+END_SRC
 
-* [#B] [0/15]g todos
+* [0/15] todos
 ** TODO :general: convert current configs to use-package
 ** TODO :hydra:org: add keybinding for org-do-promote and org-do-demote
 ** TODO :hydra: configure hydras
