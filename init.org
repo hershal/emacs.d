@@ -149,6 +149,10 @@ disable those too.
         :commands magit-status
         :init (bind-key "C-c g" 'magit-status hb-mode-map))
 #+END_SRC
+** monochrome-theme
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package monochrome-theme)
+#+END_SRC
 ** transpose-frame
 #+BEGIN_SRC emacs-lisp :tangle yes
       (use-package transpose-frame
