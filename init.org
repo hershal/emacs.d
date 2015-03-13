@@ -311,3 +311,4 @@ Reference [[http://orgmode.org/manual/Tags.html][the org manual]].
 ** TODO :annoy:makefile: add hook to makefile-mode to tabify
 ** TODO :annoy:org: don't allow 'org-edit-special' to clobber my window config
 ** TODO :annoy: make something similar to esc's should-have functions
+** TODO :org: add org-indent-mode hook
