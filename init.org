@@ -138,21 +138,21 @@ general-general.
 #+END_SRC
 ** auto-complete
 #+BEGIN_SRC emacs-lisp :tangle yes
-    (use-package auto-complete
-      :ensure t
+  (use-package auto-complete
+    :ensure t
 
-      :init
-      (setq ac-use-menu-map t)
+    :init
+    (setq ac-use-menu-map t)
 
-      :config
-      (ac-config-default)
-      (setq-default ac-auto-show-menu 0.1)
-      (setq-default ac-sources (append '(ac-source-imenu) ac-sources))
-      (define-key ac-menu-map (kbd "C-n") nil)
-      (define-key ac-menu-map (kbd "C-p") nil)
-      (global-auto-complete-mode)
+    :config
+    (ac-config-default)
+    (setq-default ac-auto-show-menu 0.1)
+    (setq-default ac-sources (append '(ac-source-imenu) ac-sources))
+    (define-key ac-menu-map (kbd "C-n") nil)
+    (define-key ac-menu-map (kbd "C-p") nil)
+    (global-auto-complete-mode)
 
-      :diminish "")
+    :diminish "")
 #+END_SRC
 ** bind-key
 #+BEGIN_SRC emacs-lisp :tangle yes
