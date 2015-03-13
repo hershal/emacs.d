@@ -44,8 +44,26 @@ Set up hb-mode and hb-mode-map.
   (diminish 'hb-mode)
   (add-hook 'minibuffer-setup-hook (lambda() (hb-mode 0)))
 #+END_SRC
+** general-bindings
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (define-key hb-mode-map (kbd "C-c C-m") 'recompile)
+  (define-key hb-mode-map (kbd "C-c m") 'compile)
+  (define-key hb-mode-map (kbd "C-x C-b") 'ido-switch-buffer)
+  (define-key hb-mode-map (kbd "C-x O") 'ff-find-other-file)
+  (define-key hb-mode-map (kbd "C-'") 'execute-extended-command)
+  (define-key hb-mode-map (kbd "C-x C-h") 'hb-delete-trailing-whitespace-untabify)
+  (define-key hb-mode-map (kbd "M-|") 'transpose-frame)
+  (define-key hb-mode-map (kbd "C-M-S-q") 'fill-region-as-paragraph)
+  (define-key hb-mode-map (kbd "M-'") 'query-replace)
+  (define-key hb-mode-map (kbd "M-\"") 'query-replace-regexp)
+  (define-key hb-mode-map (kbd "M-Q") 'auto-fill-mode)
+  (define-key hb-mode-map (kbd "C-o") 'split-line)
+  (define-key hb-mode-map (kbd "C-x K") 'kill-buffer-and-window)
+  (define-key hb-mode-map (kbd "C-x C-S-f") 'find-file-other-window)
+
+#+END_SRC
 ** test-map
-#
+
 * os-specific
 ** linux
 * general
