@@ -112,6 +112,9 @@ Also remove all dialog boxes
 Very general stuff here. I don't know where to categorize this, so
 general-general.
 #+BEGIN_SRC emacs-lisp :tangle yes
+  (show-paren-mode t)
+  (setq show-paren-style 'mixed)
+  (setq transient-mark-mode nil)
   (setq vc-follow-symlinks t)
   (setq ediff-auto-refine 'on)
   (global-auto-revert-mode t)
