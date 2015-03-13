@@ -181,6 +181,25 @@ general-general.
       (bind-key "C-+" 'er/contract-region) hb-mode-map )
 #+END_SRC
 ** TODO multiple-cursors
+** icomplete+
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package 'icomplete+
+    :ensure t
+    (icomplete-mode))
+#+END_SRC
+** ido-hacks
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package 'ido-hacks
+    :ensure t
+    :init (progn
+            (ido-mode t)
+            (setq ido-enable-flex-matching t
+                  ido-everywhere t
+                  ido-max-directory-size 100000
+                  ido-create-new-buffer 'always
+                  ido-default-file-method 'selected-window
+                  ido-default-buffer-method 'selected-window)))
+#+END_SRC
 ** paredit
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package paredit
