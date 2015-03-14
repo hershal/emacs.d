@@ -275,15 +275,16 @@ general-general.
 * major modes
 ** TODO org-mode
 * minor modes
-*** customization
+** customization
 * macros
-** hb-delete-trailing-whitespace-untabify
+** delete-trailing-whitespace-untabify
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (defun hb-delete-trailing-whitespace-untabify ()
+  (defun hb/delete-trailing-whitespace-untabify ()
     (interactive)
     (delete-trailing-whitespace (point-min) (point-max))
     (untabify (point-min) (point-max)))
-  (add-hook 'before-save-hook 'hb-delete-trailing-whitespace-untabify)
+  (add-hook 'before-save-hook 'hb/delete-trailing-whitespace-untabify)
+#+END_SRC
 #+END_SRC
 * conclusion
 #+BEGIN_SRC emacs-lisp
