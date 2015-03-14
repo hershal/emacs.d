@@ -134,6 +134,7 @@ general-general.
 #+END_SRC
 
 ** hydras
+*** movement
 #+BEGIN_SRC emacs-lisp :tangle yes
   (setq scroll-amount 10)
   (defhydra hb/hydra-movement (hb-mode-map "M-n" :color red)
