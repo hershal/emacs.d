@@ -246,7 +246,14 @@ general-general.
     :config (progn
             (hb-mc-config)))
 #+END_SRC
-** paredit
+** org
+#+BEGIN_SRC emacs-lisp :tangle yes
+    (use-package org
+      :init (progn (setq org-src-window-setup 'other-window
+                         org-startup-indented t))
+      :diminish org-indent-mode)
+#+END_SRC
+* paredit
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package paredit
       :ensure t
@@ -301,17 +308,6 @@ general-general.
   (use-package writegood-mode
     :idle-priority 5)
 #+END_SRC
-* major modes
-** TODO org-mode
-#+BEGIN_SRC emacs-lisp :tangle yes
-    (use-package org
-      :init (progn (setq org-src-window-setup 'other-window
-                         org-startup-indented t))
-      :diminish org-indent-mode)
-#+END_SRC
-
-* minor modes
-** customization
 * macros
 ** follow-mode-80-char-compliant
 Thanks to @EricCrosson.
