@@ -140,10 +140,7 @@ general-general.
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package auto-complete
     :ensure t
-
-    :init
-    (setq ac-use-menu-map t)
-
+    :init (setq ac-use-menu-map t)
     :config
     (ac-config-default)
     (setq-default ac-auto-show-menu 0.1)
@@ -180,16 +177,15 @@ general-general.
       (bind-key "C-=" 'er/expand-region hb-mode-map )
       (bind-key "C-+" 'er/contract-region) hb-mode-map )
 #+END_SRC
-** TODO multiple-cursors
 ** icomplete+
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (use-package 'icomplete+
+  (use-package icomplete+
     :ensure t
-    (icomplete-mode))
+    :config (icomplete-mode))
 #+END_SRC
 ** ido-hacks
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (use-package 'ido-hacks
+  (use-package ido-hacks
     :ensure t
     :init (progn
             (ido-mode t)
