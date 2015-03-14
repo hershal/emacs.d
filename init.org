@@ -249,8 +249,7 @@ general-general.
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package paredit
       :ensure t
-      :config
-      (add-hook 'prog-mode-hook 'paredit-mode)
+      :config (add-hook 'emacs-lisp-mode-hook 'paredit-mode)
       :diminish "")
 #+END_SRC
 ** TODO undo-tree
