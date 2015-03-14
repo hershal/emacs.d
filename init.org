@@ -198,8 +198,7 @@ general-general.
 #+END_SRC
 ** multiple-cursors
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (defun hb-mc-config
-      (progn
+  (defun hb-mc-config ()
         (defvar jc/mc-search--last-term nil)
         (defun jc/mc-search (search-command)
           ;; Read new search term when not repeated command or applying to fake cursors
@@ -215,13 +214,12 @@ general-general.
         (defun jc/mc-search-backward ()
           "Simplified version of backward search that supports multiple cursors"
           (interactive)
-          (jc/mc-search 'search-backward))))
+          (jc/mc-search 'search-backward)))
 
-  (use-package 'multiple-cursors-mode
+  (use-package multiple-cursors
     :idle 1
-    :init
-    (progn
-      (hb-mc-config)))
+    :config (progn
+            (hb-mc-config)))
 #+END_SRC
 ** paredit
 #+BEGIN_SRC emacs-lisp :tangle yes
