@@ -136,8 +136,8 @@ general-general.
     ("f" (hb/scroll-up-halfpage)      "down half")
     ("b" (hb/scroll-down-halfpage)    "up half")
     ("s" (isearch-forward)            "isearch")
-    ("v" (visual-line-mode)           "visual-line")
-    ("F" (auto-fill-mode)             "auto-fill-mode"))
+    ("v" visual-line-mode             "visual-line")
+    ("F" auto-fill-mode               "auto-fill-mode"))
 #+END_SRC
 * packages
 ** ace-window
