@@ -264,8 +264,9 @@ general-general.
                  (setq magit-auto-revert-mode-lighter "")))
 #+END_SRC
 ** monochrome-theme
-#+BEGIN_SRC emacs-lisp :tangle yes
-  (use-package monochrome-theme)
+#+BEGIN_SRC emacs-lisp :tangle no
+  (use-package monochrome-theme
+    :idle 5)
 #+END_SRC
 ** transpose-frame
 #+BEGIN_SRC emacs-lisp :tangle yes
