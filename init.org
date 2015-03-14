@@ -366,25 +366,22 @@ Thanks to @EricCrosson.
 
 #+END_SRC
 
-* [0/17] todos
-** TODO :general: convert current configs to use-package
-** TODO :hydra: configure hydras
-** TODO :hydra: insert delimeters (), [], {}, etc
+* [0/14] todos
+** TODO insert delimeters (), [], {}, etc
 ** TODO :emacs: macro to create 'BEGIN_SRC emacs-lisp :tangle yes' blocks
 ** TODO :autocomplete: test if auto-complete is working
 ** TODO :autocomplete:org: get ac-complete-org working
 ** TODO :org: find out how to use orgmode tags properly
 Reference [[http://orgmode.org/manual/Tags.html][the org manual]].
-** TODO :esc:ponder:general: take a look at writeroom mode
 ** TODO :magit:hydra: investigate if magit needs hydras
 ** TODO :magit: find out why magit doesn't work
 ** TODO :annoy:makefile: add hook to makefile-mode to tabify
 ** TODO :annoy:org: don't allow 'org-edit-special' to clobber my window config
 ** TODO :annoy: make something similar to esc's should-have functions
-** TODO :org: add org-indent-mode hook
 ** TODO :annoy: delete-that-newly-opened-window
 - add to movement hydra ("d"?)
 ** TODO :annoy: reopen-in-other-window
 - add to movement hydra ("o"?)
 ** TODO custom mode
 - turn on and off various minor modes
+** TODO change all bindings to bind-key
