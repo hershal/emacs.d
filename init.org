@@ -60,7 +60,7 @@ Set up hb-mode and hb-mode-map.
   (define-key hb-mode-map (kbd "C-o") 'split-line)
   (define-key hb-mode-map (kbd "C-x K") 'kill-buffer-and-window)
   (define-key hb-mode-map (kbd "C-x C-S-f") 'find-file-other-window)
-
+  (define-key hb-mode-map (kbd "C-'") 'execute-extended-command)
 #+END_SRC
 ** test-map
 
