@@ -233,7 +233,7 @@ general-general.
 #+END_SRC
 ** TODO undo-tree
 ** TODO uniquify
-** TODO hydra
+** hydra
 #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package hydra
        :ensure t)
@@ -267,7 +267,7 @@ general-general.
     :ensure t
     :config (windmove-default-keybindings))
 #+END_SRC
-** TODO writegood-mode
+** writegood-mode
 #+BEGIN_SRC emacs-lisp
   (use-package writegood-mode
     :idle-priority 5)
