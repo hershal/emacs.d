@@ -274,6 +274,12 @@ general-general.
 #+END_SRC
 * major modes
 ** TODO org-mode
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package org
+    :init (progn (setq org-src-window-setup 'other-window
+                       org-startup-indented t)))
+#+END_SRC
+
 * minor modes
 ** customization
 * macros
