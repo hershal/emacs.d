@@ -151,6 +151,14 @@ general-general.
     ("w"     ace-window                    "ace-window")
     ("8"     follow-mode-80-char-compliant "follow-mode-80-char"))
 #+END_SRC
+*** fold-this
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defhydra hb/fold-this (hb-mode-map "C-x f" :color blue)
+    "fold-this"
+    ("f" fold-this "fold-this")
+    ("u" fold-this-unfold-at-point "unfold-at-point")
+    ("a" fold-this-unfold-all "unfold-all"))
+#+END_SRC
 * packages
 ** ace-window
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -201,6 +209,10 @@ general-general.
       :config
       (bind-key "C-=" 'er/expand-region hb-mode-map )
       (bind-key "C-+" 'er/contract-region) hb-mode-map )
+#+END_SRC
+** fold-this
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package fold-this)
 #+END_SRC
 ** icomplete+
 #+BEGIN_SRC emacs-lisp :tangle yes
