@@ -285,6 +285,18 @@ general-general.
     (untabify (point-min) (point-max)))
   (add-hook 'before-save-hook 'hb/delete-trailing-whitespace-untabify)
 #+END_SRC
+** scroll-halfpage
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun window-half-height ()
+    (max 1 (/ (1- (window-height (selected-window))) 2)))
+
+  (defun hb/scroll-up-halfpage ()
+    (interactive)
+    (scroll-up (window-half-height)))
+
+  (defun hb/scroll-down-halfpage ()
+    (interactive)
+    (scroll-down (window-half-height)))
 #+END_SRC
 * conclusion
 #+BEGIN_SRC emacs-lisp
