@@ -256,9 +256,8 @@ general-general.
 #+END_SRC
 ** transpose-frame
 #+BEGIN_SRC emacs-lisp :tangle yes
-      (use-package transpose-frame
-        :commands transpose-frame
-        :init (bind-key "M-|" 'transpose-frame hb-mode-map))
+  (use-package transpose-frame
+    :config (bind-key "M-|" 'transpose-frame hb-mode-map))
 #+END_SRC
 ** winner-mode
 #+BEGIN_SRC emacs-lisp :tangle yes
