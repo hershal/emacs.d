@@ -126,6 +126,19 @@ general-general.
   (setq kill-whole-line t)
 #+END_SRC
 
+** TODO hydras
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (setq scroll-amount 10)
+  (defhydra hb/hydra-movement (hb-mode-map "M-n" :color red)
+    "movement"
+    ("j" (scroll-up scroll-amount)    "down")
+    ("k" (scroll-down scroll-amount)  "up")
+    ("f" (hb/scroll-up-halfpage)      "down half")
+    ("b" (hb/scroll-down-halfpage)    "up half")
+    ("s" (isearch-forward)            "isearch")
+    ("v" (visual-line-mode)           "visual-line")
+    ("F" (auto-fill-mode)             "auto-fill-mode"))
+#+END_SRC
 * packages
 ** ace-window
 #+BEGIN_SRC emacs-lisp :tangle yes
