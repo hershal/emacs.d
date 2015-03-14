@@ -230,6 +230,12 @@ general-general.
       :diminish "")
 #+END_SRC
 ** TODO undo-tree
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package undo-tree
+    :ensure t
+    :config (global-undo-tree-mode)
+    :diminish "")
+#+END_SRC
 ** TODO uniquify
 ** hydra
 #+BEGIN_SRC emacs-lisp :tangle yes
