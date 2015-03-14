@@ -252,10 +252,9 @@ general-general.
       :config (add-hook 'emacs-lisp-mode-hook 'paredit-mode)
       :diminish "")
 #+END_SRC
-** TODO undo-tree
+** undo-tree
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package undo-tree
-    :ensure t
     :config (global-undo-tree-mode)
     :diminish "")
 #+END_SRC
