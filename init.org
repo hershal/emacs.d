@@ -301,6 +301,24 @@ general-general.
 * minor modes
 ** customization
 * macros
+** follow-mode-80-char-compliant
+Thanks to @EricCrosson.
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun follow-mode-80-char-compliant()
+    "Open the current buffer in `follow-mode' in as many 80-char
+  windows as you can fit on this screen."
+    (interactive)
+    (delete-other-windows)
+    (follow-mode 1)
+    (let ((width (window-total-width nil 'floor)))
+      (while (> width 80)
+        (split-window-horizontally)
+        (balance-windows)
+        (setq width (window-total-width nil 'floor))))
+    (delete-window)
+    (balance-windows)
+    (recenter-top-bottom))
+#+END_SRC
 ** delete-trailing-whitespace-untabify
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun hb/delete-trailing-whitespace-untabify ()
