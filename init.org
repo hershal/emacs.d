@@ -244,9 +244,11 @@ general-general.
 #+END_SRC
 ** magit
 #+BEGIN_SRC emacs-lisp :tangle yes
-      (use-package magit
-        :commands magit-status
-        :init (bind-key "C-c g" 'magit-status hb-mode-map))
+  (use-package magit
+    :idle 5
+    :commands magit-status
+    :init (progn (bind-key "C-c g" 'magit-status hb-mode-map)
+                 (setq magit-auto-revert-mode-lighter "")))
 #+END_SRC
 ** monochrome-theme
 #+BEGIN_SRC emacs-lisp :tangle yes
