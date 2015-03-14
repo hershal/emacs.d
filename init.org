@@ -44,24 +44,6 @@ Set up hb-mode and hb-mode-map.
   (diminish 'hb-mode)
   (add-hook 'minibuffer-setup-hook (lambda() (hb-mode 0)))
 #+END_SRC
-** general-bindings
-#+BEGIN_SRC emacs-lisp :tangle yes
-  (define-key hb-mode-map (kbd "C-c C-m") 'recompile)
-  (define-key hb-mode-map (kbd "C-c m") 'compile)
-  (define-key hb-mode-map (kbd "C-x C-b") 'ido-switch-buffer)
-  (define-key hb-mode-map (kbd "C-x O") 'ff-find-other-file)
-  (define-key hb-mode-map (kbd "C-'") 'execute-extended-command)
-  (define-key hb-mode-map (kbd "C-x C-h") 'hb-delete-trailing-whitespace-untabify)
-  (define-key hb-mode-map (kbd "M-|") 'transpose-frame)
-  (define-key hb-mode-map (kbd "C-M-S-q") 'fill-region-as-paragraph)
-  (define-key hb-mode-map (kbd "M-'") 'query-replace)
-  (define-key hb-mode-map (kbd "M-\"") 'query-replace-regexp)
-  (define-key hb-mode-map (kbd "M-Q") 'auto-fill-mode)
-  (define-key hb-mode-map (kbd "C-o") 'split-line)
-  (define-key hb-mode-map (kbd "C-x K") 'kill-buffer-and-window)
-  (define-key hb-mode-map (kbd "C-x C-S-f") 'find-file-other-window)
-  (define-key hb-mode-map (kbd "C-'") 'execute-extended-command)
-#+END_SRC
 ** test-map
 
 * os-specific
@@ -108,50 +90,76 @@ Also remove all dialog boxes
       ad-do-it))
 #+END_SRC
 
+** general-bindings
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (define-key hb-mode-map (kbd "C-c C-m") 'recompile)
+  (define-key hb-mode-map (kbd "C-c m") 'compile)
+  (define-key hb-mode-map (kbd "C-x C-b") 'ido-switch-buffer)
+  (define-key hb-mode-map (kbd "C-x O") 'ff-find-other-file)
+  (define-key hb-mode-map (kbd "C-'") 'execute-extended-command)
+  (define-key hb-mode-map (kbd "C-x C-h") 'hb-delete-trailing-whitespace-untabify)
+  (define-key hb-mode-map (kbd "M-|") 'transpose-frame)
+  (define-key hb-mode-map (kbd "C-M-S-q") 'fill-region-as-paragraph)
+  (define-key hb-mode-map (kbd "M-'") 'query-replace)
+  (define-key hb-mode-map (kbd "M-\"") 'query-replace-regexp)
+  (define-key hb-mode-map (kbd "M-Q") 'auto-fill-mode)
+  (define-key hb-mode-map (kbd "C-o") 'split-line)
+  (define-key hb-mode-map (kbd "C-x K") 'kill-buffer-and-window)
+  (define-key hb-mode-map (kbd "C-x C-S-f") 'find-file-other-window)
+  (define-key hb-mode-map (kbd "C-'") 'execute-extended-command)
+#+END_SRC
 ** general-general
 Very general stuff here. I don't know where to categorize this, so
 general-general.
 #+BEGIN_SRC emacs-lisp :tangle yes
+  (global-auto-revert-mode t)
+  (set-buffer-file-coding-system 'unix)
+  (setq-default indent-tabs-mode nil)
+
+  ;;; show paren mode
   (show-paren-mode t)
   (setq show-paren-style 'mixed)
-  (setq transient-mark-mode nil)
+
   (setq vc-follow-symlinks t)
   (setq ediff-auto-refine 'on)
-  (global-auto-revert-mode t)
   (setq ring-bell-function 'ignore)
   (setq backup-directory-alist `((".*" . , "~/.emacs-backups/")))
   (setq tramp-auto-save-directory "~/.emacs-backups/")
-  (set-buffer-file-coding-system 'unix)
-  (setq-default indent-tabs-mode nil)
   (setq kill-whole-line t)
+  (setq size-indication-mode t)
+
+  (setq display-time-24hr-format t)
+  (setq display-time-mode t)
 #+END_SRC
 
-** TODO hydras
+** hydras
 #+BEGIN_SRC emacs-lisp :tangle yes
   (setq scroll-amount 10)
   (defhydra hb/hydra-movement (hb-mode-map "M-n" :color red)
     "movement"
-    ("j     " (scroll-up scroll-amount)     "down")
-    ("k     " (scroll-down scroll-amount)   "up")
-    ("n     " hb/scroll-up-halfpage         "down half")
-    ("p     " hb/scroll-down-halfpage       "up half")
-    ("SPC   " scroll-up         "down full")
-    ("S-SPC " scroll-down       "up full")
-    ("s     " isearch-forward               "isearch")
-    ("v     " visual-line-mode              "visual-line")
-    ("a     " auto-fill-mode                "auto-fill-mode")
-    ("f     " follow-mode                   "follow-mode")
-    ("8     " follow-mode-80-char-compliant "follow-mode-80-char"))
+    ("j"     (scroll-up scroll-amount)     "down")
+    ("k"     (scroll-down scroll-amount)   "up")
+    ("n"     hb/scroll-up-halfpage         "down half")
+    ("p"     hb/scroll-down-halfpage       "up half")
+    ("SPC"   scroll-up                     "down full")
+    ("S-SPC" scroll-down                   "up full")
+    ("s"     isearch-forward               "isearch")
+    ("v"     visual-line-mode              "visual-line")
+    ("a"     auto-fill-mode                "auto-fill-mode")
+    ("f"     follow-mode                   "follow-mode")
+    ("w"     ace-window                    "ace-window")
+    ("8"     follow-mode-80-char-compliant "follow-mode-80-char"))
 #+END_SRC
 * packages
 ** ace-window
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package ace-window
     :ensure t
-    :init
-    (bind-key "M-p" 'ace-window hb-mode-map)
-    (setq aw-leading-char-style 'path
-          aw-keys (number-sequence 97 (+ 97 26))))
+    :init (progn
+            (bind-key "M-p" 'ace-window hb-mode-map)
+            (setq aw-leading-char-style 'path
+                  aw-keys (number-sequence 97 (+ 97 26)))
+            (custom-set-faces '(aw-leading-char-face ((t (:inherit ace-jump-face-foreground :height 3.0)))))))
 #+END_SRC
 ** auto-complete
 #+BEGIN_SRC emacs-lisp :tangle yes
