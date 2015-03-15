@@ -325,6 +325,12 @@ general-general.
   (use-package writegood-mode
     :idle-priority 5)
 #+END_SRC
+** paredit-everywhere
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package paredit-everywhere
+      :config (add-hook 'prog-mode-hook 'paredit-everywhere-mode)
+      :diminish "")
+#+END_SRC
 * macros
 ** follow-mode-80-char-compliant
 Thanks to @EricCrosson.
@@ -370,7 +376,7 @@ Thanks to @EricCrosson.
 
 #+END_SRC
 
-* [0/14] todos
+* [0/16] todos
 ** TODO insert delimeters (), [], {}, etc
 ** TODO :emacs: macro to create 'BEGIN_SRC emacs-lisp :tangle yes' blocks
 ** TODO :autocomplete: test if auto-complete is working
@@ -395,3 +401,4 @@ possibly
 (after 'org-indent-mode
                    (diminish 'org-indent-mode ""))
 #+END_SRC
+** TODO get paredit-everywhere-mode working
