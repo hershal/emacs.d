@@ -172,7 +172,6 @@ general-general.
 ** ace-window
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package ace-window
-    :ensure t
     :init (progn
             (bind-key "M-p" 'ace-window hb-mode-map)
             (setq aw-leading-char-style 'path
@@ -182,7 +181,6 @@ general-general.
 ** auto-complete
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package auto-complete
-    :ensure t
     :init (setq ac-use-menu-map t)
     :config (progn
               (ac-config-default)
@@ -195,26 +193,22 @@ general-general.
 #+END_SRC
 ** bind-key
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (use-package bind-key
-    :ensure t)
+  (use-package bind-key)
 #+END_SRC
 ** bliss-theme
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package bliss-theme
-    :ensure t
     :config (load-theme 'bliss t))
 #+END_SRC
 ** TODO desktop-mode
 ** diminish
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package diminish
-    :ensure t
     :commands diminish)
 #+END_SRC
 ** expand-region
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package expand-region
-      :ensure t
       :config
       (bind-key "C-=" 'er/expand-region hb-mode-map )
       (bind-key "C-+" 'er/contract-region) hb-mode-map )
@@ -226,13 +220,11 @@ general-general.
 ** icomplete+
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package icomplete+
-    :ensure t
     :config (icomplete-mode))
 #+END_SRC
 ** ido-hacks
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package ido-hacks
-    :ensure t
     :init (progn
             (ido-mode t)
             (setq ido-enable-flex-matching t
@@ -277,7 +269,6 @@ general-general.
 * paredit
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package paredit
-      :ensure t
       :config (add-hook 'emacs-lisp-mode-hook 'paredit-mode)
       :diminish "")
 #+END_SRC
@@ -290,8 +281,8 @@ general-general.
 ** TODO uniquify
 ** hydra
 #+BEGIN_SRC emacs-lisp :tangle yes
-     (use-package hydra
-       :ensure t)
+  (use-package hydra
+    :config (hb/hydra-configure))
 #+END_SRC
 ** magit
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -314,14 +305,12 @@ general-general.
 ** winner-mode
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package winner
-    :ensure t
     :defer t
     :idle (winner-mode 1))
 #+END_SRC
 ** windmove
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package windmove
-    :ensure t
     :config (windmove-default-keybindings))
 #+END_SRC
 ** writegood-mode
