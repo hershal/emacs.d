@@ -263,7 +263,7 @@ general-general.
           (jc/mc-search 'search-backward)))
 
   (use-package multiple-cursors
-    :idle 1
+    :idle-priority 5
     :config (progn
             (hb-mc-config)))
 #+END_SRC
@@ -296,7 +296,7 @@ general-general.
 ** magit
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package magit
-    :idle 5
+    :idle-priority 5
     :commands magit-status
     :init (progn (bind-key "C-c g" 'magit-status hb-mode-map)
                  (setq magit-auto-revert-mode-lighter "")))
@@ -304,7 +304,7 @@ general-general.
 ** monochrome-theme
 #+BEGIN_SRC emacs-lisp :tangle no
   (use-package monochrome-theme
-    :idle 5)
+    :idle-priority 5)
 #+END_SRC
 ** transpose-frame
 #+BEGIN_SRC emacs-lisp :tangle yes
