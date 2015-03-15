@@ -134,31 +134,39 @@ general-general.
 #+END_SRC
 
 ** hydras
+*** configure
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun hb/hydra-configure ()
+    (hb/hydra-configure-movement)
+    (hb/hydra-configure-fold-this))
+#+END_SRC
 *** movement
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (setq scroll-amount 10)
-  (defhydra hb/hydra-movement (hb-mode-map "M-n" :color red)
-    "movement"
-    ("j"     (scroll-up scroll-amount)     "down")
-    ("k"     (scroll-down scroll-amount)   "up")
-    ("n"     hb/scroll-up-halfpage         "down half")
-    ("p"     hb/scroll-down-halfpage       "up half")
-    ("SPC"   scroll-up                     "down full")
-    ("S-SPC" scroll-down                   "up full")
-    ("s"     isearch-forward               "isearch")
-    ("v"     visual-line-mode              "visual-line")
-    ("a"     auto-fill-mode                "auto-fill-mode")
-    ("f"     follow-mode                   "follow-mode")
-    ("w"     ace-window                    "ace-window")
-    ("8"     follow-mode-80-char-compliant "follow-mode-80-char"))
+  (defun hb/hydra-configure-movement ()
+    (setq scroll-amount 10)
+    (defhydra hb/hydra-movement (hb-mode-map "M-n" :color red)
+      "movement"
+      ("j"     (scroll-up scroll-amount)     "down")
+      ("k"     (scroll-down scroll-amount)   "up")
+      ("n"     hb/scroll-up-halfpage         "down half")
+      ("p"     hb/scroll-down-halfpage       "up half")
+      ("SPC"   scroll-up                     "down full")
+      ("S-SPC" scroll-down                   "up full")
+      ("s"     isearch-forward               "isearch")
+      ("v"     visual-line-mode              "visual-line")
+      ("a"     auto-fill-mode                "auto-fill-mode")
+      ("f"     follow-mode                   "follow-mode")
+      ("w"     ace-window                    "ace-window")
+      ("8"     follow-mode-80-char-compliant "follow-mode-80-char")))
 #+END_SRC
 *** fold-this
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (defhydra hb/fold-this (hb-mode-map "C-x f" :color blue)
-    "fold-this"
-    ("f" fold-this "fold-this")
-    ("u" fold-this-unfold-at-point "unfold-at-point")
-    ("a" fold-this-unfold-all "unfold-all"))
+  (defun hb/hydra-configure-fold-this ()
+    (defhydra hb/fold-this (hb-mode-map "C-x f" :color blue)
+      "fold-this"
+      ("f" fold-this "fold-this")
+      ("u" fold-this-unfold-at-point "unfold-at-point")
+      ("a" fold-this-unfold-all "unfold-all")))
 #+END_SRC
 * packages
 ** ace-window
