@@ -271,7 +271,9 @@ general-general.
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package org
     :init (progn (setq org-src-window-setup 'other-window
-                       org-startup-indented t)))
+                       org-startup-indented t)
+                 (after 'org-indent
+                   (diminish 'org-indent-mode ""))))
 #+END_SRC
 ** paredit
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -376,7 +378,7 @@ Thanks to @EricCrosson.
 
 #+END_SRC
 
-* [0/16] todos
+* [0/15] todos
 ** TODO insert delimeters (), [], {}, etc
 ** TODO :emacs: macro to create 'BEGIN_SRC emacs-lisp :tangle yes' blocks
 ** TODO :autocomplete: test if auto-complete is working
@@ -395,10 +397,4 @@ Reference [[http://orgmode.org/manual/Tags.html][the org manual]].
 ** TODO custom mode
 - turn on and off various minor modes
 ** TODO change all bindings to bind-key
-** TODO fix org-indent-mode diminish
-possibly
-#+BEGIN_SRC emacs-lisp
-(after 'org-indent-mode
-                   (diminish 'org-indent-mode ""))
-#+END_SRC
 ** TODO get paredit-everywhere-mode working
