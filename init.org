@@ -261,10 +261,9 @@ general-general.
 #+END_SRC
 ** org
 #+BEGIN_SRC emacs-lisp :tangle yes
-    (use-package org
-      :init (progn (setq org-src-window-setup 'other-window
-                         org-startup-indented t))
-      :diminish org-indent-mode)
+  (use-package org
+    :init (progn (setq org-src-window-setup 'other-window
+                       org-startup-indented t)))
 #+END_SRC
 ** paredit
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -382,3 +381,9 @@ Reference [[http://orgmode.org/manual/Tags.html][the org manual]].
 ** TODO custom mode
 - turn on and off various minor modes
 ** TODO change all bindings to bind-key
+** TODO fix org-indent-mode diminish
+possibly
+#+BEGIN_SRC emacs-lisp
+(after 'org-indent-mode
+                   (diminish 'org-indent-mode ""))
+#+END_SRC
