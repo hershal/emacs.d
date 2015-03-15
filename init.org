@@ -266,7 +266,7 @@ general-general.
                          org-startup-indented t))
       :diminish org-indent-mode)
 #+END_SRC
-* paredit
+** paredit
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package paredit
       :config (add-hook 'emacs-lisp-mode-hook 'paredit-mode)
