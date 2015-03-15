@@ -17,6 +17,14 @@ First we must initialize use-package.
 
   (require 'use-package)
 #+END_SRC
+** after
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defmacro after (mode &rest body)
+    "`eval-after-load' MODE evaluate BODY."
+    (declare (indent defun))
+    `(eval-after-load ,mode
+       '(progn ,@body)))
+#+END_SRC
 ** whoami
 Who am I?
 
