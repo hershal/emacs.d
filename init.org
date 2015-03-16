@@ -56,6 +56,11 @@ Set up hb-mode and hb-mode-map.
 
 * os-specific
 ** linux
+** osx
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (if (equal window-system 'ns)
+      (set-default-font "Menlo 10"))
+#+END_SRC
 * general
 ** window system
 These usually exist when using a window system. Let's make that not
