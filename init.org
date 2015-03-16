@@ -152,7 +152,7 @@ general-general.
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun hb/hydra-configure-movement ()
     (setq scroll-amount 10)
-    (defhydra hb/hydra-movement (hb-mode-map "M-n" :color red)
+    (defhydra hb/hydra-movement (hb-mode-map "M-m" :color red)
       "movement"
       ("j"     (scroll-up scroll-amount)     "down")
       ("k"     (scroll-down scroll-amount)   "up")
