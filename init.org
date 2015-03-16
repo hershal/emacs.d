@@ -375,6 +375,15 @@ Thanks to @EricCrosson.
     (interactive)
     (scroll-down (window-half-height)))
 #+END_SRC
+** back-to-indentation-or-beginning
+This frees up M-m by making C-a do double-duty as beginning-of-line
+and back-to-indentation
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun back-to-indentation-or-beginning ()
+    (interactive)
+    (if (bolp) (back-to-indentation) (beginning-of-line)))
+  (bind-key "C-a" 'back-to-indentation-or-beginning hb-mode-map)
+#+END_SRC
 * conclusion
 #+BEGIN_SRC emacs-lisp
 
