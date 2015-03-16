@@ -369,6 +369,11 @@ general-general.
       :config (add-hook 'prog-mode-hook 'paredit-everywhere-mode)
       :diminish "")
 #+END_SRC
+* major-modes
+** c++
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (setq c-basic-offset 4)
+#+END_SRC
 * macros
 ** follow-mode-80-char-compliant
 Thanks to @EricCrosson.
