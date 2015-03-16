@@ -302,8 +302,7 @@ general-general.
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package org
     :init (progn (setq org-src-window-setup 'other-window
-                       org-startup-indented t
-                       org-src-fontify-natively t)
+                       org-startup-indented t)
                  (after 'org-indent
                    (diminish 'org-indent-mode ""))))
 #+END_SRC
