@@ -215,6 +215,11 @@ general-general.
     :config (progn (load-theme 'bliss t)
                    (set-face-attribute 'highlight nil :foreground 'nil :underline 'nil :background "#222222")))
 #+END_SRC
+** bury-successful-compilation
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package bury-successful-compilation
+    :config bury-successful-compilation)
+#+END_SRC
 ** TODO desktop-mode
 ** diminish
 #+BEGIN_SRC emacs-lisp :tangle yes
