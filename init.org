@@ -116,6 +116,7 @@ Also remove all dialog boxes
   (bind-key "C-x C-S-f"  'find-file-other-window hb-mode-map)
   (bind-key "C-'"        'execute-extended-command hb-mode-map)
   (bind-key "M-SPC"      'cycle-spacing hb-mode-map)
+  (bind-key "C-M-'"      'replace-regexp hb-mode-map)
 #+END_SRC
 ** general-general
 Very general stuff here. I don't know where to categorize this, so
