@@ -206,7 +206,8 @@ general-general.
 ** bliss-theme
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package bliss-theme
-    :config (load-theme 'bliss t))
+    :config (progn (load-theme 'bliss t)
+                   (set-face-attribute 'highlight nil :foreground 'nil :underline 'nil :background "#222222")))
 #+END_SRC
 ** TODO desktop-mode
 ** diminish
