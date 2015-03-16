@@ -244,8 +244,15 @@ general-general.
                   ido-default-buffer-method 'selected-window)))
 #+END_SRC
 ** multiple-cursors
+*** configuration
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (defun hb-mc-config ()
+  (defun hb/mc-configure ()
+    (hb/mc-configure-isearch)
+    (hb/mc-configure-bindings))
+#+END_SRC
+*** mc-isearch
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun hb/mc-configure-isearch ()
         (defvar jc/mc-search--last-term nil)
         (defun jc/mc-search (search-command)
           ;; Read new search term when not repeated command or applying to fake cursors
@@ -262,11 +269,28 @@ general-general.
           "Simplified version of backward search that supports multiple cursors"
           (interactive)
           (jc/mc-search 'search-backward)))
-
+#+END_SRC
+*** bindings
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun hb/mc-configure-bindings ()
+    (bind-key "C-S-c C-S-c" 'mc/edit-lines hb-mode-map)
+    (bind-key "C-S-SPC" 'set-rectangular-region-anchor hb-mode-map)
+    (bind-key "C->" 'mc/mark-next-like-this hb-mode-map)
+    (bind-key "C-<" 'mc/mark-previous-like-this hb-mode-map)
+    (bind-key "C-c C-<" 'mc/mark-all-like-this hb-mode-map)
+    (bind-key "C-c C->" 'mc/mark-all-like-this-dwim hb-mode-map)
+    (bind-key "C-c ~" 'mc/insert-numbers hb-mode-map)
+    (bind-key "M-~" 'mc/sort-regions hb-mode-map)
+    (bind-key "C-~" 'mc/reverse-regions hb-mode-map)
+    (bind-key "C-S-c C-e" 'mc/edit-ends-of-lines hb-mode-map)
+    (bind-key "C-S-c C-a" 'mc/edit-beginnings-of-lines hb-mode-map))
+#+END_SRC
+*** package
+#+BEGIN_SRC emacs-lisp :tangle yes
   (use-package multiple-cursors
     :idle-priority 5
     :config (progn
-            (hb-mc-config)))
+            (hb/mc-configure)))
 #+END_SRC
 ** org
 #+BEGIN_SRC emacs-lisp :tangle yes
