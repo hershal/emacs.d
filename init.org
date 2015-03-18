@@ -490,6 +490,24 @@ Credits: @bbatsov, http://emacsredux.com/blog/2013/03/29/terminal-at-your-finger
   (bind-key "C-c i" 'ido-goto-symbol hb-mode-map)
   (bind-key "C-c I" 'imenu hb-mode-map)
 #+END_SRC
+** comment-eclipse
+#+BEGIN_SRC emacs-lisp :tangle yes
+    (defun comment-eclipse ()
+          (interactive)
+          (let ((start (line-beginning-position))
+                (end (line-end-position)))
+            (when (region-active-p)
+              (setq start (save-excursion
+                            (goto-char (region-beginning))
+                            (beginning-of-line)
+                            (point))
+                    end (save-excursion
+                          (goto-char (region-end))
+                          (end-of-line)
+                          (point))))
+            (comment-or-uncomment-region start end)))
+  (bind-key "C-;" 'comment-eclipse hb-mode-map)
+#+END_SRC
 * conclusion
 #+BEGIN_SRC emacs-lisp
 
