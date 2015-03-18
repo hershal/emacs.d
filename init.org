@@ -517,7 +517,7 @@ Credits: @bbatsov, http://emacsredux.com/blog/2013/03/29/terminal-at-your-finger
 
 #+END_SRC
 
-* [0/16] todos
+* TODO [0/18] todos
 ** TODO insert delimeters (), [], {}, etc
 ** TODO :emacs: macro to create 'BEGIN_SRC emacs-lisp :tangle yes' blocks
 ** TODO :autocomplete: test if auto-complete is working
@@ -538,3 +538,21 @@ Reference [[http://orgmode.org/manual/Tags.html][the org manual]].
 ** TODO change all bindings to bind-key
 ** TODO get paredit-everywhere-mode working
 ** TODO evaluate ido-complete-space-or-hyphen
+** TODO :annoy:org: add org fly-dictate minor mode
+Should automatically correct dictation issues. Prospective features:
+- make heading titles capitalized
+  - except when there are more than two consecutive upper case characters
+    - if so, ignore that word
+    - else continue capitalizing
+- automatically create definitions based on dictating a specific word
+  or phrase:
+  - maybe a way to dictate a M-x command?
+    - "dictate-meta-x"!
+- if there is a capital letter in the middle of a word, that probably
+  means that the word needs to be split
+  - e.g. thisThat -> this that
+  - determine when the concatenation needs to be split into two
+    sentences or two words
+** TODO :magit:hydra:git: make git hydra
+should have some common vc, magit, git-messenger, and git-timemachine
+commands
