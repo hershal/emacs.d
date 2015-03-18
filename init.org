@@ -218,7 +218,7 @@ general-general.
 ** bury-successful-compilation
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package bury-successful-compilation
-    :config bury-successful-compilation)
+    :config (bury-successful-compilation))
 #+END_SRC
 ** TODO desktop-mode
 ** diminish
