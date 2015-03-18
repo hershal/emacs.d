@@ -372,7 +372,9 @@ general-general.
 * major-modes
 ** c++
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (setq c-basic-offset 4)
+  (setq c-basic-offset 4
+        comment-start "/* "
+        comment-end " */")
 #+END_SRC
 * macros
 ** follow-mode-80-char-compliant
