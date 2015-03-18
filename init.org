@@ -229,9 +229,9 @@ general-general.
 ** expand-region
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package expand-region
-      :config
-      (bind-key "C-=" 'er/expand-region hb-mode-map )
-      (bind-key "C-+" 'er/contract-region) hb-mode-map )
+    :config (progn
+              (bind-key "C-=" 'er/expand-region hb-mode-map)
+              (bind-key "C-+" 'er/contract-region) hb-mode-map))
 #+END_SRC
 ** fold-this
 #+BEGIN_SRC emacs-lisp :tangle yes
