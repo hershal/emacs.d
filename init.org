@@ -372,9 +372,11 @@ general-general.
 * major-modes
 ** c++
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (setq c-basic-offset 4
-        comment-start "/* "
-        comment-end " */")
+  (defun hb/configure-c++ ()
+      (setq c-basic-offset 4
+            comment-start "/* "
+            comment-end " */"))
+  (add-hook 'c++-mode-hook 'hb/configure-c++)
 #+END_SRC
 * macros
 ** follow-mode-80-char-compliant
