@@ -150,13 +150,13 @@ general-general.
 ** hydras
 *** configuration
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (defun hb/hydra-configure ()
-    (hb/hydra-configure-movement)
-    (hb/hydra-configure-fold-this))
+  (defun hb/configure-hydra ()
+    (hb/configure-hydra-movement)
+    (hb/configure-hydra-fold-this))
 #+END_SRC
 *** movement
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (defun hb/hydra-configure-movement ()
+  (defun hb/configure-hydra-movement ()
     (setq scroll-amount 10)
     (defhydra hb/hydra-movement (hb-mode-map "M-m" :color red)
       "movement"
@@ -175,7 +175,7 @@ general-general.
 #+END_SRC
 *** fold-this
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (defun hb/hydra-configure-fold-this ()
+  (defun hb/configure-hydra-fold-this ()
     (defhydra hb/fold-this (hb-mode-map "C-x f" :color blue)
       "fold-this"
       ("f" fold-this "fold-this")
@@ -257,13 +257,13 @@ general-general.
 ** multiple-cursors
 *** configuration
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (defun hb/mc-configure ()
-    (hb/mc-configure-isearch)
-    (hb/mc-configure-bindings))
+  (defun hb/configure-mc ()
+    (hb/configure-mc-isearch)
+    (hb/configure-mc-bindings))
 #+END_SRC
 *** mc-isearch
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (defun hb/mc-configure-isearch ()
+  (defun hb/configure-mc-isearch ()
         (defvar jc/mc-search--last-term nil)
         (defun jc/mc-search (search-command)
           ;; Read new search term when not repeated command or applying to fake cursors
@@ -283,7 +283,7 @@ general-general.
 #+END_SRC
 *** bindings
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (defun hb/mc-configure-bindings ()
+  (defun hb/configure-mc-bindings ()
     (bind-key "C-S-c C-S-c" 'mc/edit-lines hb-mode-map)
     (bind-key "C-S-SPC" 'set-rectangular-region-anchor hb-mode-map)
     (bind-key "C->" 'mc/mark-next-like-this hb-mode-map)
@@ -301,7 +301,7 @@ general-general.
   (use-package multiple-cursors
     :idle-priority 5
     :config (progn
-            (hb/mc-configure)))
+            (hb/configure-mc)))
 #+END_SRC
 ** org
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -327,7 +327,7 @@ general-general.
 ** hydra
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package hydra
-    :config (hb/hydra-configure))
+    :config (hb/configure-hydra))
 #+END_SRC
 ** magit
 #+BEGIN_SRC emacs-lisp :tangle yes
