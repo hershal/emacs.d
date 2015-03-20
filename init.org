@@ -110,7 +110,7 @@ Also remove all dialog boxes
   (bind-key "C-x C-b"    'ido-switch-buffer hb-mode-map)
   (bind-key "C-x O"      'ff-find-other-file hb-mode-map)
   (bind-key "C-'"        'execute-extended-command hb-mode-map)
-  (bind-key "C-x C-h"    'hb-delete-trailing-whitespace-untabify hb-mode-map)
+  (bind-key "C-x C-h"    'hb/delete-trailing-whitespace-untabify hb-mode-map)
   (bind-key "M-|"        'transpose-frame hb-mode-map)
   (bind-key "C-M-S-q"    'fill-region-as-paragraph hb-mode-map)
   (bind-key "M-'"        'query-replace hb-mode-map)
