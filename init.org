@@ -564,3 +564,5 @@ commands
 - set up style
 - constructor arguments should be auto-filled and c-basic-offset
   tabbed
+  - the constructor argument name and type should not be broken across
+    lines
