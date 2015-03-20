@@ -281,8 +281,9 @@ general-general.
           "Simplified version of backward search that supports multiple cursors"
           (interactive)
           (jc/mc-search 'search-backward)))
-  (bind-key "C-s" 'jc/mc-search-forward mc/keymap)
-  (bind-key "C-s" 'jc/mc-search-backward mc/keymap)
+  (after 'multiple-cursors-mode
+    (bind-key "C-s" 'jc/mc-search-forward mc/keymap)
+    (bind-key "C-r" 'jc/mc-search-backward mc/keymap))
 #+END_SRC
 *** bindings
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -308,8 +309,7 @@ general-general.
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package multiple-cursors
     :idle-priority 5
-    :config (progn
-            (hb/configure-mc)))
+    :config (hb/configure-mc))
 #+END_SRC
 ** org
 #+BEGIN_SRC emacs-lisp :tangle yes
