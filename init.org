@@ -525,7 +525,7 @@ Credits: @bbatsov, http://emacsredux.com/blog/2013/03/29/terminal-at-your-finger
 
 #+END_SRC
 
-* TODO [0/19] todos
+* TODO [0/20] todos
 ** TODO insert delimeters (), [], {}, etc
 ** TODO :emacs: macro to create 'BEGIN_SRC emacs-lisp :tangle yes' blocks
 ** TODO :autocomplete: test if auto-complete is working
@@ -574,3 +574,5 @@ commands
   tabbed
   - the constructor argument name and type should not be broken across
     lines
+** TODO :dired: investigate up dired-single
+- [[http://www.emacswiki.org/emacs/dired-single.el]]
