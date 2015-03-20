@@ -218,7 +218,7 @@ general-general.
 ** bury-successful-compilation
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package bury-successful-compilation
-    :config bury-successful-compilation)
+    :config (bury-successful-compilation))
 #+END_SRC
 ** TODO desktop-mode
 ** diminish
@@ -229,9 +229,9 @@ general-general.
 ** expand-region
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package expand-region
-      :config
-      (bind-key "C-=" 'er/expand-region hb-mode-map )
-      (bind-key "C-+" 'er/contract-region) hb-mode-map )
+    :config (progn
+              (bind-key "C-=" 'er/expand-region hb-mode-map)
+              (bind-key "C-+" 'er/contract-region) hb-mode-map))
 #+END_SRC
 ** fold-this
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -259,7 +259,8 @@ general-general.
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun hb/configure-mc ()
     (hb/configure-mc-isearch)
-    (hb/configure-mc-bindings))
+    (hb/configure-mc-bindings)
+    (hb/configure-mc-fixes))
 #+END_SRC
 *** mc-isearch
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -280,6 +281,8 @@ general-general.
           "Simplified version of backward search that supports multiple cursors"
           (interactive)
           (jc/mc-search 'search-backward)))
+  (bind-key "C-s" 'jc/mc-search-forward mc/keymap)
+  (bind-key "C-s" 'jc/mc-search-backward mc/keymap)
 #+END_SRC
 *** bindings
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -295,6 +298,11 @@ general-general.
     (bind-key "C-~" 'mc/reverse-regions hb-mode-map)
     (bind-key "C-S-c C-e" 'mc/edit-ends-of-lines hb-mode-map)
     (bind-key "C-S-c C-a" 'mc/edit-beginnings-of-lines hb-mode-map))
+#+END_SRC
+*** fixes
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun hb/configure-mc-fixes ()
+    (bind-key "C-SPC" 'just-one-space mc/keymap))
 #+END_SRC
 *** package
 #+BEGIN_SRC emacs-lisp :tangle yes
