@@ -103,7 +103,7 @@ Also remove all dialog boxes
       ad-do-it))
 #+END_SRC
 
-** general-bindings
+** bindings
 #+BEGIN_SRC emacs-lisp :tangle yes
   (bind-key "C-c C-m"    'recompile hb-mode-map)
   (bind-key "C-c m"      'compile hb-mode-map)
@@ -121,7 +121,8 @@ Also remove all dialog boxes
   (bind-key "C-x C-S-f"  'find-file-other-window hb-mode-map)
   (bind-key "C-'"        'execute-extended-command hb-mode-map)
   (bind-key "M-SPC"      'cycle-spacing hb-mode-map)
-  (bind-key "C-M-'"      'replace-regexp hb-mode-map)
+  (bind-key "M-;"        'replace-regexp hb-mode-map)
+  (bind-key "C-;"        'comment-dwim hb-mode-map)
 #+END_SRC
 ** general-general
 Very general stuff here. I don't know where to categorize this, so
@@ -502,8 +503,10 @@ Credits: @bbatsov, http://emacsredux.com/blog/2013/03/29/terminal-at-your-finger
   (bind-key "C-c i" 'ido-goto-symbol hb-mode-map)
   (bind-key "C-c I" 'imenu hb-mode-map)
 #+END_SRC
-** comment-eclipse
-#+BEGIN_SRC emacs-lisp :tangle yes
+** TODO comment-eclipse
+THIS DOES NOT WORK AS EXPECTED.
+Find out what I want and make it.
+#+BEGIN_SRC emacs-lisp :tangle no
     (defun comment-eclipse ()
           (interactive)
           (let ((start (line-beginning-position))
