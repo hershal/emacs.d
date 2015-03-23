@@ -303,7 +303,7 @@ general-general.
 *** fixes
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun hb/configure-mc-fixes ()
-    (bind-key "C-SPC" 'just-one-space mc/keymap))
+    (bind-key "M-SPC" 'just-one-space mc/keymap))
 #+END_SRC
 *** package
 #+BEGIN_SRC emacs-lisp :tangle yes
