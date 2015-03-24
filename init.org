@@ -528,7 +528,7 @@ Find out what I want and make it.
 
 #+END_SRC
 
-* TODO [0/21] todos
+* TODO [0/22] todos
 ** TODO insert delimeters (), [], {}, etc
 ** TODO :emacs: macro to create 'BEGIN_SRC emacs-lisp :tangle yes' blocks
 ** TODO :autocomplete: test if auto-complete is working
@@ -580,3 +580,4 @@ commands
 ** TODO :dired: investigate up dired-single
 - [[http://www.emacswiki.org/emacs/dired-single.el]]
 ** TODO comment-eclipse doesn't dwim
+** TODO ido-vertical
