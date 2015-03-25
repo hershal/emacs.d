@@ -58,7 +58,9 @@ Set up hb-mode and hb-mode-map.
 ** linux
 #+BEGIN_SRC emacs-lisp :tangle yes
   (if (equal window-system 'x)
-      (set-default-font "Meslo LG S 8"))
+      (progn
+        (set-default-font "Meslo LG S 8")
+        (bind-key "s-u" 'revert-buffer hb-mode-map)))
 #+END_SRC
 ** osx
 #+BEGIN_SRC emacs-lisp :tangle yes
