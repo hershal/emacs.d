@@ -332,6 +332,11 @@ general-general.
     :diminish "")
 #+END_SRC
 ** TODO uniquify
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (require 'uniquify)
+  (setq uniquify-buffer-name-style 'post-forward
+        uniquify-separator ":")
+#+END_SRC
 ** hydra
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package hydra
