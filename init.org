@@ -56,6 +56,10 @@ Set up hb-mode and hb-mode-map.
 
 * os-specific
 ** linux
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (if (equal window-system 'x)
+      (set-default-font "Meslo LG S 8"))
+#+END_SRC
 ** osx
 #+BEGIN_SRC emacs-lisp :tangle yes
   (if (equal window-system 'ns)
@@ -309,7 +313,6 @@ general-general.
 *** package
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package multiple-cursors
-    :idle-priority 5
     :config (hb/configure-mc))
 #+END_SRC
 ** org
@@ -333,6 +336,11 @@ general-general.
     :diminish "")
 #+END_SRC
 ** TODO uniquify
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (require 'uniquify)
+  (setq uniquify-buffer-name-style 'post-forward
+        uniquify-separator ":")
+#+END_SRC
 ** hydra
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package hydra
@@ -341,26 +349,23 @@ general-general.
 ** magit
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package magit
-    :idle-priority 5
     :commands magit-status
     :init (progn (bind-key "C-c g" 'magit-status hb-mode-map)
                  (setq magit-auto-revert-mode-lighter "")))
 #+END_SRC
 ** monochrome-theme
 #+BEGIN_SRC emacs-lisp :tangle no
-  (use-package monochrome-theme
-    :idle-priority 5)
+  (use-package monochrome-theme)
 #+END_SRC
 ** transpose-frame
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package transpose-frame
     :config (bind-key "M-|" 'transpose-frame hb-mode-map))
 #+END_SRC
-** winner-mode
+** winner
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package winner
-    :defer t
-    :idle (winner-mode 1))
+    :config (winner-mode 1))
 #+END_SRC
 ** windmove
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -369,8 +374,7 @@ general-general.
 #+END_SRC
 ** writegood-mode
 #+BEGIN_SRC emacs-lisp
-  (use-package writegood-mode
-    :idle-priority 5)
+  (use-package writegood-mode)
 #+END_SRC
 ** paredit-everywhere
 #+BEGIN_SRC emacs-lisp :tangle yes
