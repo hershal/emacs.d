@@ -309,7 +309,6 @@ general-general.
 *** package
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package multiple-cursors
-    :idle-priority 5
     :config (hb/configure-mc))
 #+END_SRC
 ** org
