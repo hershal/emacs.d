@@ -360,7 +360,7 @@ general-general.
   (use-package transpose-frame
     :config (bind-key "M-|" 'transpose-frame hb-mode-map))
 #+END_SRC
-** winner-mode
+** winner
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package winner
     :defer t
