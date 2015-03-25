@@ -157,7 +157,8 @@ general-general.
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun hb/configure-hydra ()
     (hb/configure-hydra-movement)
-    (hb/configure-hydra-fold-this))
+    (hb/configure-hydra-fold-this)
+    (hb/configure-hydra-fonts))
 #+END_SRC
 *** movement
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -186,6 +187,15 @@ general-general.
       ("f" fold-this "fold-this")
       ("u" fold-this-unfold-at-point "unfold-at-point")
       ("a" fold-this-unfold-all "unfold-all")))
+#+END_SRC
+*** font
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun hb/configure-hydra-fonts ()
+    (defhydra hb/fonts (hb-mode-map "M-o" :color blue)
+      "fonts"
+      ("f" font-lock-fontify-buffer "fontify-buffer")
+      ("m" meslo-face               "meslo-face")
+      ("c" courier-face             "courier-face")))
 #+END_SRC
 * packages
 ** ace-window
@@ -526,6 +536,19 @@ Find out what I want and make it.
                           (point))))
             (comment-or-uncomment-region start end)))
   (bind-key "C-;" 'comment-eclipse hb-mode-map)
+#+END_SRC
+** faces
+*** meslo-face
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun meslo-face ()
+    (interactive)
+    (set-default-font "Meslo LG S 8"))
+#+END_SRC
+*** courier-face
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun courier-face ()
+    (interactive)
+    (set-default-font "-adobe-courier-medium-r-normal-*-*-*-100-100-*-60-iso10646-1"))
 #+END_SRC
 * conclusion
 #+BEGIN_SRC emacs-lisp
