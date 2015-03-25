@@ -250,6 +250,10 @@ general-general.
               (bind-key "C-=" 'er/expand-region hb-mode-map)
               (bind-key "C-+" 'er/contract-region) hb-mode-map))
 #+END_SRC
+** fic-mode
+#+BEGIN_SRC emacs-lisp :tangle yes
+    (use-package fic-mode)
+#+END_SRC
 ** fold-this
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package fold-this)
@@ -331,7 +335,8 @@ general-general.
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package org
     :init (progn (setq org-src-window-setup 'other-window
-                       org-startup-indented t)
+                       org-startup-indented t
+                       org-hide-emphasis-markers t)
                  (after 'org-indent
                    (diminish 'org-indent-mode ""))))
 #+END_SRC
@@ -400,7 +405,9 @@ general-general.
   (defun hb/configure-c++ ()
       (setq c-basic-offset 4
             comment-start "/* "
-            comment-end " */"))
+            comment-end " */")
+      (after 'fic-mode
+        (turn-on-fic-mode)))
   (add-hook 'c++-mode-hook 'hb/configure-c++)
 #+END_SRC
 ** java
@@ -408,7 +415,9 @@ general-general.
   (defun hb/configure-java ()
       (setq c-basic-offset 4
             comment-start "/* "
-            comment-end " */"))
+            comment-end " */")
+      (after 'fic-mode
+        (turn-on-fic-mode)))
   (add-hook 'java-mode-hook 'hb/configure-java)
 #+END_SRC
 * macros
