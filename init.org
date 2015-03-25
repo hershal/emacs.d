@@ -58,7 +58,9 @@ Set up hb-mode and hb-mode-map.
 ** linux
 #+BEGIN_SRC emacs-lisp :tangle yes
   (if (equal window-system 'x)
-      (set-default-font "Meslo LG S 8"))
+      (progn
+        (set-default-font "Meslo LG S 8")
+        (bind-key "s-u" 'revert-buffer hb-mode-map)))
 #+END_SRC
 ** osx
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -400,6 +402,14 @@ general-general.
             comment-start "/* "
             comment-end " */"))
   (add-hook 'c++-mode-hook 'hb/configure-c++)
+#+END_SRC
+** java
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun hb/configure-java ()
+      (setq c-basic-offset 4
+            comment-start "/* "
+            comment-end " */"))
+  (add-hook 'java-mode-hook 'hb/configure-java)
 #+END_SRC
 * macros
 ** follow-mode-80-char-compliant
