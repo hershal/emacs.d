@@ -243,6 +243,11 @@ general-general.
   (use-package diminish
     :commands diminish)
 #+END_SRC
+** ediff
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package ediff
+    :config (setq ediff-window-setup-function 'ediff-setup-windows-plain))
+#+END_SRC
 ** expand-region
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package expand-region
