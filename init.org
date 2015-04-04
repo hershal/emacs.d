@@ -121,7 +121,7 @@ Also remove all dialog boxes
   (bind-key "C-M-S-q"    'fill-region-as-paragraph hb-mode-map)
   (bind-key "M-'"        'query-replace hb-mode-map)
   (bind-key "M-\""       'query-replace-regexp hb-mode-map)
-  (bind-key "M-Q"        'auto-fill-mode hb-mode-map)
+  (bind-key "M-Q"        'fill-region hb-mode-map)
   (bind-key "C-o"        'split-line hb-mode-map)
   (bind-key "C-x K"      'kill-buffer-and-window hb-mode-map)
   (bind-key "C-x C-S-f"  'find-file-other-window hb-mode-map)
@@ -245,12 +245,21 @@ general-general.
   (use-package diminish
     :commands diminish)
 #+END_SRC
+** ediff
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package ediff
+    :config (setq ediff-window-setup-function 'ediff-setup-windows-plain))
+#+END_SRC
 ** expand-region
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package expand-region
     :config (progn
               (bind-key "C-=" 'er/expand-region hb-mode-map)
               (bind-key "C-+" 'er/contract-region) hb-mode-map))
+#+END_SRC
+** fic-mode
+#+BEGIN_SRC emacs-lisp :tangle yes
+    (use-package fic-mode)
 #+END_SRC
 ** fold-this
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -333,7 +342,8 @@ general-general.
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package org
     :init (progn (setq org-src-window-setup 'other-window
-                       org-startup-indented t)
+                       org-startup-indented t
+                       org-hide-emphasis-markers t)
                  (after 'org-indent
                    (diminish 'org-indent-mode ""))))
 #+END_SRC
@@ -399,18 +409,22 @@ general-general.
 * major-modes
 ** c++
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (defun hb/configure-c++ ()
+  (defun hb/configure-c-common ()
       (setq c-basic-offset 4
             comment-start "/* "
-            comment-end " */"))
-  (add-hook 'c++-mode-hook 'hb/configure-c++)
+            comment-end " */")
+      (after 'fic-mode
+        (turn-on-fic-mode)))
+  (add-hook 'c-mode-common-hook 'hb/configure-c-common)
 #+END_SRC
 ** java
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun hb/configure-java ()
       (setq c-basic-offset 4
             comment-start "/* "
-            comment-end " */"))
+            comment-end " */")
+      (after 'fic-mode
+        (turn-on-fic-mode)))
   (add-hook 'java-mode-hook 'hb/configure-java)
 #+END_SRC
 * macros
