@@ -152,6 +152,8 @@ general-general.
 
   (setq display-time-24hr-format t)
   (setq display-time-mode t)
+
+  (toggle-truncate-lines 1)
 #+END_SRC
 
 ** hydras
