@@ -369,6 +369,12 @@ general-general.
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package paredit
       :config (add-hook 'emacs-lisp-mode-hook 'paredit-mode)
+      :diminish " P")
+#+END_SRC
+** paredit-everywhere
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package paredit-everywhere
+      :config (add-hook 'prog-mode-hook 'paredit-everywhere-mode)
       :diminish "")
 #+END_SRC
 ** undo-tree
@@ -424,12 +430,6 @@ general-general.
 ** writegood-mode
 #+BEGIN_SRC emacs-lisp
   (use-package writegood-mode)
-#+END_SRC
-** paredit-everywhere
-#+BEGIN_SRC emacs-lisp :tangle yes
-  (use-package paredit-everywhere
-      :config (add-hook 'prog-mode-hook 'paredit-everywhere-mode)
-      :diminish "")
 #+END_SRC
 * major-modes
 ** c++
