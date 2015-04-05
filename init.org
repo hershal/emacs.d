@@ -205,23 +205,23 @@ general-general.
 ** ace-window
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package ace-window
-    :init (progn
-            (bind-key "M-p" 'ace-window hb-mode-map)
-            (setq aw-leading-char-style 'path
-                  aw-keys (number-sequence 97 (+ 97 26)))
-            (custom-set-faces '(aw-leading-char-face ((t (:inherit ace-jump-face-foreground :height 3.0)))))))
+    :config
+    (bind-key "M-p" 'ace-window hb-mode-map)
+    (setq aw-leading-char-style 'path
+          aw-keys (number-sequence 97 (+ 97 26)))
+    (custom-set-faces '(aw-leading-char-face ((t (:inherit ace-jump-face-foreground :height 3.0))))))
 #+END_SRC
 ** auto-complete
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package auto-complete
-    :init (setq ac-use-menu-map t)
-    :config (progn
-              (ac-config-default)
-              (setq-default ac-auto-show-menu 0.1)
-              (setq-default ac-sources (append '(ac-source-imenu) ac-sources))
-              (define-key ac-menu-map (kbd "C-n") nil)
-              (define-key ac-menu-map (kbd "C-p") nil)
-              (global-auto-complete-mode))
+    :config
+    (setq ac-use-menu-map t)
+    (ac-config-default)
+    (setq-default ac-auto-show-menu 0.1)
+    (setq-default ac-sources (append '(ac-source-imenu) ac-sources))
+    (define-key ac-menu-map (kbd "C-n") nil)
+    (define-key ac-menu-map (kbd "C-p") nil)
+    (global-auto-complete-mode)
     :diminish "")
 #+END_SRC
 ** bind-key
@@ -231,8 +231,9 @@ general-general.
 ** bliss-theme
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package bliss-theme
-    :config (progn (load-theme 'bliss t)
-                   (set-face-attribute 'highlight nil :foreground 'nil :underline 'nil :background "#222222")))
+    :config
+    '(load-theme 'bliss t)
+    (set-face-attribute 'highlight nil :foreground 'nil :underline 'nil :background "#222222"))
 #+END_SRC
 ** bury-successful-compilation
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -253,9 +254,9 @@ general-general.
 ** expand-region
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package expand-region
-    :config (progn
-              (bind-key "C-=" 'er/expand-region hb-mode-map)
-              (bind-key "C-+" 'er/contract-region) hb-mode-map))
+    :config
+    (bind-key "C-=" 'er/expand-region hb-mode-map)
+    (bind-key "C-+" 'er/contract-region) hb-mode-map)
 #+END_SRC
 ** fic-mode
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -271,16 +272,16 @@ general-general.
     :config (icomplete-mode))
 #+END_SRC
 ** ido-hacks
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp :tangle no
   (use-package ido-hacks
-    :init (progn
-            (ido-mode t)
-            (setq ido-enable-flex-matching t
-                  ido-everywhere t
-                  ido-max-directory-size 100000
-                  ido-create-new-buffer 'always
-                  ido-default-file-method 'selected-window
-                  ido-default-buffer-method 'selected-window)))
+    :config
+    (ido-mode t)
+    (setq ido-enable-flex-matching t
+          ido-everywhere t
+          ido-max-directory-size 100000
+          ido-create-new-buffer 'always
+          ido-default-file-method 'selected-window
+          ido-default-buffer-method 'selected-window))
 #+END_SRC
 ** multiple-cursors
 *** configuration
@@ -341,11 +342,12 @@ general-general.
 ** org
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package org
-    :init (progn (setq org-src-window-setup 'other-window
-                       org-startup-indented t
-                       org-hide-emphasis-markers t)
-                 (after 'org-indent
-                   (diminish 'org-indent-mode ""))))
+    :config
+    (setq org-src-window-setup 'other-window
+          org-startup-indented t
+          org-hide-emphasis-markers t)
+    (after 'org-indent
+      (diminish 'org-indent-mode "")))
 #+END_SRC
 ** paredit
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -374,8 +376,9 @@ general-general.
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package magit
     :commands magit-status
-    :init (progn (bind-key "C-c g" 'magit-status hb-mode-map)
-                 (setq magit-auto-revert-mode-lighter "")))
+    :init
+    (bind-key "C-c g" 'magit-status hb-mode-map)
+    (setq magit-auto-revert-mode-lighter ""))
 #+END_SRC
 ** monochrome-theme
 #+BEGIN_SRC emacs-lisp :tangle no
