@@ -618,18 +618,11 @@ Credits: @bbatsov, http://emacsredux.com/blog/2013/03/29/terminal-at-your-finger
 
 #+END_SRC
 
-* TODO [0/20] todos
-** TODO insert delimeters (), [], {}, etc
+* TODO [0/16] todos
 ** TODO :emacs: macro to create 'BEGIN_SRC emacs-lisp :tangle yes' blocks
-** TODO :autocomplete: test if auto-complete is working
 ** TODO :autocomplete:org: get ac-complete-org working
 ** TODO :org: find out how to use orgmode tags properly
 Reference [[http://orgmode.org/manual/Tags.html][the org manual]].
-** TODO :magit:hydra: investigate if magit needs hydras
-** TODO :magit: find out why magit doesn't work
-** TODO :annoy:makefile: add hook to makefile-mode to tabify
-- alternatively do not remove the whitespace in this mode
-- could just do a buffer-local remove-hook, if that is possible
 ** TODO :annoy:org: don't allow 'org-edit-special' to clobber my window config
 ** TODO :annoy: make something similar to esc's should-have functions
 ** TODO :annoy: delete-that-newly-opened-window
