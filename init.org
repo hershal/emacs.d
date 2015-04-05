@@ -624,7 +624,7 @@ Credits: @bbatsov, http://emacsredux.com/blog/2013/03/29/terminal-at-your-finger
 
 #+END_SRC
 
-* TODO [0/16] todos
+* TODO [0/12] todos
 ** TODO :emacs: macro to create 'BEGIN_SRC emacs-lisp :tangle yes' blocks
 ** TODO :autocomplete:org: get ac-complete-org working
 ** TODO :org: find out how to use orgmode tags properly
@@ -637,8 +637,6 @@ Reference [[http://orgmode.org/manual/Tags.html][the org manual]].
 - add to movement hydra ("o"?)
 ** TODO custom mode
 - turn on and off various minor modes
-** TODO get paredit-everywhere-mode working
-** TODO evaluate ido-complete-space-or-hyphen
 ** TODO :annoy:org: add org fly-dictate minor mode
 Should automatically correct dictation issues. Prospective features:
 - make heading titles capitalized
