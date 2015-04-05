@@ -400,6 +400,12 @@ general-general.
 #+BEGIN_SRC emacs-lisp :tangle no
   (use-package monochrome-theme)
 #+END_SRC
+** smartparens-mode
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package smartparens
+    :config (smartparens-global-mode)
+    :diminish "")
+#+END_SRC
 ** transpose-frame
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package transpose-frame
