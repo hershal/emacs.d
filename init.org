@@ -289,6 +289,15 @@ general-general.
     (ido-mode 1)
     (ido-hacks-mode 1))
 #+END_SRC
+** ido-vertical
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package ido-vertical-mode
+    :config
+    (ido-vertical-mode 1)
+    (setq ido-vertical-show-count t
+          ido-use-faces t
+          ido-vertical-define-keys 'C-n-C-p-up-down-left-right))
+#+END_SRC
 ** multiple-cursors
 *** configuration
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -642,4 +651,3 @@ commands
 ** TODO :dired: investigate up dired-single
 - [[http://www.emacswiki.org/emacs/dired-single.el]]
 ** TODO comment-eclipse doesn't dwim
-** TODO ido-vertical
