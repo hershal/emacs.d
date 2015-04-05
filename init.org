@@ -171,14 +171,15 @@ general-general.
       "movement"
       ("j"     (scroll-up scroll-amount)     "down")
       ("k"     (scroll-down scroll-amount)   "up")
-      ("n"     hb/scroll-up-halfpage         "down half")
-      ("p"     hb/scroll-down-halfpage       "up half")
+      ("f"     hb/scroll-up-halfpage         "down half")
+      ("b"     hb/scroll-down-halfpage       "up half")
       ("SPC"   scroll-up                     "down full")
       ("S-SPC" scroll-down                   "up full")
       ("s"     isearch-forward               "isearch")
       ("v"     visual-line-mode              "visual-line")
       ("a"     auto-fill-mode                "auto-fill-mode")
-      ("f"     follow-mode                   "follow-mode")
+      ("i"     set-fill-column               "fill-column")
+      ("o"     follow-mode                   "follow-mode")
       ("w"     ace-window                    "ace-window")
       ("8"     follow-mode-80-char-compliant "follow-mode-80-char")))
 #+END_SRC
