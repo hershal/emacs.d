@@ -271,17 +271,23 @@ general-general.
   (use-package icomplete+
     :config (icomplete-mode))
 #+END_SRC
-** ido-hacks
-#+BEGIN_SRC emacs-lisp :tangle no
-  (use-package ido-hacks
+** ido
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package ido
     :config
-    (ido-mode t)
     (setq ido-enable-flex-matching t
           ido-everywhere t
           ido-max-directory-size 100000
           ido-create-new-buffer 'always
           ido-default-file-method 'selected-window
           ido-default-buffer-method 'selected-window))
+#+END_SRC
+** ido-hacks
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package ido-hacks
+    :config
+    (ido-mode 1)
+    (ido-hacks-mode 1))
 #+END_SRC
 ** multiple-cursors
 *** configuration
