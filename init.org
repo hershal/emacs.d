@@ -279,7 +279,9 @@ general-general.
           ido-max-directory-size 100000
           ido-create-new-buffer 'always
           ido-default-file-method 'selected-window
-          ido-default-buffer-method 'selected-window))
+          ido-default-buffer-method 'selected-window)
+    (ido-complete-space-or-hyphen-enable))
+
 #+END_SRC
 ** ido-hacks
 #+BEGIN_SRC emacs-lisp :tangle yes
