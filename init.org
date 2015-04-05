@@ -476,10 +476,20 @@ Thanks to @EricCrosson.
 #+END_SRC
 ** delete-trailing-whitespace-untabify
 #+BEGIN_SRC emacs-lisp :tangle yes
+  (setq makefile-modes '(makefile-mode
+                         makefile-bsdmake-mode
+                         makefile-gmake-mode
+                         makefile-imake-mode
+                         makefile-makepp-mode
+                         makefile-automake-mode))
+
   (defun hb/delete-trailing-whitespace-untabify ()
     (interactive)
-    (delete-trailing-whitespace (point-min) (point-max))
-    (untabify (point-min) (point-max)))
+    (if (not (member major-mode makefile-modes))
+        (progn
+          (delete-trailing-whitespace (point-min) (point-max))
+          (untabify (point-min) (point-max)))))
+
   (add-hook 'before-save-hook 'hb/delete-trailing-whitespace-untabify)
 #+END_SRC
 ** scroll-halfpage
