@@ -218,8 +218,8 @@ general-general.
     (ac-config-default)
     (setq-default ac-auto-show-menu 0.1)
     (setq-default ac-sources (append '(ac-source-imenu) ac-sources))
-    (define-key ac-menu-map (kbd "C-n") nil)
-    (define-key ac-menu-map (kbd "C-p") nil)
+    (bind-key "C-n" nil ac-menu-map)
+    (bind-key "C-p" nil ac-menu-map)
     (global-auto-complete-mode)
     :diminish "")
 #+END_SRC
@@ -637,7 +637,6 @@ Reference [[http://orgmode.org/manual/Tags.html][the org manual]].
 - add to movement hydra ("o"?)
 ** TODO custom mode
 - turn on and off various minor modes
-** TODO change all bindings to bind-key
 ** TODO get paredit-everywhere-mode working
 ** TODO evaluate ido-complete-space-or-hyphen
 ** TODO :annoy:org: add org fly-dictate minor mode
