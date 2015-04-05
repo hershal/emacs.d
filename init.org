@@ -128,7 +128,6 @@ Also remove all dialog boxes
   (bind-key "C-'"        'execute-extended-command hb-mode-map)
   (bind-key "M-SPC"      'cycle-spacing hb-mode-map)
   (bind-key "M-;"        'replace-regexp hb-mode-map)
-  (bind-key "C-;"        'comment-dwim hb-mode-map)
 #+END_SRC
 ** general-general
 Very general stuff here. I don't know where to categorize this, so
@@ -446,6 +445,15 @@ general-general.
   (add-hook 'java-mode-hook 'hb/configure-java)
 #+END_SRC
 * macros
+** hb/quotemeta
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun hb/quotemeta (str-val)
+    "Return STR-VAL with all non-word characters and / escaped with backslash.
+
+  This is more vigorous than `shell-quote-argument'."
+    (save-match-data
+      (replace-regexp-in-string "\\([^A-Za-z_0-9 /]\\)" "\\\\\\1" str-val)))
+#+END_SRC
 ** follow-mode-80-char-compliant
 Thanks to @EricCrosson.
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -561,25 +569,24 @@ Credits: @bbatsov, http://emacsredux.com/blog/2013/03/29/terminal-at-your-finger
   (bind-key "C-c i" 'ido-goto-symbol hb-mode-map)
   (bind-key "C-c I" 'imenu hb-mode-map)
 #+END_SRC
-** TODO comment-eclipse
-THIS DOES NOT WORK AS EXPECTED.
-Find out what I want and make it.
-#+BEGIN_SRC emacs-lisp :tangle no
-    (defun comment-eclipse ()
-          (interactive)
-          (let ((start (line-beginning-position))
-                (end (line-end-position)))
-            (when (region-active-p)
-              (setq start (save-excursion
-                            (goto-char (region-beginning))
-                            (beginning-of-line)
-                            (point))
-                    end (save-excursion
-                          (goto-char (region-end))
-                          (end-of-line)
-                          (point))))
-            (comment-or-uncomment-region start end)))
-  (bind-key "C-;" 'comment-eclipse hb-mode-map)
+** comment-dwim-line
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun comment-dwim-line (&optional arg)
+    "Replacement for the comment-dwim command.
+          If no region is selected and current line is not blank and we are not at the end of the line,
+          then comment current line.
+          Replaces default behaviour of comment-dwim, when it inserts comment at the end of the line."
+    (interactive "*P")
+    (comment-normalize-vars)
+    (if (or (and (not (region-active-p)) (not (looking-at "[ \t]*$"))) (and (not (equal comment-end "")) (looking-at (hb/quotemeta comment-end))))
+        (if (looking-at (hb/quotemeta comment-end))
+            (progn
+              (comment-or-uncomment-region (comment-beginning) (line-end-position))
+              (delete-trailing-whitespace (line-beginning-position) (line-end-position)))
+          (comment-or-uncomment-region (line-beginning-position) (line-end-position)))
+      (comment-dwim arg)))
+
+  (bind-key "C-;" 'comment-dwim-line hb-mode-map)
 #+END_SRC
 ** faces
 *** meslo-face
@@ -599,7 +606,7 @@ Find out what I want and make it.
 
 #+END_SRC
 
-* TODO [0/22] todos
+* TODO [0/20] todos
 ** TODO insert delimeters (), [], {}, etc
 ** TODO :emacs: macro to create 'BEGIN_SRC emacs-lisp :tangle yes' blocks
 ** TODO :autocomplete: test if auto-complete is working
@@ -650,4 +657,3 @@ commands
     lines
 ** TODO :dired: investigate up dired-single
 - [[http://www.emacswiki.org/emacs/dired-single.el]]
-** TODO comment-eclipse doesn't dwim
