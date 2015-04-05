@@ -211,7 +211,7 @@ general-general.
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package ace-window
     :config
-    (bind-key "M-p" 'ace-window hb-mode-map)
+    (bind-key "C-x p" 'ace-window hb-mode-map)
     (setq aw-leading-char-style 'path
           aw-keys (number-sequence 97 (+ 97 26)))
     (custom-set-faces '(aw-leading-char-face ((t (:inherit ace-jump-face-foreground :height 3.0))))))
