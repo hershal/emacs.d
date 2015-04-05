@@ -486,6 +486,7 @@ Thanks to @EricCrosson.
     (recenter-top-bottom))
 #+END_SRC
 ** delete-trailing-whitespace-untabify
+I want this to be everywhere except in Makefiles.
 #+BEGIN_SRC emacs-lisp :tangle yes
   (setq makefile-modes '(makefile-mode
                          makefile-bsdmake-mode
