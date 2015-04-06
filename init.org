@@ -60,7 +60,11 @@ Set up hb-mode and hb-mode-map.
 #+BEGIN_SRC emacs-lisp :tangle yes
   (if (equal window-system 'x)
       (progn
-        (set-default-font "Meslo LG S 8")
+        (cond
+         ((find-font (font-spec :name "Meslo LG S"))
+          (set-default-font "Meslo LG S 8"))
+         ((find-font (font-spec :name "-adobe-courier-medium-r-normal-*-*-*-100-100-*-60-iso10646-1"))
+          (set-default-font "-adobe-courier-medium-r-normal-*-*-*-100-100-*-60-iso10646-1")))
         (bind-key "s-u" 'revert-buffer hb-mode-map)))
 #+END_SRC
 ** osx
