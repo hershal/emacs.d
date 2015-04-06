@@ -647,8 +647,9 @@ Credits: @bbatsov, http://emacsredux.com/blog/2013/03/29/terminal-at-your-finger
     (set-default-font "-adobe-courier-medium-r-normal-*-*-*-100-100-*-60-iso10646-1"))
 #+END_SRC
 * conclusion
-#+BEGIN_SRC emacs-lisp
-
+Open this file
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (find-file "~/.emacs.d/init.org")
 #+END_SRC
 
 * TODO [0/12] todos
