@@ -63,6 +63,8 @@ Set up hb-mode and hb-mode-map.
         (cond
          ((find-font (font-spec :name "Meslo LG S"))
           (set-default-font "Meslo LG S 8"))
+         ((find-font (font-spec :name "Bitstream Vera Sans Mono"))
+          (set-default-font "Bitstream Vera Sans Mono 8"))
          ((find-font (font-spec :name "-adobe-courier-medium-r-normal-*-*-*-100-100-*-60-iso10646-1"))
           (set-default-font "-adobe-courier-medium-r-normal-*-*-*-100-100-*-60-iso10646-1")))
         (bind-key "s-u" 'revert-buffer hb-mode-map)))
@@ -209,6 +211,7 @@ general-general.
       ("w" writegood-mode            "writegood-mode")
       ("f" font-lock-fontify-buffer  "fontify-buffer")
       ("m" meslo-face                "meslo-face")
+      ("b" bitstream-face            "bistream-face")
       ("c" courier-face              "courier-face")))
 #+END_SRC
 * packages
@@ -629,6 +632,12 @@ Credits: @bbatsov, http://emacsredux.com/blog/2013/03/29/terminal-at-your-finger
   (defun meslo-face ()
     (interactive)
     (set-default-font "Meslo LG S 8"))
+#+END_SRC
+*** bitstream-face
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun bitstream-face ()
+    (interactive)
+    (set-default-font "Bitstream Vera Sans Mono 8"))
 #+END_SRC
 *** courier-face
 #+BEGIN_SRC emacs-lisp :tangle yes
