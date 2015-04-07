@@ -215,9 +215,10 @@ general-general.
       ("c" courier-face              "courier-face")))
 #+END_SRC
 * packages
-** ace-window
+** TODO ace-window
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package ace-window
+    :ensure t
     :config
     (bind-key "C-x p" 'ace-window hb-mode-map)
     (setq aw-leading-char-style 'path
@@ -227,6 +228,7 @@ general-general.
 ** auto-complete
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package auto-complete
+    :ensure t
     :config
     (setq ac-use-menu-map t)
     (ac-config-default)
@@ -239,18 +241,21 @@ general-general.
 #+END_SRC
 ** bind-key
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (use-package bind-key)
+  (use-package bind-key
+    :ensure t)
 #+END_SRC
 ** bliss-theme
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package bliss-theme
+    :ensure t
     :config
-    '(load-theme 'bliss t)
+    (load-theme 'bliss t)
     (set-face-attribute 'highlight nil :foreground 'nil :underline 'nil :background "#222222"))
 #+END_SRC
 ** bury-successful-compilation
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package bury-successful-compilation
+    :ensure t
     :config (bury-successful-compilation))
 #+END_SRC
 ** TODO desktop-mode
@@ -262,31 +267,37 @@ general-general.
 ** ediff
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package ediff
+    :ensure t
     :config (setq ediff-window-setup-function 'ediff-setup-windows-plain))
 #+END_SRC
 ** expand-region
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package expand-region
+    :ensure t
     :config
     (bind-key "C-=" 'er/expand-region hb-mode-map)
     (bind-key "C-+" 'er/contract-region) hb-mode-map)
 #+END_SRC
 ** fic-mode
 #+BEGIN_SRC emacs-lisp :tangle yes
-    (use-package fic-mode)
+  (use-package fic-mode
+    :ensure t)
 #+END_SRC
 ** fold-this
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (use-package fold-this)
+  (use-package fold-this
+    :ensure t)
 #+END_SRC
 ** icomplete+
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package icomplete+
+    :ensure t
     :config (icomplete-mode))
 #+END_SRC
 ** ido
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package ido
+    :ensure t
     :config
     (setq ido-enable-flex-matching t
           ido-everywhere t
@@ -298,12 +309,14 @@ general-general.
 ** ido-complete-space-or-hyphen
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package ido-complete-space-or-hyphen
+    :ensure t
     :config
     (ido-complete-space-or-hyphen-enable))
 #+END_SRC
 ** ido-hacks
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package ido-hacks
+    :ensure t
     :config
     (ido-mode 1)
     (ido-hacks-mode 1))
@@ -311,6 +324,7 @@ general-general.
 ** ido-vertical
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package ido-vertical-mode
+    :ensure t
     :config
     (ido-vertical-mode 1)
     (setq ido-vertical-show-count t
@@ -368,14 +382,16 @@ general-general.
   (defun hb/configure-mc-fixes ()
     (bind-key "M-SPC" 'just-one-space mc/keymap))
 #+END_SRC
-*** package
+*** COMMENT package
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package multiple-cursors
+    :ensure t
     :config (hb/configure-mc))
 #+END_SRC
 ** org
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package org
+    :ensure t
     :config
     (setq org-src-window-setup 'other-window
           org-startup-indented t
@@ -388,18 +404,21 @@ general-general.
 ** paredit
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package paredit
-      :config (add-hook 'emacs-lisp-mode-hook 'paredit-mode)
-      :diminish " P")
+    :ensure t
+    :config (add-hook 'emacs-lisp-mode-hook 'paredit-mode)
+    :diminish " P")
 #+END_SRC
 ** paredit-everywhere
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package paredit-everywhere
-      :config (add-hook 'prog-mode-hook 'paredit-everywhere-mode)
-      :diminish "")
+    :ensure t
+    :config (add-hook 'prog-mode-hook 'paredit-everywhere-mode)
+    :diminish "")
 #+END_SRC
 ** undo-tree
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package undo-tree
+    :ensure t
     :config (global-undo-tree-mode)
     :diminish "")
 #+END_SRC
@@ -412,11 +431,13 @@ general-general.
 ** hydra
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package hydra
+    :ensure t
     :config (hb/configure-hydra))
 #+END_SRC
 ** magit
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package magit
+    :ensure t
     :commands magit-status
     :init
     (bind-key "C-c g" 'magit-status hb-mode-map)
@@ -424,32 +445,38 @@ general-general.
 #+END_SRC
 ** monochrome-theme
 #+BEGIN_SRC emacs-lisp :tangle no
-  (use-package monochrome-theme)
+  (use-package monochrome-theme
+    :ensure t)
 #+END_SRC
 ** smartparens-mode
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package smartparens
+    :ensure t
     :config (smartparens-global-mode)
     :diminish "")
 #+END_SRC
 ** transpose-frame
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package transpose-frame
+    :ensure t
     :config (bind-key "M-|" 'transpose-frame hb-mode-map))
 #+END_SRC
 ** winner
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package winner
+    :ensure t
     :config (winner-mode 1))
 #+END_SRC
 ** windmove
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package windmove
+    :ensure t
     :config (windmove-default-keybindings))
 #+END_SRC
 ** writegood-mode
 #+BEGIN_SRC emacs-lisp
-  (use-package writegood-mode)
+  (use-package writegood-mode
+    :ensure t)
 #+END_SRC
 * major-modes
 ** c++
