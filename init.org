@@ -382,7 +382,7 @@ general-general.
   (defun hb/configure-mc-fixes ()
     (bind-key "M-SPC" 'just-one-space mc/keymap))
 #+END_SRC
-*** COMMENT package
+*** package
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package multiple-cursors
     :ensure t
