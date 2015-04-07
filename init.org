@@ -679,7 +679,7 @@ Open this file
   (find-file "~/.emacs.d/init.org")
 #+END_SRC
 
-* TODO [0/12] todos
+* TODO [0/14] todos
 :PROPERTIES:
 :visibility: overview
 :END:
@@ -693,8 +693,6 @@ Reference [[http://orgmode.org/manual/Tags.html][the org manual]].
 - add to movement hydra ("d"?)
 ** TODO :annoy: reopen-in-other-window
 - add to movement hydra ("o"?)
-** TODO custom mode
-- turn on and off various minor modes
 ** TODO :annoy:org: add org fly-dictate minor mode
 Should automatically correct dictation issues. Prospective features:
 - make heading titles capitalized
@@ -715,7 +713,6 @@ should have some common vc, magit, git-messenger, and git-timemachine
 commands
 ** TODO :annoy: set up c++ indentation rules properly
 - public/private spacing
-- verify c-basic-offset
 - set up style
 - constructor arguments should be auto-filled and c-basic-offset
   tabbed
@@ -723,3 +720,6 @@ commands
     lines
 ** TODO :dired: investigate up dired-single
 - [[http://www.emacswiki.org/emacs/dired-single.el]]
+** TODO :convenience: investigate company-mode
+** TODO :annoy: sp-pair remove single quotes
+** TODO :convenience: integrate semantic with c/c++
