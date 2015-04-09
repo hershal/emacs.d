@@ -160,16 +160,15 @@ general-general.
   (set-buffer-file-coding-system 'unix)
   (setq-default indent-tabs-mode nil)
 
-  (setq vc-follow-symlinks t)
-  (setq ediff-auto-refine 'on)
-  (setq ring-bell-function 'ignore)
-  (setq backup-directory-alist `((".*" . , "~/.emacs-backups/")))
-  (setq tramp-auto-save-directory "~/.emacs-backups/")
-  (setq kill-whole-line t)
-  (setq size-indication-mode t)
-
-  (setq display-time-24hr-format t)
-  (setq display-time-mode t)
+  (setq vc-follow-symlinks t
+        ediff-auto-refine 'on
+        ring-bell-function 'ignore
+        backup-directory-alist `((".*" . , "~/.emacs-backups/"))
+        tramp-auto-save-directory "~/.emacs-backups/"
+        kill-whole-line t
+        size-indication-mode t
+        display-time-24hr-format t
+        display-time-mode t)
 
   (toggle-truncate-lines 1)
 #+END_SRC
