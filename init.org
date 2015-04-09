@@ -756,7 +756,7 @@ Open this file
   (find-file "~/.emacs.d/init.org")
 #+END_SRC
 
-* TODO [0/14] todos
+* TODO [0/15] todos
 :PROPERTIES:
 :visibility: overview
 :END:
@@ -800,3 +800,4 @@ commands
 ** TODO :convenience: investigate company-mode
 ** TODO :convenience: integrate semantic with c/c++
 ** TODO :convenience: investigate test-map
+** TODO :convenience: investivate paredit vs smartparens
