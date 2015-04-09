@@ -53,8 +53,6 @@ Set up hb-mode and hb-mode-map.
   (diminish 'hb-mode)
   (add-hook 'minibuffer-setup-hook (lambda() (hb-mode 0)))
 #+END_SRC
-** test-map
-
 * os-specific
 ** linux
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -782,5 +780,5 @@ commands
 ** TODO :dired: investigate up dired-single
 - [[http://www.emacswiki.org/emacs/dired-single.el]]
 ** TODO :convenience: investigate company-mode
-** TODO :annoy: sp-pair remove single quotes
 ** TODO :convenience: integrate semantic with c/c++
+** TODO :convenience: investigate test-map
