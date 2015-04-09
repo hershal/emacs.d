@@ -73,7 +73,7 @@ Set up hb-mode and hb-mode-map.
       (set-default-font "Menlo 10"))
 #+END_SRC
 * general
-** window system
+** window-system
 These usually exist when using a window system. Let's make that not
 so.
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -84,8 +84,8 @@ so.
              (set-fringe-mode 0)))
 #+END_SRC
 
-This exists regardless of whether we use a windowing system, so
-disable those too.
+This exists regardless of whether we use a windowing system, so let's
+disable it too.
 #+BEGIN_SRC emacs-lisp :tangle yes
 (menu-bar-mode 0)
 #+END_SRC
