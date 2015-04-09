@@ -288,7 +288,7 @@ general-general.
     :ensure t
     :config
     (bind-key "C-=" 'er/expand-region hb-mode-map)
-    (bind-key "C-+" 'er/contract-region) hb-mode-map)
+    (bind-key "C-+" 'er/contract-region hb-mode-map))
 #+END_SRC
 ** fic-mode
 #+BEGIN_SRC emacs-lisp :tangle yes
