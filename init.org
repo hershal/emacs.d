@@ -309,16 +309,34 @@ general-general.
     :config (icomplete-mode))
 #+END_SRC
 ** ido
+*** configuration
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun hb/configure-ido ()
+    (hb/configure-ido-preferences)
+    (advice-add 'ido-init-completion-maps :after
+                #'hb/configure-ido-bindings))
+#+END_SRC
+*** preferences
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun hb/configure-ido-preferences ()
+    (setq ido-enable-flex-matching t
+            ido-everywhere t
+            ido-max-directory-size 100000
+            ido-create-new-buffer 'always
+            ido-default-file-method 'selected-window
+            ido-default-buffer-method 'selected-window))
+#+END_SRC
+*** bindings
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun hb/configure-ido-bindings ()
+    (bind-key "C-a" nil ido-common-completion-map))
+#+END_SRC
+*** package
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package ido
     :ensure t
     :config
-    (setq ido-enable-flex-matching t
-          ido-everywhere t
-          ido-max-directory-size 100000
-          ido-create-new-buffer 'always
-          ido-default-file-method 'selected-window
-          ido-default-buffer-method 'selected-window))
+    (hb/configure-ido))
 #+END_SRC
 ** ido-complete-space-or-hyphen
 #+BEGIN_SRC emacs-lisp :tangle yes
