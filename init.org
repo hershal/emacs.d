@@ -29,8 +29,8 @@ First we must initialize use-package.
 Who am I?
 
 #+BEGIN_SRC emacs-lisp :tangle yes
-(setq user-full-name "Hershal Bhave"
-      user-mail-address "hershal.bhave@gmail.com")
+  (setq user-full-name "Hershal Bhave"
+        user-mail-address "hershal.bhave@gmail.com")
 #+END_SRC
 ** misc-defaults
 Let's set some (sensible) defaults that don't go anywhere else.
