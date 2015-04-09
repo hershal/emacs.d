@@ -274,7 +274,10 @@ general-general.
 ** diminish
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package diminish
-    :commands diminish)
+    :commands diminish
+    :config
+    (diminish 'auto-fill-function)
+    (diminish 'visual-line-mode))
 #+END_SRC
 ** ediff
 #+BEGIN_SRC emacs-lisp :tangle yes
