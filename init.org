@@ -227,7 +227,7 @@ general-general.
       ("c" courier-face              "courier-face")))
 #+END_SRC
 * packages
-** TODO ace-window
+** ace-window
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package ace-window
     :ensure t
@@ -270,7 +270,6 @@ general-general.
     :ensure t
     :config (bury-successful-compilation))
 #+END_SRC
-** TODO desktop-mode
 ** diminish
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package diminish
@@ -477,7 +476,7 @@ Thanks [[http://whattheemacsd.com/my-misc.el-02.html][Magnar]]!
     (hb/configure-undo-tree)
     (global-undo-tree-mode))
 #+END_SRC
-** TODO uniquify
+** uniquify
 #+BEGIN_SRC emacs-lisp :tangle yes
   (require 'uniquify)
   (setq uniquify-buffer-name-style 'post-forward
