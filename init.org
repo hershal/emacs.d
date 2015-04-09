@@ -144,10 +144,6 @@ general-general.
   (set-buffer-file-coding-system 'unix)
   (setq-default indent-tabs-mode nil)
 
-  ;;; show paren mode
-  (show-paren-mode t)
-  (setq show-paren-style 'mixed)
-
   (setq vc-follow-symlinks t)
   (setq ediff-auto-refine 'on)
   (setq ring-bell-function 'ignore)
@@ -452,8 +448,10 @@ general-general.
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package smartparens
     :ensure t
-    :config (smartparens-global-mode)
-    :diminish "")
+    :diminish ""
+    :config
+    (smartparens-global-mode)
+    (show-smartparens-global-mode))
 #+END_SRC
 ** transpose-frame
 #+BEGIN_SRC emacs-lisp :tangle yes
