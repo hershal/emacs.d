@@ -697,6 +697,23 @@ Credits: @bbatsov, http://emacsredux.com/blog/2013/03/29/terminal-at-your-finger
     (interactive)
     (set-default-font "-adobe-courier-medium-r-normal-*-*-*-100-100-*-60-iso10646-1"))
 #+END_SRC
+** capitalize-dwim
+Not sure why this doesn't exist yet.q
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun capitalize-line-dwim ()
+    (interactive)
+    (if (region-active-p)
+        (save-excursion
+          (let ((beg (region-beginning))
+                (end (region-end)))
+            (capitalize-region beg end)))
+      (save-excursion
+        (let ((beg (line-beginning-position))
+              (end (line-end-position)))
+          (capitalize-region beg end)))))
+
+  (bind-key "C-x c" 'capitalize-line-dwim hb-mode-map)
+#+END_SRC
 * conclusion
 Open this file
 #+BEGIN_SRC emacs-lisp :tangle yes
