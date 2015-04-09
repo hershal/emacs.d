@@ -465,13 +465,20 @@ Thanks [[http://whattheemacsd.com/my-misc.el-02.html][Magnar]]!
     :ensure t)
 #+END_SRC
 ** smartparens-mode
+*** emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun hb/configure-smartparens-emacs-lisp ()
+    (sp-local-pair 'emacs-lisp-mode "'" nil :actions nil))
+#+END_SRC
+*** package
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package smartparens
     :ensure t
     :diminish ""
     :config
     (smartparens-global-mode)
-    (show-smartparens-global-mode))
+    (show-smartparens-global-mode)
+    (hb/configure-smartparens-emacs-lisp))
 #+END_SRC
 ** transpose-frame
 #+BEGIN_SRC emacs-lisp :tangle yes
