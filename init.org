@@ -168,7 +168,8 @@ general-general.
         kill-whole-line t
         size-indication-mode t
         display-time-24hr-format t
-        display-time-mode t)
+        display-time-mode t
+        revert-without-query '(".*"))
 
   (toggle-truncate-lines 1)
 #+END_SRC
