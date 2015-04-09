@@ -277,7 +277,9 @@ general-general.
 ** fic-mode
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package fic-mode
-    :ensure t)
+    :ensure t
+    :config
+    (add-hook 'prog-mode-hook 'turn-on-fic-mode))
 #+END_SRC
 ** fold-this
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -482,9 +484,7 @@ general-general.
   (defun hb/configure-c-common ()
       (setq c-basic-offset 4
             comment-start "/* "
-            comment-end " */")
-      (after 'fic-mode
-        (turn-on-fic-mode)))
+            comment-end " */"))
   (add-hook 'c-mode-common-hook 'hb/configure-c-common)
 #+END_SRC
 ** java
@@ -492,9 +492,7 @@ general-general.
   (defun hb/configure-java ()
       (setq c-basic-offset 4
             comment-start "/* "
-            comment-end " */")
-      (after 'fic-mode
-        (turn-on-fic-mode)))
+            comment-end " */"))
   (add-hook 'java-mode-hook 'hb/configure-java)
 #+END_SRC
 * macros
