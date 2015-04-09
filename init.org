@@ -415,7 +415,9 @@ general-general.
           org-startup-folded 'content)
     (after 'org-indent
       (diminish 'org-indent-mode ""))
-    (bind-key "C-x C-s" 'org-babel-tangle org-mode-map))
+    (bind-key "C-x C-s" 'org-babel-tangle org-mode-map)
+    (add-hook 'org-mode-hook 'auto-fill-mode)
+    (add-hook 'org-mode-hook 'visual-line-mode))
 #+END_SRC
 ** paredit
 #+BEGIN_SRC emacs-lisp :tangle yes
