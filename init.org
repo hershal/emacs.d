@@ -116,6 +116,24 @@ Also remove all dialog boxes
       ad-do-it))
 #+END_SRC
 
+Enable the recursive minibuffer. Remember though, with great power
+comes great responsiblity. From the [[http://www.gnu.org/software/emacs/manual/html_node/emacs/Recursive-Edit.html][Emacs Manual]]:
+
+#+BEGIN_QUOTE
+In general, we try to minimize the use of recursive editing levels in
+GNU Emacs. This is because they constrain you to “go back” in a
+particular order --— from the innermost level toward the top
+level. When possible, we present different activities in separate
+buffers so that you can switch between them as you please. Some
+commands switch to a new major mode which provides a command to switch
+back. These approaches give you more flexibility to go back to
+unfinished tasks in the order you choose.
+#+END_QUOTE
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (setq enable-recursive-minibuffers t)
+#+END_SRC
+
 ** bindings
 #+BEGIN_SRC emacs-lisp :tangle yes
   (bind-key "C-c C-m"    'recompile hb-mode-map)
