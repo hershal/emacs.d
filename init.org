@@ -460,14 +460,14 @@ general-general.
     :config (org-ac/config-default))
 #+END_SRC
 ** paredit
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp :tangle no
   (use-package paredit
     :ensure t
     :config (add-hook 'emacs-lisp-mode-hook 'paredit-mode)
     :diminish " P")
 #+END_SRC
 ** paredit-everywhere
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp :tangle no
   (use-package paredit-everywhere
     :ensure t
     :config (add-hook 'prog-mode-hook 'paredit-everywhere-mode)
@@ -525,11 +525,20 @@ Thanks [[http://whattheemacsd.com/my-misc.el-02.html][Magnar]]!
     :ensure t)
 #+END_SRC
 ** smartparens-mode
+*** configuration
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun hb/configure-smartparens ()
+    (sp-use-paredit-bindings)
+    (sp-use-smartparens-bindings)
+    (hb/configure-smartparens-emacs-lisp))
+#+END_SRC
 *** emacs-lisp
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun hb/configure-smartparens-emacs-lisp ()
     (sp-local-pair 'emacs-lisp-mode "'" nil :actions nil)
-    (sp-local-pair 'lisp-interaction-mode "'" nil :actions nil))
+    (add-hook 'emacs-lisp-mode-hook 'smartparens-strict-mode)
+    (sp-local-pair 'lisp-interaction-mode "'" nil :actions nil)
+    (add-hook 'lisp-interaction-mode-hook 'smartparens-strict-mode))
 #+END_SRC
 *** package
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -539,7 +548,7 @@ Thanks [[http://whattheemacsd.com/my-misc.el-02.html][Magnar]]!
     :config
     (smartparens-global-mode)
     (show-smartparens-global-mode)
-    (hb/configure-smartparens-emacs-lisp))
+    (hb/configure-smartparens))
 #+END_SRC
 ** transpose-frame
 #+BEGIN_SRC emacs-lisp :tangle yes
