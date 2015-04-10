@@ -72,7 +72,9 @@ Set up hb-mode and hb-mode-map.
 ** osx
 #+BEGIN_SRC emacs-lisp :tangle yes
   (if (equal window-system 'ns)
-      (set-default-font "Menlo 10"))
+      (progn
+        (set-default-font "Menlo 10")
+        (menu-bar-mode 1)))
 #+END_SRC
 * general
 ** window-system
