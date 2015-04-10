@@ -434,7 +434,11 @@ general-general.
       (diminish 'org-indent-mode ""))
     (bind-key "C-x C-s" 'org-babel-tangle org-mode-map)
     (add-hook 'org-mode-hook 'auto-fill-mode)
-    (add-hook 'org-mode-hook 'visual-line-mode))
+    (add-hook 'org-mode-hook 'visual-line-mode)
+    (add-to-list 'org-structure-template-alist
+                 '("st"
+                   "#+BEGIN_SRC emacs-lisp :tangle yes\n?\n#+END_SRC"
+                   "<src lang=\"?\">\n\n</src>")))
 #+END_SRC
 ** paredit
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -762,7 +766,6 @@ Open this file
 :PROPERTIES:
 :visibility: overview
 :END:
-** TODO :emacs: macro to create 'BEGIN_SRC emacs-lisp :tangle yes' blocks
 ** TODO :autocomplete:org: get ac-complete-org working
 ** TODO :org: find out how to use orgmode tags properly
 Reference [[http://orgmode.org/manual/Tags.html][the org manual]].
