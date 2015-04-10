@@ -769,7 +769,7 @@ Open this file
   (find-file "~/.emacs.d/init.org")
 #+END_SRC
 
-* [0/15] todos
+* [0/14] todos
 :PROPERTIES:
 :visibility: overview
 :END:
