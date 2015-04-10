@@ -447,6 +447,12 @@ general-general.
                    "#+BEGIN_SRC emacs-lisp :tangle yes\n?\n#+END_SRC"
                    "<src lang=\"?\">\n\n</src>")))
 #+END_SRC
+** org-ac
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package org-ac
+    :ensure t
+    :config (org-ac/config-default))
+#+END_SRC
 ** paredit
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package paredit
@@ -769,11 +775,10 @@ Open this file
   (find-file "~/.emacs.d/init.org")
 #+END_SRC
 
-* [0/14] todos
+* [0/13] todos
 :PROPERTIES:
 :visibility: overview
 :END:
-** TODO :autocomplete:org: get ac-complete-org working
 ** TODO :org: find out how to use orgmode tags properly
 Reference [[http://orgmode.org/manual/Tags.html][the org manual]].
 ** TODO :annoy:org: don't allow 'org-edit-special' to clobber my window config
