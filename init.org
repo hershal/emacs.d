@@ -131,6 +131,13 @@ unfinished tasks in the order you choose.
   (setq enable-recursive-minibuffers t)
 #+END_SRC
 
+Remove the "buffer X has a running process" query for
+process buffers.
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (setq kill-buffer-query-functions
+        (remove 'process-kill-buffer-query-function
+                kill-buffer-query-functions))
+#+END_SRC
 ** bindings
 #+BEGIN_SRC emacs-lisp :tangle yes
   (bind-key "C-c C-m"    'recompile hb-mode-map)
