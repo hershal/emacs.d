@@ -299,11 +299,17 @@ general-general.
     (bind-key "C-+" 'er/contract-region hb-mode-map))
 #+END_SRC
 ** fic-mode
+*** configuration
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun hb/configure-fic-mode ()
+    (turn-on-fic-mode)
+    (diminish 'fic-mode ""))
+#+END_SRC
+*** package
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package fic-mode
     :ensure t
-    :config
-    (add-hook 'prog-mode-hook 'turn-on-fic-mode))
+    :config (add-hook 'prog-mode-hook 'hb/configure-fic-mode))
 #+END_SRC
 ** fold-this
 #+BEGIN_SRC emacs-lisp :tangle yes
