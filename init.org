@@ -74,7 +74,9 @@ Set up hb-mode and hb-mode-map.
   (if (equal window-system 'ns)
       (progn
         (set-default-font "Menlo 10")
-        (menu-bar-mode 1)))
+        (menu-bar-mode 1)
+        (if (file-exists-p "/opt/local/bin/bash")
+            (setq shell-file-name "/opt/local/bin/bash"))))
 #+END_SRC
 * general
 ** window-system
