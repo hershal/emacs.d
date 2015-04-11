@@ -66,8 +66,8 @@ Set up hb-mode and hb-mode-map.
          ((find-font (font-spec :name "-adobe-courier-medium-r-normal-*-*-*-100-100-*-60-iso10646-1"))
           (set-default-font "-adobe-courier-medium-r-normal-*-*-*-100-100-*-60-iso10646-1")))
         (bind-key "s-u" 'revert-buffer hb-mode-map)
-        (bind-key "s-L" 'goto-line hb-mode-map))
-    (menu-bar-mode 0))
+        (bind-key "s-L" 'goto-line hb-mode-map)
+    (menu-bar-mode 0)))
 #+END_SRC
 ** osx
 #+BEGIN_SRC emacs-lisp :tangle yes
