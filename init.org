@@ -60,11 +60,11 @@ Set up hb-mode and hb-mode-map.
       (progn
         (cond
          ((find-font (font-spec :name "Meslo LG S"))
-          (set-default-font "Meslo LG S 8"))
+          (set-frame-font "Meslo LG S 8"))
          ((find-font (font-spec :name "Bitstream Vera Sans Mono"))
-          (set-default-font "Bitstream Vera Sans Mono 8"))
+          (set-frame-font "Bitstream Vera Sans Mono 8"))
          ((find-font (font-spec :name "-adobe-courier-medium-r-normal-*-*-*-100-100-*-60-iso10646-1"))
-          (set-default-font "-adobe-courier-medium-r-normal-*-*-*-100-100-*-60-iso10646-1")))
+          (set-frame-font "-adobe-courier-medium-r-normal-*-*-*-100-100-*-60-iso10646-1")))
         (bind-key "s-u" 'revert-buffer hb-mode-map)
         (bind-key "s-L" 'goto-line hb-mode-map)
     (menu-bar-mode 0)))
@@ -73,7 +73,7 @@ Set up hb-mode and hb-mode-map.
 #+BEGIN_SRC emacs-lisp :tangle yes
   (if (equal window-system 'ns)
       (progn
-        (set-default-font "Menlo 10")
+        (set-frame-font "Menlo 10")
         (menu-bar-mode 1)
         (if (file-exists-p "/opt/local/bin/bash")
             (setq shell-file-name "/opt/local/bin/bash"))))
@@ -753,19 +753,19 @@ Credits: @bbatsov, http://emacsredux.com/blog/2013/03/29/terminal-at-your-finger
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun meslo-face ()
     (interactive)
-    (set-default-font "Meslo LG S 8"))
+    (set-frame-font "Meslo LG S 8"))
 #+END_SRC
 *** bitstream-face
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun bitstream-face ()
     (interactive)
-    (set-default-font "Bitstream Vera Sans Mono 8"))
+    (set-frame-font "Bitstream Vera Sans Mono 8"))
 #+END_SRC
 *** courier-face
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun courier-face ()
     (interactive)
-    (set-default-font "-adobe-courier-medium-r-normal-*-*-*-100-100-*-60-iso10646-1"))
+    (set-frame-fonte "-adobe-courier-medium-r-normal-*-*-*-100-100-*-60-iso10646-1"))
 #+END_SRC
 ** capitalize-dwim
 Not sure why this doesn't exist yet.q
