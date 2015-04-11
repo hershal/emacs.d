@@ -58,7 +58,7 @@ Set up hb-mode and hb-mode-map.
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun meslo-face ()
     (interactive)
-    (set-frame-font "Meslo LG S 8"))
+    (set-frame-font "Meslo LG S 7"))
 #+END_SRC
 *** bitstream-face
 #+BEGIN_SRC emacs-lisp :tangle yes
