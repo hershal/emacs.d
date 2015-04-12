@@ -60,6 +60,12 @@ Set up hb-mode and hb-mode-map.
     (interactive)
     (set-frame-font "Meslo LG S 7"))
 #+END_SRC
+*** menlo-face
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun menlo-face ()
+    (interactive)
+    (set-frame-font "Menlo 7"))
+#+END_SRC
 *** bitstream-face
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun bitstream-face ()
@@ -78,6 +84,8 @@ Set up hb-mode and hb-mode-map.
   (if (equal window-system 'x)
       (progn
         (cond
+         ((find-font (font-spec :name "Menlo"))
+          (menlo-face))
          ((find-font (font-spec :name "Meslo LG S"))
           (meslo-face))
          ((find-font (font-spec :name "Bitstream Vera Sans Mono"))
