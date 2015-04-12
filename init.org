@@ -548,7 +548,6 @@ Thanks [[http://whattheemacsd.com/my-misc.el-02.html][Magnar]]!
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun hb/configure-smartparens ()
     (sp-use-paredit-bindings)
-    (sp-use-smartparens-bindings)
     (hb/configure-smartparens-emacs-lisp))
 #+END_SRC
 *** emacs-lisp
