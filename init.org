@@ -57,7 +57,7 @@ Set up hb-mode and hb-mode-map.
 *** meslo-face
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun meslo-face (&optional size)
-    (interactive)
+    (interactive "N")
     (if size
         (set-frame-font (concat "Meslo LG S " (number-to-string size)))
       (set-frame-font "Meslo LG S 7")))
@@ -65,7 +65,7 @@ Set up hb-mode and hb-mode-map.
 *** menlo-face
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun menlo-face (&optional size)
-    (interactive)
+    (interactive "N")
     (if size
         (set-frame-font (concat "Menlo " (number-to-string size)))
       (set-frame-font "Menlo 7")))
@@ -73,7 +73,7 @@ Set up hb-mode and hb-mode-map.
 *** bitstream-face
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun bitstream-face (&optional size)
-    (interactive)
+    (interactive "N")
     (if size
         (set-frame-font (concat "Bitstream Vera Sans Mono " (number-to-string size)))
       (set-frame-font "Bitstream Vera Sans Mono 8")))
