@@ -56,21 +56,27 @@ Set up hb-mode and hb-mode-map.
 ** faces
 *** meslo-face
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (defun meslo-face ()
+  (defun meslo-face (&optional size)
     (interactive)
-    (set-frame-font "Meslo LG S 7"))
+    (if size
+        (set-frame-font (concat "Meslo LG S " (number-to-string size)))
+      (set-frame-font "Meslo LG S 7")))
 #+END_SRC
 *** menlo-face
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (defun menlo-face ()
+  (defun menlo-face (&optional size)
     (interactive)
-    (set-frame-font "Menlo 7"))
+    (if size
+        (set-frame-font (concat "Menlo " (number-to-string size)))
+      (set-frame-font "Menlo 7")))
 #+END_SRC
 *** bitstream-face
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (defun bitstream-face ()
+  (defun bitstream-face (&optional size)
     (interactive)
-    (set-frame-font "Bitstream Vera Sans Mono 8"))
+    (if size
+        (set-frame-font (concat "Bitstream Vera Sans Mono " (number-to-string size)))
+      (set-frame-font "Bitstream Vera Sans Mono 8")))
 #+END_SRC
 *** courier-face
 #+BEGIN_SRC emacs-lisp :tangle yes
