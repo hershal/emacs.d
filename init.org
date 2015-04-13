@@ -873,3 +873,4 @@ commands
 ** TODO :convenience: integrate semantic with c/c++
 ** TODO :convenience: investigate test-map
 ** TODO :convenience: investivate paredit vs smartparens
+** TODO :annoy:convenience: investigate and change bindings for ido
