@@ -18,6 +18,9 @@ First we must initialize use-package.
   (require 'use-package)
 #+END_SRC
 ** after
+This is a cool macro from milkypostman which runs a function body
+after a mode loads into emacs.
+
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defmacro after (mode &rest body)
     "`eval-after-load' MODE evaluate BODY."
@@ -54,6 +57,10 @@ Set up hb-mode and hb-mode-map.
   (add-hook 'minibuffer-setup-hook (lambda() (hb-mode 0)))
 #+END_SRC
 ** faces
+These are some faces that I like to skip around in sometimes. I mainly
+use either Menlo of courier these days, but maybe sometime I'd like to
+try out others. This makes trying out fonts easy.
+
 *** meslo-face
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun meslo-face (&optional size)
@@ -85,7 +92,15 @@ Set up hb-mode and hb-mode-map.
     (set-frame-fonte "-adobe-courier-medium-r-normal-*-*-*-100-100-*-60-iso10646-1"))
 #+END_SRC
 * os-specific
+Depending on the OS emacs is currently running on, I might need to
+make some changes.
+
 ** linux
+On Linux, I may or may not have some fonts installed. I check if each
+one exists on the system in order of preference and use the most
+preferred font that exists on the current system. I also bind some
+keys and remove the menu-bar.
+
 #+BEGIN_SRC emacs-lisp :tangle yes
   (if (equal window-system 'x)
       (progn
@@ -103,6 +118,10 @@ Set up hb-mode and hb-mode-map.
     (menu-bar-mode 0)))
 #+END_SRC
 ** osx
+On OSX, I decrease the font size and turn on the menu-bar since it
+doesn't impact screen real-estate. If ports is in use, I try to use
+that version of bash.
+
 #+BEGIN_SRC emacs-lisp :tangle yes
   (if (equal window-system 'ns)
       (progn
@@ -123,18 +142,22 @@ so.
              (set-fringe-mode 0)))
 #+END_SRC
 ** portables
-Activate display-battery-mode.
+Activate display-battery-mode. Not sure what happens when I'm on a
+desktop.
+
 #+BEGIN_SRC emacs-lisp :tangle yes
   (display-battery-mode 1)
 #+END_SRC
-
 ** nuisances
+These are things that annoy me with emacs. Let's make those annoyances
+go away.
+
 Remove the yes-or-no prompts and replace them with y-or-n.
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defalias 'yes-or-no-p 'y-or-n-p)
 #+END_SRC
 
-Also remove all dialog boxes
+Also remove all dialog boxes.
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defadvice yes-or-no-p (around prevent-dialog activate)
     "Prevent yes-or-no-p from activating a dialog"
@@ -172,6 +195,8 @@ process buffers.
                 kill-buffer-query-functions))
 #+END_SRC
 ** bindings
+Some general-purpose keybindings.
+
 #+BEGIN_SRC emacs-lisp :tangle yes
   (bind-key "C-c C-m"    'recompile hb-mode-map)
   (bind-key "C-c m"      'compile hb-mode-map)
@@ -192,8 +217,9 @@ process buffers.
   (bind-key "M-;"        'replace-regexp hb-mode-map)
 #+END_SRC
 ** general-general
-Very general stuff here. I don't know where to categorize this, so
+General stuff here. I don't know where to categorize this, so
 general-general.
+
 #+BEGIN_SRC emacs-lisp :tangle yes
   (global-auto-revert-mode t)
   (set-buffer-file-coding-system 'unix)
