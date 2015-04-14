@@ -830,7 +830,7 @@ Open this file
   (find-file "~/.emacs.d/init.org")
 #+END_SRC
 
-* [0/13] todos
+* [0/16] todos
 :PROPERTIES:
 :visibility: overview
 :END:
@@ -873,4 +873,6 @@ commands
 ** TODO :convenience: integrate semantic with c/c++
 ** TODO :convenience: investigate test-map
 ** TODO :convenience: investivate paredit vs smartparens
+** TODO :annoy: get smartparens to close quotes properly
+** TODO :annoy: remove single quotes from smartparens pairs
 ** TODO :annoy:convenience: investigate and change bindings for ido
