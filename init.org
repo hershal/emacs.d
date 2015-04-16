@@ -377,6 +377,13 @@ general-general.
   (use-package fold-this
     :ensure t)
 #+END_SRC
+** ibuffer-vc
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package ibuffer-vc
+    :ensure t
+    :config
+    (add-hook 'ibuffer-mode-hook 'ibuffer-vc-set-filter-groups-by-vc-root))
+#+END_SRC
 ** icomplete+
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package icomplete+
