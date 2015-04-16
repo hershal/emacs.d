@@ -383,6 +383,25 @@ general-general.
   (use-package fold-this
     :ensure t)
 #+END_SRC
+** helm
+*** configuration
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun hb/configure-helm ()
+    (hb/configure-helm-bindings))
+#+END_SRC
+*** bindings
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun hb/configure-helm-bindings ()
+    (bind-key "C-x b" 'helm-mini hb-mode-map)
+    (bind-key "M-y" 'helm-show-kill-ring))
+#+END_SRC
+*** package
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package helm
+    :ensure t
+    :config
+    (hb/configure-helm))
+#+END_SRC
 ** ibuffer-vc
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package ibuffer-vc
