@@ -521,11 +521,11 @@ general-general.
     (add-to-list 'org-structure-template-alist
                  '("st"
                    "#+BEGIN_SRC emacs-lisp :tangle yes\n?\n#+END_SRC"
-                   "<src lang=\"?\">\n\n</src>")))
+                   "<src lang=\"?\">\n\n</src>"))
+    (add-hook 'org-mode-hook 'hb/configure-org-mode-hook))
 #+END_SRC
 *** hooks
 Note that this has a dependency on writegood-mode.
-
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun hb/configure-org-mode-hook ()
     (auto-fill-mode 1)
@@ -535,12 +535,11 @@ Note that this has a dependency on writegood-mode.
 #+END_SRC
 *** package
 #+BEGIN_SRC emacs-lisp :tangle yes
-    (use-package org
-      :ensure t
-      :pin org
-      :config
-      (hb/configure-org)
-      (add-hook 'org-mode-hook 'hb/configure-org-mode-hook))
+  (use-package org
+    :ensure t
+    :pin org
+    :config
+    (hb/configure-org))
 #+END_SRC
 ** org-ac
 #+BEGIN_SRC emacs-lisp :tangle yes
