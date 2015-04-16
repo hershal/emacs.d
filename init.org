@@ -336,12 +336,6 @@ general-general.
     (load-theme 'bliss t)
     (set-face-attribute 'highlight nil :foreground 'nil :underline 'nil :background "#222222"))
 #+END_SRC
-** browse-kill-ring
-#+BEGIN_SRC emacs-lisp :tangle yes
-  (use-package browse-kill-ring
-    :ensure t
-    :config (bind-key "C-x y" 'browse-kill-ring hb-mode-map))
-#+END_SRC
 ** bury-successful-compilation
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package bury-successful-compilation
