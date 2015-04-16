@@ -839,7 +839,7 @@ Open this file
   (find-file "~/.emacs.d/init.org")
 #+END_SRC
 
-* [0/16] todos
+* [0/19] todos
 :PROPERTIES:
 :visibility: overview
 :END:
@@ -885,3 +885,6 @@ commands
 ** TODO :annoy: get smartparens to close quotes properly
 ** TODO :annoy: remove single quotes from smartparens pairs
 ** TODO :annoy:convenience: investigate and change bindings for ido
+** TODO fix writegood-mode and org-mode
+*** TODO investigate req-package
+** TODO investigate shell-pop
