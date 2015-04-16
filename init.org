@@ -643,11 +643,9 @@ Thanks [[http://whattheemacsd.com/my-misc.el-02.html][Magnar]]!
 #+END_SRC
 ** writegood-mode
 #+BEGIN_SRC emacs-lisp
-  (use-package writegood-mode
-    :ensure t
-    :config
-    (add-hook 'latex-mode-hook 'writegood-mode)
-    (add-hook 'org-mode-hook 'writegood-mode))
+    (use-package writegood-mode
+      :ensure t
+      :diminish "")
 #+END_SRC
 * major-modes
 ** c++
