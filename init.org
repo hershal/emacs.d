@@ -578,7 +578,8 @@ Thanks [[http://whattheemacsd.com/my-misc.el-02.html][Magnar]]!
     :commands magit-status
     :init
     (bind-key "C-c g" 'magit-status hb-mode-map)
-    (setq magit-auto-revert-mode-lighter ""))
+    (setq magit-auto-revert-mode-lighter "")
+    (setq magit-last-seen-setup-instructions "1.4.0"))
 #+END_SRC
 ** monochrome-theme
 #+BEGIN_SRC emacs-lisp :tangle no
