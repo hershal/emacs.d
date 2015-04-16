@@ -508,10 +508,9 @@ general-general.
     :config (hb/configure-mc))
 #+END_SRC
 ** org
+*** configuration
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (use-package org
-    :ensure t
-    :config
+  (defun hb/configure-org ()
     (setq org-src-window-setup 'other-window
           org-startup-indented t
           org-hide-emphasis-markers t
@@ -519,12 +518,29 @@ general-general.
     (after 'org-indent
       (diminish 'org-indent-mode ""))
     (bind-key "C-x C-s" 'org-babel-tangle org-mode-map)
-    (add-hook 'org-mode-hook 'auto-fill-mode)
-    (add-hook 'org-mode-hook 'visual-line-mode)
     (add-to-list 'org-structure-template-alist
                  '("st"
                    "#+BEGIN_SRC emacs-lisp :tangle yes\n?\n#+END_SRC"
                    "<src lang=\"?\">\n\n</src>")))
+#+END_SRC
+*** hooks
+Note that this has a dependency on writegood-mode.
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun hb/configure-org-mode-hook ()
+    (auto-fill-mode 1)
+    (writegood-mode 1)
+    (setq-local ac-auto-show-menu 1.0)
+    (setq-local ac-delay 1.0))
+#+END_SRC
+*** package
+#+BEGIN_SRC emacs-lisp :tangle yes
+    (use-package org
+      :ensure t
+      :pin org
+      :config
+      (hb/configure-org)
+      (add-hook 'org-mode-hook 'hb/configure-org-mode-hook))
 #+END_SRC
 ** org-ac
 #+BEGIN_SRC emacs-lisp :tangle yes
