@@ -237,6 +237,7 @@ general-general.
         revert-without-query '(".*"))
 
   (toggle-truncate-lines 1)
+  (column-number-mode 1)
 #+END_SRC
 
 ** hydras
