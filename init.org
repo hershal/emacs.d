@@ -194,6 +194,11 @@ process buffers.
         (remove 'process-kill-buffer-query-function
                 kill-buffer-query-functions))
 #+END_SRC
+
+Black magic doesn't exist.
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (setq disabled-command-function nil)
+#+END_SRC
 ** bindings
 Some general-purpose keybindings.
 
