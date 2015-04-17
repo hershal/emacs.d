@@ -551,8 +551,8 @@ Note that this has a dependency on writegood-mode.
   (defun hb/configure-org-mode-hook ()
     (auto-fill-mode 1)
     (writegood-mode 1)
-    (setq-local ac-auto-show-menu 1.0)
-    (setq-local ac-delay 1.0))
+    (setq-local ac-auto-show-menu 2.0)
+    (setq-local ac-delay 2.0))
 #+END_SRC
 *** package
 #+BEGIN_SRC emacs-lisp :tangle yes
