@@ -393,8 +393,8 @@ general-general.
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun hb/configure-helm-bindings ()
     (bind-key "C-x b" 'helm-mini hb-mode-map)
-    (bind-key "M-y" 'helm-show-kill-ring)
-    (bind-key "C-x C-f" 'helm-find-files))
+    (bind-key "M-y" 'helm-show-kill-ring hb-mode-map)
+    (bind-key "C-x C-f" 'helm-find-files hb-mode-map))
 #+END_SRC
 *** package
 #+BEGIN_SRC emacs-lisp :tangle yes
