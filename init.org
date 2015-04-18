@@ -402,7 +402,7 @@ general-general.
     (bind-key "C-x b" 'helm-mini hb-mode-map)
     (bind-key "M-y" 'helm-show-kill-ring hb-mode-map)
     (bind-key "C-x C-f" 'helm-find-files hb-mode-map)
-    (bind-key "M-i" 'helm-imenu hb-mode-map))
+    (bind-key "M-i" 'helm-semantic-or-imenu hb-mode-map))
 #+END_SRC
 *** package
 #+BEGIN_SRC emacs-lisp :tangle yes
