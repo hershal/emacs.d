@@ -394,7 +394,9 @@ general-general.
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun hb/configure-helm-preferences ()
     (setq helm-buffers-fuzzy-matching t
-          helm-recentf-fuzzy-match t))
+          helm-recentf-fuzzy-match t
+          helm-semantic-fuzzy-match t
+          helm-imenu-fuzzy-match t))
 #+END_SRC
 *** bindings
 #+BEGIN_SRC emacs-lisp :tangle yes
