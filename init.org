@@ -387,7 +387,14 @@ general-general.
 *** configuration
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun hb/configure-helm ()
-    (hb/configure-helm-bindings))
+    (hb/configure-helm-bindings)
+    (hb/configure-helm-preferences))
+#+END_SRC
+*** preferences
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun hb/configure-helm-preferences ()
+    (setq helm-buffers-fuzzy-matching t
+          helm-recentf-fuzzy-match t))
 #+END_SRC
 *** bindings
 #+BEGIN_SRC emacs-lisp :tangle yes
