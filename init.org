@@ -90,7 +90,7 @@ try out others. This makes trying out fonts easy.
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun courier-face ()
     (interactive)
-    (set-frame-fonte "-adobe-courier-medium-r-normal-*-*-*-100-100-*-60-iso10646-1"))
+    (set-frame-font "-adobe-courier-medium-r-normal-*-*-*-100-100-*-60-iso10646-1"))
 #+END_SRC
 * os-specific
 Depending on the OS emacs is currently running on, I might need to
