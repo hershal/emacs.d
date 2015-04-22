@@ -886,6 +886,19 @@ Not sure why this doesn't exist yet.
 
   (bind-key "C-x c" 'capitalize-line-dwim hb-mode-map)
 #+END_SRC
+** eval-and-replace
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun fc-eval-and-replace ()
+    "Replace the preceding sexp with its value."
+    (interactive)
+    (backward-kill-sexp)
+    (condition-case nil
+        (prin1 (eval (read (current-kill 0)))
+               (current-buffer))
+      (error (message "Invalid expression")
+             (insert (current-kill 0)))))
+  (bind-key "C-c C-x C-e" 'fc-eval-and-replace hb-mode-map)
+#+END_SRC
 * conclusion
 Open this file
 #+BEGIN_SRC emacs-lisp :tangle yes
