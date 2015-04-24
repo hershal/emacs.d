@@ -402,10 +402,23 @@ general-general.
           helm-semantic-fuzzy-match t
           helm-imenu-fuzzy-match t))
 #+END_SRC
+*** macros
+**** helm-power-buffer-list
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun hb/helm-power-buffer-list ()
+    (interactive)
+    (helm :sources '(helm-source-buffers-list
+                     helm-source-ido-virtual-buffers
+                     helm-source-buffer-not-found
+                     helm-source-recentf
+                     helm-source-findutils
+                     helm-source-google-suggest)
+          :buffer "*helm-power*"))
+#+END_SRC
 *** bindings
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun hb/configure-helm-bindings ()
-    (bind-key "C-x b" 'helm-mini hb-mode-map)
+    (bind-key "C-x b" 'hb/helm-power-buffer-list hb-mode-map)
     (bind-key "M-y" 'helm-show-kill-ring hb-mode-map)
     (bind-key "C-x C-f" 'helm-find-files hb-mode-map)
     (bind-key "M-i" 'helm-semantic-or-imenu hb-mode-map))
