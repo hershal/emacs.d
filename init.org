@@ -221,6 +221,7 @@ Some general-purpose keybindings.
   (bind-key "C-'"        'execute-extended-command hb-mode-map)
   (bind-key "M-SPC"      'cycle-spacing hb-mode-map)
   (bind-key "M-;"        'replace-regexp hb-mode-map)
+  (bind-key "C-x C-b"    'switch-to-other-buffer hb-mode-map)
 #+END_SRC
 ** general-general
 General stuff here. I don't know where to categorize this, so
@@ -911,6 +912,12 @@ Not sure why this doesn't exist yet.
       (error (message "Invalid expression")
              (insert (current-kill 0)))))
   (bind-key "C-c C-x C-e" 'fc-eval-and-replace hb-mode-map)
+#+END_SRC
+** switch-to-other-buffer
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun switch-to-other-buffer ()
+    (interactive)
+    (switch-to-buffer nil))
 #+END_SRC
 * conclusion
 Open this file
