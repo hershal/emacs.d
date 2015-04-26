@@ -412,8 +412,7 @@ general-general.
                      helm-source-ido-virtual-buffers
                      helm-source-buffer-not-found
                      helm-source-recentf
-                     helm-source-findutils
-                     helm-source-google-suggest)
+                     helm-source-findutils)
           :buffer "*helm-power*"))
 #+END_SRC
 *** bindings
