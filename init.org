@@ -681,8 +681,10 @@ Thanks [[http://whattheemacsd.com/my-misc.el-02.html][Magnar]]!
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun hb/configure-smartparens-emacs-lisp ()
     (sp-local-pair 'emacs-lisp-mode "'" nil :actions nil)
+    (sp-local-pair 'emacs-lisp-mode "`" nil :actions nil)
     (add-hook 'emacs-lisp-mode-hook 'smartparens-strict-mode)
     (sp-local-pair 'lisp-interaction-mode "'" nil :actions nil)
+    (sp-local-pair 'lisp-interaction-mode "`" nil :actions nil)
     (add-hook 'lisp-interaction-mode-hook 'smartparens-strict-mode))
 #+END_SRC
 *** package
