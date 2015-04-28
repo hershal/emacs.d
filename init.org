@@ -243,12 +243,12 @@ general-general.
         backup-directory-alist `((".*" . , "~/.emacs-backups/"))
         tramp-auto-save-directory "~/.emacs-backups/"
         kill-whole-line t
-        size-indication-mode t
         display-time-24hr-format t
         revert-without-query '(".*"))
 
   (toggle-truncate-lines 1)
   (column-number-mode 1)
+  (size-indication-mode 1)
 #+END_SRC
 
 ** hydras
