@@ -131,7 +131,7 @@ that version of bash.
 #+BEGIN_SRC emacs-lisp :tangle yes
   (if (equal window-system 'ns)
       (progn
-        (set-frame-font "Menlo 10")
+        (hb/set-frame-font "Menlo" 10)
         (menu-bar-mode 1)
         (if (file-exists-p "/opt/local/bin/bash")
             (setq shell-file-name "/opt/local/bin/bash"))))
