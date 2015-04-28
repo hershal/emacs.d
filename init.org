@@ -70,25 +70,19 @@ try out others. This makes trying out fonts easy.
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun meslo-face (&optional size)
     (interactive "N")
-    (if size
-        (set-frame-font (concat "Meslo LG S " (number-to-string size)))
-      (set-frame-font "Meslo LG S 7")))
+    (set-frame-font (concat "Meslo LG S " (if size (number-to-string size) "7"))))
 #+END_SRC
 *** menlo-face
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun menlo-face (&optional size)
     (interactive "N")
-    (if size
-        (set-frame-font (concat "Menlo " (number-to-string size)))
-      (set-frame-font "Menlo 7")))
+    (set-frame-font (concat "Menlo " (if size (number-to-string size) "7"))))
 #+END_SRC
 *** bitstream-face
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun bitstream-face (&optional size)
     (interactive "N")
-    (if size
-        (set-frame-font (concat "Bitstream Vera Sans Mono " (number-to-string size)))
-      (set-frame-font "Bitstream Vera Sans Mono 8")))
+    (set-frame-font (concat "Bitstream Vera Sans Mono " (if size (number-to-string size) "7"))))
 #+END_SRC
 *** courier-face
 #+BEGIN_SRC emacs-lisp :tangle yes
