@@ -413,7 +413,8 @@ general-general.
                      helm-source-buffer-not-found
                      helm-source-recentf
                      helm-source-findutils)
-          :buffer "*helm-power*"))
+          :buffer "*helm-power*"
+          :truncate-lines t))
 #+END_SRC
 *** bindings
 #+BEGIN_SRC emacs-lisp :tangle yes
