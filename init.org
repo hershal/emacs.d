@@ -921,7 +921,7 @@ Open this file
   (find-file "~/.emacs.d/init.org")
 #+END_SRC
 
-* [0/18] todos
+* [0/23] todos
 :PROPERTIES:
 :visibility: overview
 :END:
@@ -961,7 +961,7 @@ commands
 ** TODO :dired: investigate up dired-single
 - [[http://www.emacswiki.org/emacs/dired-single.el]]
 ** TODO :convenience: investigate company-mode
-** TODO :convenience: integrate semantic with c/c++
+** TODO :convenience: integrate semantic/srefactor with c/c++
 ** TODO :convenience: investigate test-map
 ** TODO :convenience: investivate paredit vs smartparens
 ** TODO :annoy: get smartparens to close quotes properly
