@@ -53,7 +53,11 @@ Set up hb-mode and hb-mode-map.
     "Toggle hb-mode.
        A minor mode so that my key settings override any major modes'."
     t " hb" 'hb-mode-map)
-  (hb-mode 1)               ;enable my minor mode, except in minibuffer
+
+  (defmacro hb/bind-key (key command &optional map)
+    `(bind-key ,key ,command (or ,map hb-mode-map)))
+
+  (hb-mode 1)
   (diminish 'hb-mode)
   (add-hook 'minibuffer-setup-hook (lambda() (hb-mode 0)))
 #+END_SRC
@@ -114,8 +118,8 @@ keys and remove the menu-bar.
           (bitstream-face))
          ((find-font (font-spec :name "-adobe-courier-medium-r-normal-*-*-*-100-100-*-60-iso10646-1"))
           (courier-face)))
-        (bind-key "s-u" 'revert-buffer hb-mode-map)
-        (bind-key "s-L" 'goto-line hb-mode-map)
+        (hb/bind-key "s-u" 'revert-buffer)
+        (hb/bind-key "s-L" 'goto-line)
     (menu-bar-mode 0)))
 #+END_SRC
 ** osx
@@ -204,24 +208,24 @@ Black magic doesn't exist.
 Some general-purpose keybindings.
 
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (bind-key "C-c C-m"    'recompile hb-mode-map)
-  (bind-key "C-c m"      'compile hb-mode-map)
-  (bind-key "C-x C-b"    'ido-switch-buffer hb-mode-map)
-  (bind-key "C-x O"      'ff-find-other-file hb-mode-map)
-  (bind-key "C-'"        'execute-extended-command hb-mode-map)
-  (bind-key "C-x C-h"    'hb/delete-trailing-whitespace-untabify hb-mode-map)
-  (bind-key "M-|"        'transpose-frame hb-mode-map)
-  (bind-key "C-M-S-q"    'fill-region-as-paragraph hb-mode-map)
-  (bind-key "M-'"        'query-replace hb-mode-map)
-  (bind-key "M-\""       'query-replace-regexp hb-mode-map)
-  (bind-key "M-Q"        'fill-region hb-mode-map)
-  (bind-key "C-o"        'split-line hb-mode-map)
-  (bind-key "C-x K"      'kill-buffer-and-window hb-mode-map)
-  (bind-key "C-x C-S-f"  'find-file-other-window hb-mode-map)
-  (bind-key "C-'"        'execute-extended-command hb-mode-map)
-  (bind-key "M-SPC"      'cycle-spacing hb-mode-map)
-  (bind-key "M-;"        'replace-regexp hb-mode-map)
-  (bind-key "C-x C-b"    'switch-to-other-buffer hb-mode-map)
+  (hb/bind-key "C-c C-m"    'recompile)
+  (hb/bind-key "C-c m"      'compile)
+  (hb/bind-key "C-x C-b"    'ido-switch-buffer)
+  (hb/bind-key "C-x O"      'ff-find-other-file)
+  (hb/bind-key "C-'"        'execute-extended-command)
+  (hb/bind-key "C-x C-h"    'hb/delete-trailing-whitespace-untabify)
+  (hb/bind-key "M-|"        'transpose-frame)
+  (hb/bind-key "C-M-S-q"    'fill-region-as-paragraph)
+  (hb/bind-key "M-'"        'query-replace)
+  (hb/bind-key "M-\""       'query-replace-regexp)
+  (hb/bind-key "M-Q"        'fill-region)
+  (hb/bind-key "C-o"        'split-line)
+  (hb/bind-key "C-x K"      'kill-buffer-and-window)
+  (hb/bind-key "C-x C-S-f"  'find-file-other-window)
+  (hb/bind-key "C-'"        'execute-extended-command)
+  (hb/bind-key "M-SPC"      'cycle-spacing)
+  (hb/bind-key "M-;"        'replace-regexp)
+  (hb/bind-key "C-x C-b"    'switch-to-other-buffer)
 #+END_SRC
 ** general-general
 General stuff here. I don't know where to categorize this, so
@@ -305,7 +309,7 @@ general-general.
   (use-package ace-window
     :ensure t
     :config
-    (bind-key "C-x p" 'ace-window hb-mode-map)
+    (hb/bind-key "C-x p" 'ace-window)
     (setq aw-leading-char-style 'path
           aw-keys (number-sequence 97 (+ 97 26)))
     (custom-set-faces '(aw-leading-char-face ((t (:inherit ace-jump-face-foreground :height 3.0))))))
@@ -324,8 +328,8 @@ general-general.
     (ac-config-default)
     (setq-default ac-auto-show-menu 0.1)
     (setq-default ac-sources (append '(ac-source-imenu) ac-sources))
-    (bind-key "C-n" nil ac-menu-map)
-    (bind-key "C-p" nil ac-menu-map)
+    (hb/bind-key "C-n" nil ac-menu-map)
+    (hb/bind-key "C-p" nil ac-menu-map)
     (global-auto-complete-mode)
     :diminish "")
 #+END_SRC
@@ -367,8 +371,8 @@ general-general.
   (use-package expand-region
     :ensure t
     :config
-    (bind-key "C-=" 'er/expand-region hb-mode-map)
-    (bind-key "C-+" 'er/contract-region hb-mode-map))
+    (hb/bind-key "C-=" 'er/expand-region)
+    (hb/bind-key "C-+" 'er/contract-region))
 #+END_SRC
 ** fic-mode
 *** configuration
@@ -423,10 +427,10 @@ general-general.
 *** bindings
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun hb/configure-helm-bindings ()
-    (bind-key "C-x b" 'hb/helm-power-buffer-list hb-mode-map)
-    (bind-key "M-y" 'helm-show-kill-ring hb-mode-map)
-    (bind-key "C-x C-f" 'helm-find-files hb-mode-map)
-    (bind-key "M-i" 'helm-semantic-or-imenu hb-mode-map))
+    (hb/bind-key "C-x b" 'hb/helm-power-buffer-list)
+    (hb/bind-key "M-y" 'helm-show-kill-ring)
+    (hb/bind-key "C-x C-f" 'helm-find-files)
+    (hb/bind-key "M-i" 'helm-semantic-or-imenu))
 #+END_SRC
 *** package
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -469,7 +473,7 @@ general-general.
 *** bindings
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun hb/configure-ido-bindings ()
-    (bind-key "C-a" nil ido-common-completion-map))
+    (hb/bind-key "C-a" nil ido-common-completion-map))
 #+END_SRC
 *** package
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -531,28 +535,28 @@ general-general.
           (interactive)
           (jc/mc-search 'search-backward)))
   (after 'multiple-cursors
-    (bind-key "C-s" 'jc/mc-search-forward mc/keymap)
-    (bind-key "C-r" 'jc/mc-search-backward mc/keymap))
+    (hb/bind-key "C-s" 'jc/mc-search-forward mc/keymap)
+    (hb/bind-key "C-r" 'jc/mc-search-backward mc/keymap))
 #+END_SRC
 *** bindings
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun hb/configure-mc-bindings ()
-    (bind-key "C-S-c C-S-c" 'mc/edit-lines hb-mode-map)
-    (bind-key "C-S-SPC" 'set-rectangular-region-anchor hb-mode-map)
-    (bind-key "C->" 'mc/mark-next-like-this hb-mode-map)
-    (bind-key "C-<" 'mc/mark-previous-like-this hb-mode-map)
-    (bind-key "C-c C-<" 'mc/mark-all-like-this hb-mode-map)
-    (bind-key "C-c C->" 'mc/mark-all-like-this-dwim hb-mode-map)
-    (bind-key "C-c ~" 'mc/insert-numbers hb-mode-map)
-    (bind-key "M-~" 'mc/sort-regions hb-mode-map)
-    (bind-key "C-~" 'mc/reverse-regions hb-mode-map)
-    (bind-key "C-S-c C-e" 'mc/edit-ends-of-lines hb-mode-map)
-    (bind-key "C-S-c C-a" 'mc/edit-beginnings-of-lines hb-mode-map))
+    (hb/bind-key "C-S-c C-S-c" 'mc/edit-lines)
+    (hb/bind-key "C-S-SPC" 'set-rectangular-region-anchor)
+    (hb/bind-key "C->" 'mc/mark-next-like-this)
+    (hb/bind-key "C-<" 'mc/mark-previous-like-this)
+    (hb/bind-key "C-c C-<" 'mc/mark-all-like-this)
+    (hb/bind-key "C-c C->" 'mc/mark-all-like-this-dwim)
+    (hb/bind-key "C-c ~" 'mc/insert-numbers)
+    (hb/bind-key "M-~" 'mc/sort-regions)
+    (hb/bind-key "C-~" 'mc/reverse-regions)
+    (hb/bind-key "C-S-c C-e" 'mc/edit-ends-of-lines)
+    (hb/bind-key "C-S-c C-a" 'mc/edit-beginnings-of-lines))
 #+END_SRC
 *** fixes
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun hb/configure-mc-fixes ()
-    (bind-key "M-SPC" 'just-one-space mc/keymap))
+    (hb/bind-key "M-SPC" 'just-one-space mc/keymap))
 #+END_SRC
 *** package
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -570,7 +574,7 @@ general-general.
           org-startup-folded 'content)
     (after 'org-indent
       (diminish 'org-indent-mode ""))
-    (bind-key "C-x C-s" 'org-babel-tangle org-mode-map)
+    (hb/bind-key "C-x C-s" 'org-babel-tangle org-mode-map)
     (add-to-list 'org-structure-template-alist
                  '("st"
                    "#+BEGIN_SRC emacs-lisp :tangle yes\n?\n#+END_SRC"
@@ -657,7 +661,7 @@ Thanks [[http://whattheemacsd.com/my-misc.el-02.html][Magnar]]!
     :ensure t
     :commands magit-status
     :init
-    (bind-key "C-c g" 'magit-status hb-mode-map)
+    (hb/bind-key "C-c g" 'magit-status)
     (setq magit-auto-revert-mode-lighter "")
     (setq magit-last-seen-setup-instructions "1.4.0"))
 #+END_SRC
@@ -695,7 +699,7 @@ Thanks [[http://whattheemacsd.com/my-misc.el-02.html][Magnar]]!
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package transpose-frame
     :ensure t
-    :config (bind-key "M-|" 'transpose-frame hb-mode-map))
+    :config (hb/bind-key "M-|" 'transpose-frame))
 #+END_SRC
 ** winner
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -799,7 +803,7 @@ and back-to-indentation
   (defun back-to-indentation-or-beginning ()
     (interactive)
     (if (bolp) (back-to-indentation) (beginning-of-line)))
-  (bind-key "C-a" 'back-to-indentation-or-beginning hb-mode-map)
+  (hb/bind-key "C-a" 'back-to-indentation-or-beginning)
 #+END_SRC
 ** visit-term-buffer
 Quickly visit an open term buffer
@@ -814,7 +818,7 @@ Credits: @bbatsov, http://emacsredux.com/blog/2013/03/29/terminal-at-your-finger
           (other-window 1)
           (ansi-term (getenv "SHELL")))
       (switch-to-buffer-other-window "*ansi-term*")))
-  (bind-key "C-c t" 'visit-term-buffer hb-mode-map)
+  (hb/bind-key "C-c t" 'visit-term-buffer)
 #+END_SRC
 ** ido-goto-symbol
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -865,8 +869,8 @@ Credits: @bbatsov, http://emacsredux.com/blog/2013/03/29/terminal-at-your-finger
                       (string= (car imenu--rescan-item) name))
             (add-to-list 'symbol-names name)
             (add-to-list 'name-and-pos (cons name position))))))))
-  (bind-key "C-c i" 'ido-goto-symbol hb-mode-map)
-  (bind-key "C-c I" 'imenu hb-mode-map)
+  (hb/bind-key "C-c i" 'ido-goto-symbol)
+  (hb/bind-key "C-c I" 'imenu)
 #+END_SRC
 ** comment-dwim-line
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -885,7 +889,7 @@ Credits: @bbatsov, http://emacsredux.com/blog/2013/03/29/terminal-at-your-finger
           (comment-or-uncomment-region (line-beginning-position) (line-end-position)))
       (comment-dwim arg)))
 
-  (bind-key "C-;" 'comment-dwim-line hb-mode-map)
+  (hb/bind-key "C-;" 'comment-dwim-line)
 #+END_SRC
 ** capitalize-dwim
 Not sure why this doesn't exist yet.
@@ -902,7 +906,7 @@ Not sure why this doesn't exist yet.
               (end (line-end-position)))
           (capitalize-region beg end)))))
 
-  (bind-key "C-x c" 'capitalize-line-dwim hb-mode-map)
+  (hb/bind-key "C-x c" 'capitalize-line-dwim)
 #+END_SRC
 ** eval-and-replace
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -915,7 +919,7 @@ Not sure why this doesn't exist yet.
                (current-buffer))
       (error (message "Invalid expression")
              (insert (current-kill 0)))))
-  (bind-key "C-c C-x C-e" 'fc-eval-and-replace hb-mode-map)
+  (hb/bind-key "C-c C-x C-e" 'fc-eval-and-replace)
 #+END_SRC
 ** switch-to-other-buffer
 #+BEGIN_SRC emacs-lisp :tangle yes
