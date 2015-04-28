@@ -66,23 +66,30 @@ These are some faces that I like to skip around in sometimes. I mainly
 use either Menlo of courier these days, but maybe sometime I'd like to
 try out others. This makes trying out fonts easy.
 
+*** hb/set-frame-font
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun hb/set-frame-font (face default &optional size)
+    (set-frame-font (concat face " " (if size
+                                         (if (numberp size) (number-to-string size) (size))
+                                       (if (numberp default) (number-to-string default) (default))))))
+#+END_SRC
 *** meslo-face
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun meslo-face (&optional size)
     (interactive "N")
-    (set-frame-font (concat "Meslo LG S " (if size (number-to-string size) "7"))))
+    (hb/set-frame-font "Meslo LG S" 7 size))
 #+END_SRC
 *** menlo-face
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun menlo-face (&optional size)
     (interactive "N")
-    (set-frame-font (concat "Menlo " (if size (number-to-string size) "7"))))
+    (hb/set-frame-font "Menlo" 7 size))
 #+END_SRC
 *** bitstream-face
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun bitstream-face (&optional size)
     (interactive "N")
-    (set-frame-font (concat "Bitstream Vera Sans Mono " (if size (number-to-string size) "7"))))
+    (hb/set-frame-font "Bitstream Vera Sans Mono" 7 size))
 #+END_SRC
 *** courier-face
 #+BEGIN_SRC emacs-lisp :tangle yes
