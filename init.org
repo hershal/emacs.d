@@ -17,6 +17,11 @@ First we must initialize use-package.
     (package-install 'use-package))
 
   (require 'use-package)
+
+  (defmacro use-package-ensure (name &rest args)
+    `(use-package ,name
+       :ensure t
+       ,@args))
 #+END_SRC
 ** after
 This is a cool macro from milkypostman which runs a function body
@@ -306,7 +311,7 @@ general-general.
 * packages
 ** ace-window
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (use-package ace-window
+  (use-package-ensure ace-window
     :ensure t
     :config
     (hb/bind-key "C-x p" 'ace-window)
@@ -316,13 +321,11 @@ general-general.
 #+END_SRC
 ** async
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (use-package async
-    :ensure t)
+  (use-package-ensure async)
 #+END_SRC
 ** auto-complete
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (use-package auto-complete
-    :ensure t
+  (use-package-ensure auto-complete
     :config
     (setq ac-use-menu-map t)
     (ac-config-default)
@@ -335,26 +338,23 @@ general-general.
 #+END_SRC
 ** bind-key
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (use-package bind-key
-    :ensure t)
+  (use-package-ensure bind-key)
 #+END_SRC
 ** bliss-theme
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (use-package bliss-theme
-    :ensure t
+  (use-package-ensure bliss-theme
     :config
     (load-theme 'bliss t)
     (set-face-attribute 'highlight nil :foreground 'nil :underline 'nil :background "#222222"))
 #+END_SRC
 ** bury-successful-compilation
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (use-package bury-successful-compilation
-    :ensure t
+  (use-package-ensure bury-successful-compilation
     :config (bury-successful-compilation))
 #+END_SRC
 ** diminish
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (use-package diminish
+  (use-package-ensure diminish
     :commands diminish
     :config
     (diminish 'auto-fill-function)
@@ -362,14 +362,12 @@ general-general.
 #+END_SRC
 ** ediff
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (use-package ediff
-    :ensure t
+  (use-package-ensure ediff
     :config (setq ediff-window-setup-function 'ediff-setup-windows-plain))
 #+END_SRC
 ** expand-region
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (use-package expand-region
-    :ensure t
+  (use-package-ensure expand-region
     :config
     (hb/bind-key "C-=" 'er/expand-region)
     (hb/bind-key "C-+" 'er/contract-region))
@@ -383,14 +381,12 @@ general-general.
 #+END_SRC
 *** package
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (use-package fic-mode
-    :ensure t
+  (use-package-ensure fic-mode
     :config (add-hook 'prog-mode-hook 'hb/configure-fic-mode))
 #+END_SRC
 ** fold-this
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (use-package fold-this
-    :ensure t)
+  (use-package-ensure fold-this)
 #+END_SRC
 ** helm
 *** configuration
@@ -434,22 +430,19 @@ general-general.
 #+END_SRC
 *** package
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (use-package helm
-    :ensure t
+  (use-package-ensure helm
     :config
     (hb/configure-helm))
 #+END_SRC
 ** ibuffer-vc
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (use-package ibuffer-vc
-    :ensure t
+  (use-package-ensure ibuffer-vc
     :config
     (add-hook 'ibuffer-mode-hook 'ibuffer-vc-set-filter-groups-by-vc-root))
 #+END_SRC
 ** icomplete+
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (use-package icomplete+
-    :ensure t
+  (use-package-ensure icomplete+
     :config (icomplete-mode))
 #+END_SRC
 ** ido
@@ -477,30 +470,26 @@ general-general.
 #+END_SRC
 *** package
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (use-package ido
-    :ensure t
+  (use-package-ensure ido
     :config
     (hb/configure-ido))
 #+END_SRC
 ** ido-complete-space-or-hyphen
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (use-package ido-complete-space-or-hyphen
-    :ensure t
+  (use-package-ensure ido-complete-space-or-hyphen
     :config
     (ido-complete-space-or-hyphen-enable))
 #+END_SRC
 ** ido-hacks
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (use-package ido-hacks
-    :ensure t
+  (use-package-ensure ido-hacks
     :config
     (ido-mode 1)
     (ido-hacks-mode 1))
 #+END_SRC
 ** ido-vertical
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (use-package ido-vertical-mode
-    :ensure t
+  (use-package-ensure ido-vertical-mode
     :config
     (ido-vertical-mode 1)
     (setq ido-vertical-show-count t
@@ -560,8 +549,7 @@ general-general.
 #+END_SRC
 *** package
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (use-package multiple-cursors
-    :ensure t
+  (use-package-ensure multiple-cursors
     :config (hb/configure-mc))
 #+END_SRC
 ** org
@@ -592,16 +580,14 @@ Note that this has a dependency on writegood-mode.
 #+END_SRC
 *** package
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (use-package org
-    :ensure t
+  (use-package-ensure org
     :pin org
     :config
     (hb/configure-org))
 #+END_SRC
 ** org-ac
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (use-package org-ac
-    :ensure t
+  (use-package-ensure org-ac
     :config (org-ac/config-default))
 #+END_SRC
 ** undo-tree
@@ -622,8 +608,7 @@ Thanks [[http://whattheemacsd.com/my-misc.el-02.html][Magnar]]!
 #+END_SRC
 *** package
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (use-package undo-tree
-    :ensure t
+  (use-package-ensure undo-tree
     :diminish ""
     :config
     (hb/configure-undo-tree)
@@ -637,14 +622,12 @@ Thanks [[http://whattheemacsd.com/my-misc.el-02.html][Magnar]]!
 #+END_SRC
 ** hydra
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (use-package hydra
-    :ensure t
+  (use-package-ensure hydra
     :config (hb/configure-hydra))
 #+END_SRC
 ** magit
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (use-package magit
-    :ensure t
+  (use-package-ensure magit
     :commands magit-status
     :init
     (hb/bind-key "C-c g" 'magit-status)
@@ -653,8 +636,7 @@ Thanks [[http://whattheemacsd.com/my-misc.el-02.html][Magnar]]!
 #+END_SRC
 ** monochrome-theme
 #+BEGIN_SRC emacs-lisp :tangle no
-  (use-package monochrome-theme
-    :ensure t)
+  (use-package-ensure monochrome-theme)
 #+END_SRC
 ** smartparens-mode
 *** configuration
@@ -675,8 +657,7 @@ Thanks [[http://whattheemacsd.com/my-misc.el-02.html][Magnar]]!
 #+END_SRC
 *** package
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (use-package smartparens
-    :ensure t
+  (use-package-ensure smartparens
     :diminish ""
     :config
     (smartparens-global-mode)
@@ -685,27 +666,23 @@ Thanks [[http://whattheemacsd.com/my-misc.el-02.html][Magnar]]!
 #+END_SRC
 ** transpose-frame
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (use-package transpose-frame
-    :ensure t
+  (use-package-ensure transpose-frame
     :config (hb/bind-key "M-|" 'transpose-frame))
 #+END_SRC
 ** winner
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (use-package winner
-    :ensure t
+  (use-package-ensure winner
     :config (winner-mode 1))
 #+END_SRC
 ** windmove
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (use-package windmove
-    :ensure t
+  (use-package-ensure windmove
     :config (windmove-default-keybindings))
 #+END_SRC
 ** writegood-mode
 #+BEGIN_SRC emacs-lisp
-    (use-package writegood-mode
-      :ensure t
-      :diminish "")
+  (use-package-ensure writegood-mode
+    :diminish "")
 #+END_SRC
 * major-modes
 ** c++
