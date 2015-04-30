@@ -317,7 +317,6 @@ general-general.
 ** ace-window
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package-ensure ace-window
-    :ensure t
     :config
     (hb/bind-key "C-x p" 'ace-window)
     (setq aw-leading-char-style 'path
