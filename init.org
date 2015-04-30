@@ -136,6 +136,11 @@ that version of bash.
         (if (file-exists-p "/opt/local/bin/bash")
             (setq shell-file-name "/opt/local/bin/bash"))))
 #+END_SRC
+** w32
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (if (equal window-system 'w32)
+      (menu-bar-mode 0))
+#+END_SRC
 * general
 ** window-system
 These usually exist when using a window system. Let's make that not
