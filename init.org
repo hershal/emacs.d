@@ -239,6 +239,7 @@ Some general-purpose keybindings.
   (hb/bind-key "C-x C-b"    'switch-to-other-buffer)
   (hb/bind-key "C-x C-n"    'switch-to-next-buffer)
   (hb/bind-key "C-x C-p"    'switch-to-prev-buffer)
+  (hb/bind-key "C-h C-f"    'find-function)
 #+END_SRC
 ** general-general
 General stuff here. I don't know where to categorize this, so
