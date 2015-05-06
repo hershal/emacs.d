@@ -407,7 +407,8 @@ general-general.
     (setq helm-buffers-fuzzy-matching t
           helm-recentf-fuzzy-match t
           helm-semantic-fuzzy-match t
-          helm-imenu-fuzzy-match t))
+          helm-imenu-fuzzy-match t
+          helm-ff-newfile-prompt-p nil))
 #+END_SRC
 *** macros
 **** helm-power-buffer-list
