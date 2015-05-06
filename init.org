@@ -237,6 +237,8 @@ Some general-purpose keybindings.
   (hb/bind-key "M-SPC"      'cycle-spacing)
   (hb/bind-key "M-;"        'replace-regexp)
   (hb/bind-key "C-x C-b"    'switch-to-other-buffer)
+  (hb/bind-key "C-x C-n"    'switch-to-next-buffer)
+  (hb/bind-key "C-x C-p"    'switch-to-prev-buffer)
 #+END_SRC
 ** general-general
 General stuff here. I don't know where to categorize this, so
