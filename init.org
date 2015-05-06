@@ -640,8 +640,9 @@ Thanks [[http://whattheemacsd.com/my-misc.el-02.html][Magnar]]!
     :commands magit-status
     :init
     (hb/bind-key "C-c g" 'magit-status)
-    (setq magit-auto-revert-mode-lighter "")
-    (setq magit-last-seen-setup-instructions "1.4.0"))
+    (setq magit-auto-revert-mode-lighter ""
+          magit-last-seen-setup-instructions "1.4.0"
+          magit-status-buffer-switch-function 'switch-to-buffer))
 #+END_SRC
 ** monochrome-theme
 #+BEGIN_SRC emacs-lisp :tangle no
