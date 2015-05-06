@@ -239,6 +239,9 @@ Some general-purpose keybindings.
   (hb/bind-key "M-SPC"      'cycle-spacing)
   (hb/bind-key "M-;"        'replace-regexp)
   (hb/bind-key "C-x C-b"    'switch-to-other-buffer)
+  (hb/bind-key "C-x C-n"    'switch-to-next-buffer)
+  (hb/bind-key "C-x C-p"    'switch-to-prev-buffer)
+  (hb/bind-key "C-h C-f"    'find-function)
 #+END_SRC
 ** general-general
 General stuff here. I don't know where to categorize this, so
@@ -407,7 +410,9 @@ general-general.
     (setq helm-buffers-fuzzy-matching t
           helm-recentf-fuzzy-match t
           helm-semantic-fuzzy-match t
-          helm-imenu-fuzzy-match t))
+          helm-imenu-fuzzy-match t
+          helm-ff-newfile-prompt-p nil
+          helm-buffer-max-length nil))
 #+END_SRC
 *** macros
 **** helm-power-buffer-list
@@ -637,8 +642,9 @@ Thanks [[http://whattheemacsd.com/my-misc.el-02.html][Magnar]]!
     :commands magit-status
     :init
     (hb/bind-key "C-c g" 'magit-status)
-    (setq magit-auto-revert-mode-lighter "")
-    (setq magit-last-seen-setup-instructions "1.4.0"))
+    (setq magit-auto-revert-mode-lighter ""
+          magit-last-seen-setup-instructions "1.4.0"
+          magit-status-buffer-switch-function 'switch-to-buffer))
 #+END_SRC
 ** monochrome-theme
 #+BEGIN_SRC emacs-lisp :tangle no
@@ -648,6 +654,7 @@ Thanks [[http://whattheemacsd.com/my-misc.el-02.html][Magnar]]!
 *** configuration
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun hb/configure-smartparens ()
+    (setq sp-paredit-bindings (acons "M-j" 'sp-join-sexp sp-paredit-bindings))
     (sp-use-paredit-bindings)
     (hb/configure-smartparens-emacs-lisp))
 #+END_SRC
