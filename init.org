@@ -409,7 +409,8 @@ general-general.
           helm-recentf-fuzzy-match t
           helm-semantic-fuzzy-match t
           helm-imenu-fuzzy-match t
-          helm-ff-newfile-prompt-p nil))
+          helm-ff-newfile-prompt-p nil
+          helm-buffer-max-length nil))
 #+END_SRC
 *** macros
 **** helm-power-buffer-list
