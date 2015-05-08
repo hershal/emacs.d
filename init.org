@@ -911,7 +911,7 @@ Open this file
   (find-file "~/.emacs.d/init.org")
 #+END_SRC
 
-* [0/23] todos
+* [0/20] todos
 :PROPERTIES:
 :visibility: overview
 :END:
@@ -955,8 +955,6 @@ commands
 ** TODO :convenience: investigate test-map
 ** TODO :convenience: investivate paredit vs smartparens
 ** TODO :annoy: get smartparens to close quotes properly
-** TODO :annoy: remove single quotes from smartparens pairs
-** TODO :annoy:convenience: investigate and change bindings for ido
 ** TODO investigate req-package
 This will fix writegood-mode and org-mode dependencies
 ** TODO investigate shell-pop
@@ -964,15 +962,4 @@ This will fix writegood-mode and org-mode dependencies
 [[http://tuhdo.github.io/helm-intro.html][Helm intro]]
 ** TODO investigate projectile
 ** TODO investigate flx-ido
-** TODO add before-save-hook to create immediate dirs
-Something like...
-#+BEGIN_SRC emacs-lisp
-(add-hook 'before-save-hook
-          (lambda ()
-            (when buffer-file-name
-              (let ((dir (file-name-directory buffer-file-name)))
-                (when (and (not (file-exists-p dir))
-                           (y-or-n-p (format "Directory %s does not exist. Create it?" dir)))
-                  (make-directory dir t))))))
-#+END_SRC
 ** TODO layer maps above a mode's map so I don't override its bindings
