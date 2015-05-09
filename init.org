@@ -19,6 +19,7 @@ First we must initialize use-package.
   (require 'use-package)
 
   (defmacro use-package-ensure (name &rest args)
+    (declare (indent 1))
     `(use-package ,name
        :ensure t
        ,@args))
