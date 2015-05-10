@@ -690,7 +690,7 @@ Thanks [[http://whattheemacsd.com/my-misc.el-02.html][Magnar]]!
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package-ensure magit
     :commands magit-status
-    :init
+    :config
     (hb/bind-key "C-c g" 'magit-status)
     (setq magit-auto-revert-mode-lighter ""
           magit-last-seen-setup-instructions "1.4.0"
