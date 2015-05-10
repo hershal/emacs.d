@@ -461,6 +461,12 @@ general-general.
     :config
     (hb/configure-helm))
 #+END_SRC
+** helm-descbinds
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package-ensure helm-descbinds
+    :config
+    (hb/bind-key "C-h b" 'helm-descbinds))
+#+END_SRC
 ** ibuffer-vc
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package-ensure ibuffer-vc
