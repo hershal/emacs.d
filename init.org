@@ -452,7 +452,8 @@ general-general.
     (hb/bind-key "C-x b" 'hb/helm-power-buffer-list)
     (hb/bind-key "M-y" 'helm-show-kill-ring)
     (hb/bind-key "C-x C-f" 'helm-find-files)
-    (hb/bind-key "M-i" 'helm-semantic-or-imenu))
+    (hb/bind-key "M-i" 'helm-semantic-or-imenu)
+    (hb/bind-key "C-h A" 'helm-apropos))
 #+END_SRC
 *** package
 #+BEGIN_SRC emacs-lisp :tangle yes
