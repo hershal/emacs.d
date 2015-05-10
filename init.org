@@ -927,7 +927,7 @@ Open this file
   (find-file "~/.emacs.d/init.org")
 #+END_SRC
 
-* [0/20] todos
+* [0/18] todos
 :PROPERTIES:
 :visibility: overview
 :END:
@@ -968,14 +968,10 @@ commands
 - [[http://www.emacswiki.org/emacs/dired-single.el]]
 ** TODO :convenience: investigate company-mode
 ** TODO :convenience: integrate semantic/srefactor with c/c++
-** TODO :convenience: investigate test-map
 ** TODO :convenience: investivate paredit vs smartparens
 ** TODO :annoy: get smartparens to close quotes properly
 ** TODO investigate req-package
 This will fix writegood-mode and org-mode dependencies
 ** TODO investigate shell-pop
-** TODO investigate helm
-[[http://tuhdo.github.io/helm-intro.html][Helm intro]]
 ** TODO investigate projectile
 ** TODO investigate flx-ido
-** TODO layer maps above a mode's map so I don't override its bindings
