@@ -672,7 +672,7 @@ Thanks [[http://whattheemacsd.com/my-misc.el-02.html][Magnar]]!
 #+BEGIN_SRC emacs-lisp :tangle no
   (use-package-ensure monochrome-theme)
 #+END_SRC
-** smartparens-mode
+** smartparens
 *** configuration
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun hb/configure-smartparens ()
