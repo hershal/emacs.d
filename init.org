@@ -678,6 +678,7 @@ Thanks [[http://whattheemacsd.com/my-misc.el-02.html][Magnar]]!
   (defun hb/configure-smartparens ()
     (setq sp-paredit-bindings (acons "M-j" 'sp-join-sexp sp-paredit-bindings))
     (sp-use-paredit-bindings)
+    (hb/configure-smartparens-bindings)
     (hb/configure-smartparens-emacs-lisp))
 #+END_SRC
 *** modes
@@ -690,6 +691,12 @@ Thanks [[http://whattheemacsd.com/my-misc.el-02.html][Magnar]]!
     (sp-local-pair 'lisp-interaction-mode "'" nil :actions nil)
     (sp-local-pair 'lisp-interaction-mode "`" nil :actions nil)
     (add-hook 'lisp-interaction-mode-hook 'smartparens-strict-mode))
+#+END_SRC
+*** bindings
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun hb/configure-smartparens-bindings ()
+    (hb/bind-key "C-*" (lambda (&optional arg) (interactive "P") (sp-wrap-with-pair "(")))
+    (hb/bind-key "C-\"" (lambda (&optional arg) (interactive "P") (sp-wrap-with-pair "\""))))
 #+END_SRC
 *** package
 #+BEGIN_SRC emacs-lisp :tangle yes
