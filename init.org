@@ -680,7 +680,8 @@ Thanks [[http://whattheemacsd.com/my-misc.el-02.html][Magnar]]!
     (sp-use-paredit-bindings)
     (hb/configure-smartparens-emacs-lisp))
 #+END_SRC
-*** emacs-lisp
+*** modes
+**** emacs-lisp
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun hb/configure-smartparens-emacs-lisp ()
     (sp-local-pair 'emacs-lisp-mode "'" nil :actions nil)
