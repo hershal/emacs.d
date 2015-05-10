@@ -128,7 +128,7 @@ keys and remove the menu-bar.
         (hb/bind-key "s-u" 'revert-buffer)
         (hb/bind-key "s-U" 'vc-revert)
         (hb/bind-key "s-L" 'goto-line)
-    (menu-bar-mode 0)))
+        (menu-bar-mode 0)))
 #+END_SRC
 ** osx
 On OSX, I decrease the font size and turn on the menu-bar since it
@@ -518,11 +518,11 @@ general-general.
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun hb/configure-ido-preferences ()
     (setq ido-enable-flex-matching t
-            ido-everywhere t
-            ido-max-directory-size 100000
-            ido-create-new-buffer 'always
-            ido-default-file-method 'selected-window
-            ido-default-buffer-method 'selected-window))
+          ido-everywhere t
+          ido-max-directory-size 100000
+          ido-create-new-buffer 'always
+          ido-default-file-method 'selected-window
+          ido-default-buffer-method 'selected-window))
 #+END_SRC
 *** bindings
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -568,22 +568,22 @@ general-general.
 *** mc-isearch
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun hb/configure-mc-isearch ()
-        (defvar jc/mc-search--last-term nil)
-        (defun jc/mc-search (search-command)
-          ;; Read new search term when not repeated command or applying to fake cursors
-          (when (and (not mc--executing-command-for-fake-cursor)
-                     (not (eq last-command 'jc/mc-search-forward))
-                     (not (eq last-command 'jc/mc-search-backward)))
-            (setq jc/mc-search--last-term (read-from-minibuffer "Search: ")))
-          (funcall search-command jc/mc-search--last-term))
-        (defun jc/mc-search-forward ()
-          "Simplified version of forward search that supports multiple cursors"
-          (interactive)
-          (jc/mc-search 'search-forward))
-        (defun jc/mc-search-backward ()
-          "Simplified version of backward search that supports multiple cursors"
-          (interactive)
-          (jc/mc-search 'search-backward)))
+    (defvar jc/mc-search--last-term nil)
+    (defun jc/mc-search (search-command)
+      ;; Read new search term when not repeated command or applying to fake cursors
+      (when (and (not mc--executing-command-for-fake-cursor)
+                 (not (eq last-command 'jc/mc-search-forward))
+                 (not (eq last-command 'jc/mc-search-backward)))
+        (setq jc/mc-search--last-term (read-from-minibuffer "Search: ")))
+      (funcall search-command jc/mc-search--last-term))
+    (defun jc/mc-search-forward ()
+      "Simplified version of forward search that supports multiple cursors"
+      (interactive)
+      (jc/mc-search 'search-forward))
+    (defun jc/mc-search-backward ()
+      "Simplified version of backward search that supports multiple cursors"
+      (interactive)
+      (jc/mc-search 'search-backward)))
   (after 'multiple-cursors
     (hb/bind-key "C-s" 'jc/mc-search-forward mc/keymap)
     (hb/bind-key "C-r" 'jc/mc-search-backward mc/keymap))
@@ -759,17 +759,17 @@ Thanks [[http://whattheemacsd.com/my-misc.el-02.html][Magnar]]!
 ** c++
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun hb/configure-c-common ()
-      (setq c-basic-offset 4
-            comment-start "/* "
-            comment-end " */"))
+    (setq c-basic-offset 4
+          comment-start "/* "
+          comment-end " */"))
   (add-hook 'c-mode-common-hook 'hb/configure-c-common)
 #+END_SRC
 ** java
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun hb/configure-java ()
-      (setq c-basic-offset 4
-            comment-start "/* "
-            comment-end " */"))
+    (setq c-basic-offset 4
+          comment-start "/* "
+          comment-end " */"))
   (add-hook 'java-mode-hook 'hb/configure-java)
 #+END_SRC
 * macros
