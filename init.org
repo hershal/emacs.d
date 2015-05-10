@@ -395,6 +395,13 @@ general-general.
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package-ensure fold-this)
 #+END_SRC
+** graphviz-dot-mode
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package-ensure graphviz-dot-mode
+      :config
+      (setq graphviz-dot-auto-indent-on-semi nil
+            graphviz-dot-indent-width 4))
+#+END_SRC
 ** helm
 *** configuration
 #+BEGIN_SRC emacs-lisp :tangle yes
