@@ -19,6 +19,7 @@ First we must initialize use-package.
   (require 'use-package)
 
   (defmacro use-package-ensure (name &rest args)
+    (declare (indent 1))
     `(use-package ,name
        :ensure t
        ,@args))
@@ -125,6 +126,7 @@ keys and remove the menu-bar.
          ((find-font (font-spec :name "-adobe-courier-medium-r-normal-*-*-*-100-100-*-60-iso10646-1"))
           (courier-face)))
         (hb/bind-key "s-u" 'revert-buffer)
+        (hb/bind-key "s-U" 'vc-revert)
         (hb/bind-key "s-L" 'goto-line)
     (menu-bar-mode 0)))
 #+END_SRC
@@ -139,7 +141,8 @@ that version of bash.
         (hb/set-frame-font "Menlo" 10)
         (menu-bar-mode 1)
         (if (file-exists-p "/opt/local/bin/bash")
-            (setq shell-file-name "/opt/local/bin/bash"))))
+            (setq shell-file-name "/opt/local/bin/bash")))
+    (hb/bind-key "s-U" 'vc-revert))
 #+END_SRC
 ** w32
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -923,7 +926,7 @@ Open this file
   (find-file "~/.emacs.d/init.org")
 #+END_SRC
 
-* [0/23] todos
+* [0/20] todos
 :PROPERTIES:
 :visibility: overview
 :END:
@@ -967,8 +970,6 @@ commands
 ** TODO :convenience: investigate test-map
 ** TODO :convenience: investivate paredit vs smartparens
 ** TODO :annoy: get smartparens to close quotes properly
-** TODO :annoy: remove single quotes from smartparens pairs
-** TODO :annoy:convenience: investigate and change bindings for ido
 ** TODO investigate req-package
 This will fix writegood-mode and org-mode dependencies
 ** TODO investigate shell-pop
@@ -976,15 +977,4 @@ This will fix writegood-mode and org-mode dependencies
 [[http://tuhdo.github.io/helm-intro.html][Helm intro]]
 ** TODO investigate projectile
 ** TODO investigate flx-ido
-** TODO add before-save-hook to create immediate dirs
-Something like...
-#+BEGIN_SRC emacs-lisp
-(add-hook 'before-save-hook
-          (lambda ()
-            (when buffer-file-name
-              (let ((dir (file-name-directory buffer-file-name)))
-                (when (and (not (file-exists-p dir))
-                           (y-or-n-p (format "Directory %s does not exist. Create it?" dir)))
-                  (make-directory dir t))))))
-#+END_SRC
 ** TODO layer maps above a mode's map so I don't override its bindings
