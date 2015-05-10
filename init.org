@@ -440,6 +440,33 @@ general-general.
           :buffer "*helm-power*"
           :truncate-lines t))
 #+END_SRC
+**** helm-same-mode-buffers
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun buffers-with-major-mode (mode)
+    (save-excursion
+      (delq nil (mapcar (lambda (buf) (when (buffer-live-p buf)
+                                        (with-current-buffer buf
+                                          (and (eq major-mode mode)
+                                               (buffer-name buf)))))
+                        (buffer-list)))))
+
+  (defun pair-buffers-with-major-mode (mode)
+    (mapcar (lambda (buf)
+              (cons buf buf))
+            (buffers-with-major-mode mode)))
+
+  (defun hb/helm-same-mode-buffers ()
+    (interactive)
+    (let ((the-mode major-mode))
+      (helm :sources (helm-build-sync-source "Same mode buffers"
+                       :candidates (pair-buffers-with-major-mode the-mode)
+                       :fuzzy-match helm-buffers-fuzzy-matching
+                       :keymap helm-map
+                       :mode-line "Same mode buffers"
+                       :action '(("Switch to" . switch-to-buffer)))
+            :buffer "*same-mode-buffers*"
+            :truncate-lines t)))
+#+END_SRC
 **** helm-buffer-run-zgrep-all
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun helm-buffer-run-zgrep-all ()
@@ -450,6 +477,7 @@ general-general.
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun hb/configure-helm-bindings ()
     (hb/bind-key "C-x b" 'hb/helm-power-buffer-list)
+    (hb/bind-key "C-x B" 'hb/helm-same-mode-buffers)
     (hb/bind-key "M-y" 'helm-show-kill-ring)
     (hb/bind-key "C-x C-f" 'helm-find-files)
     (hb/bind-key "M-i" 'helm-semantic-or-imenu)
