@@ -421,7 +421,8 @@ general-general.
           helm-imenu-fuzzy-match t
           helm-ff-newfile-prompt-p nil
           helm-buffer-max-length nil)
-    (hb/bind-key "C-s" 'helm-buffer-run-zgrep-all helm-buffer-map))
+    (after 'helm-buffers
+      (hb/bind-key "C-s" 'helm-buffer-run-zgrep-all helm-buffer-map)))
 #+END_SRC
 *** macros
 **** helm-power-buffer-list
