@@ -471,6 +471,7 @@ general-general.
 **** helm-buffer-run-zgrep-all
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun helm-buffer-run-zgrep-all ()
+    (interactive)
     (setq helm-current-prefix-arg 4)
     (helm-buffer-run-zgrep))
 #+END_SRC
