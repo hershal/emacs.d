@@ -691,7 +691,6 @@ Thanks [[http://whattheemacsd.com/my-misc.el-02.html][Magnar]]!
 ** magit
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package-ensure magit
-    :commands magit-status
     :config
     (hb/bind-key "C-c g" 'magit-status)
     (setq magit-auto-revert-mode-lighter ""
