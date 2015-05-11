@@ -65,7 +65,6 @@ Set up hb-mode and hb-mode-map.
 
   (hb-mode 1)
   (diminish 'hb-mode)
-  (add-hook 'minibuffer-setup-hook (lambda() (hb-mode 0)))
 #+END_SRC
 ** faces
 These are some faces that I like to skip around in sometimes. I mainly
