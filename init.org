@@ -245,6 +245,7 @@ Some general-purpose keybindings.
   (hb/bind-key "C-x k"      'kill-this-buffer)
   (hb/bind-key "C-x 2"      'vsplit-last-buffer)
   (hb/bind-key "C-x 3"      'hsplit-last-buffer)
+  (hb/bind-key "C-h o"      'package-install)
 #+END_SRC
 ** general-general
 General stuff here. I don't know where to categorize this, so
