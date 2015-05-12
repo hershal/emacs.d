@@ -667,7 +667,9 @@ Thanks [[http://whattheemacsd.com/my-misc.el-02.html][Magnar]]!
             (set-mark m)
             (set-marker p nil)
             (set-marker m nil))
-        ad-do-it)))
+        ad-do-it))
+    (setq undo-tree-visualizer-timestamps t
+          undo-tree-visualizer-diff t))
 #+END_SRC
 *** package
 #+BEGIN_SRC emacs-lisp :tangle yes
