@@ -701,6 +701,13 @@ Thanks [[http://whattheemacsd.com/my-misc.el-02.html][Magnar]]!
 #+BEGIN_SRC emacs-lisp :tangle no
   (use-package-ensure monochrome-theme)
 #+END_SRC
+** savehist
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package-ensure savehist
+    :config
+    (savehist-mode)
+    (add-to-list 'savehist-additional-variables 'compile-command))
+#+END_SRC
 ** smartparens
 *** configuration
 #+BEGIN_SRC emacs-lisp :tangle yes
