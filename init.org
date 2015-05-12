@@ -26,8 +26,8 @@ First we must initialize use-package.
 
   (defconst use-package-ensure-font-lock-keywords
     (list (cons (replace-regexp-in-string "use-package" "use-package-ensure"
-                                     (caar use-package-font-lock-keywords))
-           (cdar use-package-font-lock-keywords))))
+                                          (caar use-package-font-lock-keywords))
+                (cdar use-package-font-lock-keywords))))
 
   (font-lock-add-keywords 'emacs-lisp-mode use-package-ensure-font-lock-keywords)
 #+END_SRC
