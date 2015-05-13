@@ -270,7 +270,8 @@ general-general.
         tramp-auto-save-directory "~/.emacs-backups/"
         kill-whole-line t
         display-time-24hr-format t
-        revert-without-query '(".*"))
+        revert-without-query '(".*")
+        shell-command-switch "-ic")
 
   (toggle-truncate-lines 1)
   (column-number-mode 1)
