@@ -456,10 +456,11 @@ general-general.
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun buffers-with-major-mode (mode)
     (save-excursion
-      (delq nil (mapcar (lambda (buf) (when (buffer-live-p buf)
-                                        (with-current-buffer buf
-                                          (and (eq major-mode mode)
-                                               (buffer-name buf)))))
+      (delq nil (mapcar (lambda (buf)
+                          (when (buffer-live-p buf)
+                            (with-current-buffer buf
+                              (and (eq major-mode mode)
+                                   (buffer-name buf)))))
                         (buffer-list)))))
 
   (defun pair-buffers-with-major-mode (mode)
