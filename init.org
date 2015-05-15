@@ -373,6 +373,34 @@ general-general.
   (use-package-ensure bury-successful-compilation
     :config (bury-successful-compilation))
 #+END_SRC
+** company
+*** configuration
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun hb/configure-company ()
+    (hb/configure-company-preferences)
+    (hb/configure-company-backends)
+    (global-company-mode))
+#+END_SRC
+*** preferences
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun hb/configure-company-preferences ()
+    (setq company-auto-complete t
+          company-global-modes t
+          company-idle-delay 0.1))
+#+END_SRC
+*** backends
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun hb/configure-company-backends ()
+    (setq company-backends (delete 'company-semantic company-backends))
+    (mapcar (lambda (backend) (add-to-list 'company-backends backend))
+            '(company-c-headers)))
+#+END_SRC
+*** package
+#+BEGIN_SRC emacs-lisp :tangle yes
+    (use-package-ensure company
+      :config
+      (hb/configure-company))
+#+END_SRC
 ** diminish
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package-ensure diminish
@@ -409,12 +437,17 @@ general-general.
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package-ensure fold-this)
 #+END_SRC
+** function-args
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package function-args
+    :config (fa-config-default))
+#+END_SRC
 ** graphviz-dot-mode
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package-ensure graphviz-dot-mode
-      :config
-      (setq graphviz-dot-auto-indent-on-semi nil
-            graphviz-dot-indent-width 4))
+    :config
+    (setq graphviz-dot-auto-indent-on-semi nil
+          graphviz-dot-indent-width 4))
 #+END_SRC
 ** helm
 *** configuration
