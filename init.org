@@ -23,6 +23,13 @@ First we must initialize use-package.
     `(use-package ,name
        :ensure t
        ,@args))
+
+  (defconst use-package-ensure-font-lock-keywords
+    (list (cons (replace-regexp-in-string "use-package" "use-package-ensure"
+                                          (caar use-package-font-lock-keywords))
+                (cdar use-package-font-lock-keywords))))
+
+  (font-lock-add-keywords 'emacs-lisp-mode use-package-ensure-font-lock-keywords)
 #+END_SRC
 ** after
 This is a cool macro from milkypostman which runs a function body
@@ -65,7 +72,6 @@ Set up hb-mode and hb-mode-map.
 
   (hb-mode 1)
   (diminish 'hb-mode)
-  (add-hook 'minibuffer-setup-hook (lambda() (hb-mode 0)))
 #+END_SRC
 ** faces
 These are some faces that I like to skip around in sometimes. I mainly
@@ -128,7 +134,7 @@ keys and remove the menu-bar.
         (hb/bind-key "s-u" 'revert-buffer)
         (hb/bind-key "s-U" 'vc-revert)
         (hb/bind-key "s-L" 'goto-line)
-    (menu-bar-mode 0)))
+        (menu-bar-mode 0)))
 #+END_SRC
 ** osx
 On OSX, I decrease the font size and turn on the menu-bar since it
@@ -243,6 +249,10 @@ Some general-purpose keybindings.
   (hb/bind-key "C-x C-n"    'switch-to-next-buffer)
   (hb/bind-key "C-x C-p"    'switch-to-prev-buffer)
   (hb/bind-key "C-h C-f"    'find-function)
+  (hb/bind-key "C-x k"      'kill-this-buffer)
+  (hb/bind-key "C-x 2"      'vsplit-last-buffer)
+  (hb/bind-key "C-x 3"      'hsplit-last-buffer)
+  (hb/bind-key "C-h o"      'package-install)
 #+END_SRC
 ** general-general
 General stuff here. I don't know where to categorize this, so
@@ -260,7 +270,8 @@ general-general.
         tramp-auto-save-directory "~/.emacs-backups/"
         kill-whole-line t
         display-time-24hr-format t
-        revert-without-query '(".*"))
+        revert-without-query '(".*")
+        shell-command-switch "-ic")
 
   (toggle-truncate-lines 1)
   (column-number-mode 1)
@@ -339,8 +350,8 @@ general-general.
     :config
     (setq ac-use-menu-map t)
     (ac-config-default)
-    (setq-default ac-auto-show-menu 0.1)
-    (setq-default ac-sources (append '(ac-source-imenu) ac-sources))
+    (setq-default ac-auto-show-menu 0.1
+                  ac-sources (append '(ac-source-imenu) ac-sources))
     (hb/bind-key "C-n" nil ac-menu-map)
     (hb/bind-key "C-p" nil ac-menu-map)
     (global-auto-complete-mode)
@@ -398,6 +409,13 @@ general-general.
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package-ensure fold-this)
 #+END_SRC
+** graphviz-dot-mode
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package-ensure graphviz-dot-mode
+      :config
+      (setq graphviz-dot-auto-indent-on-semi nil
+            graphviz-dot-indent-width 4))
+#+END_SRC
 ** helm
 *** configuration
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -413,7 +431,9 @@ general-general.
           helm-semantic-fuzzy-match t
           helm-imenu-fuzzy-match t
           helm-ff-newfile-prompt-p nil
-          helm-buffer-max-length nil))
+          helm-buffer-max-length nil)
+    (after 'helm-buffers
+      (hb/bind-key "C-s" 'helm-buffer-run-zgrep-all helm-buffer-map)))
 #+END_SRC
 *** macros
 **** helm-power-buffer-list
@@ -433,19 +453,62 @@ general-general.
           :buffer "*helm-power*"
           :truncate-lines t))
 #+END_SRC
+**** helm-same-mode-buffers
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun buffers-with-major-mode (mode)
+    (save-excursion
+      (delq nil (mapcar (lambda (buf)
+                          (when (buffer-live-p buf)
+                            (with-current-buffer buf
+                              (and (eq major-mode mode)
+                                   (buffer-name buf)))))
+                        (buffer-list)))))
+
+  (defun pair-buffers-with-major-mode (mode)
+    (mapcar (lambda (buf)
+              (cons buf buf))
+            (buffers-with-major-mode mode)))
+
+  (defun hb/helm-same-mode-buffers ()
+    (interactive)
+    (let ((the-mode major-mode))
+      (helm :sources (helm-build-sync-source "Same mode buffers"
+                       :candidates (pair-buffers-with-major-mode the-mode)
+                       :fuzzy-match helm-buffers-fuzzy-matching
+                       :keymap helm-map
+                       :mode-line "Same mode buffers"
+                       :action '(("Switch to" . switch-to-buffer)))
+            :buffer "*same-mode-buffers*"
+            :truncate-lines t)))
+#+END_SRC
+**** helm-buffer-run-zgrep-all
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun helm-buffer-run-zgrep-all ()
+    (interactive)
+    (setq helm-current-prefix-arg 4)
+    (helm-buffer-run-zgrep))
+#+END_SRC
 *** bindings
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun hb/configure-helm-bindings ()
     (hb/bind-key "C-x b" 'hb/helm-power-buffer-list)
+    (hb/bind-key "C-x B" 'hb/helm-same-mode-buffers)
     (hb/bind-key "M-y" 'helm-show-kill-ring)
     (hb/bind-key "C-x C-f" 'helm-find-files)
-    (hb/bind-key "M-i" 'helm-semantic-or-imenu))
+    (hb/bind-key "M-i" 'helm-semantic-or-imenu)
+    (hb/bind-key "C-h A" 'helm-apropos))
 #+END_SRC
 *** package
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package-ensure helm
     :config
     (hb/configure-helm))
+#+END_SRC
+** helm-descbinds
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package-ensure helm-descbinds
+    :config
+    (hb/bind-key "C-h b" 'helm-descbinds))
 #+END_SRC
 ** ibuffer-vc
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -470,11 +533,11 @@ general-general.
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun hb/configure-ido-preferences ()
     (setq ido-enable-flex-matching t
-            ido-everywhere t
-            ido-max-directory-size 100000
-            ido-create-new-buffer 'always
-            ido-default-file-method 'selected-window
-            ido-default-buffer-method 'selected-window))
+          ido-everywhere t
+          ido-max-directory-size 100000
+          ido-create-new-buffer 'always
+          ido-default-file-method 'selected-window
+          ido-default-buffer-method 'selected-window))
 #+END_SRC
 *** bindings
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -520,22 +583,22 @@ general-general.
 *** mc-isearch
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun hb/configure-mc-isearch ()
-        (defvar jc/mc-search--last-term nil)
-        (defun jc/mc-search (search-command)
-          ;; Read new search term when not repeated command or applying to fake cursors
-          (when (and (not mc--executing-command-for-fake-cursor)
-                     (not (eq last-command 'jc/mc-search-forward))
-                     (not (eq last-command 'jc/mc-search-backward)))
-            (setq jc/mc-search--last-term (read-from-minibuffer "Search: ")))
-          (funcall search-command jc/mc-search--last-term))
-        (defun jc/mc-search-forward ()
-          "Simplified version of forward search that supports multiple cursors"
-          (interactive)
-          (jc/mc-search 'search-forward))
-        (defun jc/mc-search-backward ()
-          "Simplified version of backward search that supports multiple cursors"
-          (interactive)
-          (jc/mc-search 'search-backward)))
+    (defvar jc/mc-search--last-term nil)
+    (defun jc/mc-search (search-command)
+      ;; Read new search term when not repeated command or applying to fake cursors
+      (when (and (not mc--executing-command-for-fake-cursor)
+                 (not (eq last-command 'jc/mc-search-forward))
+                 (not (eq last-command 'jc/mc-search-backward)))
+        (setq jc/mc-search--last-term (read-from-minibuffer "Search: ")))
+      (funcall search-command jc/mc-search--last-term))
+    (defun jc/mc-search-forward ()
+      "Simplified version of forward search that supports multiple cursors"
+      (interactive)
+      (jc/mc-search 'search-forward))
+    (defun jc/mc-search-backward ()
+      "Simplified version of backward search that supports multiple cursors"
+      (interactive)
+      (jc/mc-search 'search-backward)))
   (after 'multiple-cursors
     (hb/bind-key "C-s" 'jc/mc-search-forward mc/keymap)
     (hb/bind-key "C-r" 'jc/mc-search-backward mc/keymap))
@@ -617,7 +680,9 @@ Thanks [[http://whattheemacsd.com/my-misc.el-02.html][Magnar]]!
             (set-mark m)
             (set-marker p nil)
             (set-marker m nil))
-        ad-do-it)))
+        ad-do-it))
+    (setq undo-tree-visualizer-timestamps t
+          undo-tree-visualizer-diff t))
 #+END_SRC
 *** package
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -641,8 +706,7 @@ Thanks [[http://whattheemacsd.com/my-misc.el-02.html][Magnar]]!
 ** magit
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package-ensure magit
-    :commands magit-status
-    :init
+    :config
     (hb/bind-key "C-c g" 'magit-status)
     (setq magit-auto-revert-mode-lighter ""
           magit-last-seen-setup-instructions "1.4.0"
@@ -652,15 +716,24 @@ Thanks [[http://whattheemacsd.com/my-misc.el-02.html][Magnar]]!
 #+BEGIN_SRC emacs-lisp :tangle no
   (use-package-ensure monochrome-theme)
 #+END_SRC
-** smartparens-mode
+** savehist
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package-ensure savehist
+    :config
+    (savehist-mode)
+    (add-to-list 'savehist-additional-variables 'compile-command))
+#+END_SRC
+** smartparens
 *** configuration
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun hb/configure-smartparens ()
     (setq sp-paredit-bindings (acons "M-j" 'sp-join-sexp sp-paredit-bindings))
     (sp-use-paredit-bindings)
+    (hb/configure-smartparens-bindings)
     (hb/configure-smartparens-emacs-lisp))
 #+END_SRC
-*** emacs-lisp
+*** modes
+**** emacs-lisp
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun hb/configure-smartparens-emacs-lisp ()
     (sp-local-pair 'emacs-lisp-mode "'" nil :actions nil)
@@ -669,6 +742,12 @@ Thanks [[http://whattheemacsd.com/my-misc.el-02.html][Magnar]]!
     (sp-local-pair 'lisp-interaction-mode "'" nil :actions nil)
     (sp-local-pair 'lisp-interaction-mode "`" nil :actions nil)
     (add-hook 'lisp-interaction-mode-hook 'smartparens-strict-mode))
+#+END_SRC
+*** bindings
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun hb/configure-smartparens-bindings ()
+    (hb/bind-key "C-*" (lambda (&optional arg) (interactive "P") (sp-wrap-with-pair "(")))
+    (hb/bind-key "C-\"" (lambda (&optional arg) (interactive "P") (sp-wrap-with-pair "\""))))
 #+END_SRC
 *** package
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -703,17 +782,17 @@ Thanks [[http://whattheemacsd.com/my-misc.el-02.html][Magnar]]!
 ** c++
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun hb/configure-c-common ()
-      (setq c-basic-offset 4
-            comment-start "/* "
-            comment-end " */"))
+    (setq c-basic-offset 4
+          comment-start "/* "
+          comment-end " */"))
   (add-hook 'c-mode-common-hook 'hb/configure-c-common)
 #+END_SRC
 ** java
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun hb/configure-java ()
-      (setq c-basic-offset 4
-            comment-start "/* "
-            comment-end " */"))
+    (setq c-basic-offset 4
+          comment-start "/* "
+          comment-end " */"))
   (add-hook 'java-mode-hook 'hb/configure-java)
 #+END_SRC
 * macros
@@ -907,13 +986,29 @@ Not sure why this doesn't exist yet.
     (interactive)
     (switch-to-buffer nil))
 #+END_SRC
+** split-last-buffer
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun vsplit-last-buffer (prefix)
+    "Split the window vertically and display the previous buffer."
+    (interactive "p")
+    (split-window-vertically)
+    (other-window 1 nil)
+    (if (= prefix 1) (switch-to-next-buffer)))
+
+  (defun hsplit-last-buffer (prefix)
+    "Split the window horizontally and display the previous buffer."
+    (interactive "p")
+    (split-window-horizontally)
+    (other-window 1 nil)
+    (if (= prefix 1) (switch-to-next-buffer)))
+#+END_SRC
 * conclusion
 Open this file
 #+BEGIN_SRC emacs-lisp :tangle yes
   (find-file "~/.emacs.d/init.org")
 #+END_SRC
 
-* [0/20] todos
+* [0/15] todos
 :PROPERTIES:
 :visibility: overview
 :END:
@@ -954,14 +1049,8 @@ commands
 - [[http://www.emacswiki.org/emacs/dired-single.el]]
 ** TODO :convenience: investigate company-mode
 ** TODO :convenience: integrate semantic/srefactor with c/c++
-** TODO :convenience: investigate test-map
-** TODO :convenience: investivate paredit vs smartparens
 ** TODO :annoy: get smartparens to close quotes properly
 ** TODO investigate req-package
 This will fix writegood-mode and org-mode dependencies
-** TODO investigate shell-pop
-** TODO investigate helm
-[[http://tuhdo.github.io/helm-intro.html][Helm intro]]
 ** TODO investigate projectile
 ** TODO investigate flx-ido
-** TODO layer maps above a mode's map so I don't override its bindings
