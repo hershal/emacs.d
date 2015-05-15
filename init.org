@@ -439,7 +439,7 @@ general-general.
 #+END_SRC
 ** function-args
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (use-package function-args
+  (use-package-ensure function-args
     :config (fa-config-default))
 #+END_SRC
 ** graphviz-dot-mode
