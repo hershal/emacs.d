@@ -424,6 +424,7 @@ general-general.
     (unless helm-source-buffers-list
       (setq helm-source-buffers-list
             (helm-make-source "Buffers" 'helm-source-buffers)))
+    (setq helm-buffer-max-length nil)
     (helm :sources '(helm-source-buffers-list
                      helm-source-ido-virtual-buffers
                      helm-source-buffer-not-found
