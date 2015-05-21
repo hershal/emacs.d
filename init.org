@@ -1078,9 +1078,6 @@ commands
   tabbed
   - the constructor argument name and type should not be broken across
     lines
-** TODO :dired: investigate up dired-single
-- [[http://www.emacswiki.org/emacs/dired-single.el]]
-** TODO :convenience: investigate company-mode
 ** TODO :convenience: integrate semantic/srefactor with c/c++
 ** TODO :annoy: get smartparens to close quotes properly
 ** TODO investigate req-package
