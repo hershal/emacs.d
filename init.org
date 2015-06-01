@@ -1078,6 +1078,23 @@ commands
   tabbed
   - the constructor argument name and type should not be broken across
     lines
+
+i.e. This should not happens:
+#+BEGIN_SRC c++
+auto hrt::core::bounding_box::relative_position(const point &p) -> vector {
+    return new hrt::core::vector((p.x - min.x)/(max.x - min.x),
+                                 (p.y - min.y)/(max.y - min.y),
+                                 (p.z - min.z)/(max.z - min.z));
+}
+#+END_SRC
+This should happen instead:
+#+BEGIN_SRC c++
+  auto hrt::core::bounding_box::relative_position(const point &p) -> vector {
+      return new hrt::core::vector((p.x - min.x)/(max.x - min.x),
+          (p.y - min.y)/(max.y - min.y),
+          (p.z - min.z)/(max.z - min.z));
+  }
+#+END_SRC
 ** TODO :convenience: integrate semantic/srefactor with c/c++
 ** TODO :annoy: get smartparens to close quotes properly
 ** TODO investigate req-package
