@@ -344,19 +344,6 @@ general-general.
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package-ensure async)
 #+END_SRC
-** auto-complete
-#+BEGIN_SRC emacs-lisp :tangle yes
-  (use-package-ensure auto-complete
-    :config
-    (setq ac-use-menu-map t)
-    (ac-config-default)
-    (setq-default ac-auto-show-menu 0.1
-                  ac-sources (append '(ac-source-imenu) ac-sources))
-    (hb/bind-key "C-n" nil ac-menu-map)
-    (hb/bind-key "C-p" nil ac-menu-map)
-    (global-auto-complete-mode)
-    :diminish "")
-#+END_SRC
 ** bind-key
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package-ensure bind-key)
