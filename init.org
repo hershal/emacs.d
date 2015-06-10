@@ -828,6 +828,7 @@ Thanks [[http://whattheemacsd.com/my-misc.el-02.html][Magnar]]!
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun hb/configure-org-mode-hook ()
     (sp-local-pair 'org-mode "/" "/" :unless '(sp-point-after-word-p))
+    (sp-local-pair 'org-mode "_" "_" :unless '(sp-point-after-word-p))
     (sp-local-pair 'org-mode "=" "=" :unless '(sp-point-after-word-p))
     (auto-fill-mode 1)
     (writegood-mode 1)
