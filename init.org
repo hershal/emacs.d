@@ -801,27 +801,27 @@ Thanks [[http://whattheemacsd.com/my-misc.el-02.html][Magnar]]!
 * major-modes
 ** c++
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (defun hb/configure-c-common ()
+  (defun hb/configure-c-common-hook ()
     (setq c-basic-offset 4
           comment-start "/* "
           comment-end " */"))
-  (add-hook 'c-mode-common-hook 'hb/configure-c-common)
+  (add-hook 'c-mode-common-hook 'hb/configure-c-common-hook)
 #+END_SRC
 ** java
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (defun hb/configure-java ()
+  (defun hb/configure-java-mode-hook ()
     (setq c-basic-offset 4
           comment-start "/* "
           comment-end " */"))
-  (add-hook 'java-mode-hook 'hb/configure-java)
+  (add-hook 'java-mode-hook 'hb/configure-java-mode-hook)
 #+END_SRC
 ** lisp
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (defun hb/configure-lisp ()
+  (defun hb/configure-lisp-mode-hook ()
     (sp-local-pair major-mode "`" nil :actions nil))
   (mapcar (lambda (hook)
             (add-hook hook 'smartparens-strict-mode)
-            (add-hook hook 'hb/configure-lisp))
+            (add-hook hook 'hb/configure-lisp-mode-hook))
           '(emacs-lisp-mode-hook lisp-mode-hook lisp-interaction-mode-hook))
 #+END_SRC
 ** org
