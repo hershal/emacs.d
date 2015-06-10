@@ -753,19 +753,7 @@ Thanks [[http://whattheemacsd.com/my-misc.el-02.html][Magnar]]!
   (defun hb/configure-smartparens ()
     (setq sp-paredit-bindings (acons "M-j" 'sp-join-sexp sp-paredit-bindings))
     (sp-use-paredit-bindings)
-    (hb/configure-smartparens-bindings)
-    (hb/configure-smartparens-emacs-lisp))
-#+END_SRC
-*** modes
-**** emacs-lisp
-#+BEGIN_SRC emacs-lisp :tangle yes
-  (defun hb/configure-smartparens-emacs-lisp ()
-    (sp-local-pair 'emacs-lisp-mode "'" nil :actions nil)
-    (sp-local-pair 'emacs-lisp-mode "`" nil :actions nil)
-    (add-hook 'emacs-lisp-mode-hook 'smartparens-strict-mode)
-    (sp-local-pair 'lisp-interaction-mode "'" nil :actions nil)
-    (sp-local-pair 'lisp-interaction-mode "`" nil :actions nil)
-    (add-hook 'lisp-interaction-mode-hook 'smartparens-strict-mode))
+    (hb/configure-smartparens-bindings))
 #+END_SRC
 *** bindings
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -818,6 +806,16 @@ Thanks [[http://whattheemacsd.com/my-misc.el-02.html][Magnar]]!
           comment-start "/* "
           comment-end " */"))
   (add-hook 'java-mode-hook 'hb/configure-java)
+#+END_SRC
+** lisp
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun hb/configure-lisp ()
+    (sp-local-pair major-mode "`" nil :actions nil))
+  (mapcar (lambda (hook)
+            (add-hook hook 'smartparens-strict-mode)
+            (add-hook hook 'hb/configure-lisp))
+          '(emacs-lisp-mode-hook lisp-mode-hook lisp-interaction-mode-hook))
+
 #+END_SRC
 * macros
 ** hb/quotemeta
