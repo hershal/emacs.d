@@ -364,6 +364,12 @@ general-general.
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package-ensure company-c-headers)
 #+END_SRC
+** company-quickhelp
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package-ensure company-quickhelp
+    :config
+    (company-quickhelp-mode 1))
+#+END_SRC
 ** company
 *** configuration
 #+BEGIN_SRC emacs-lisp :tangle yes
