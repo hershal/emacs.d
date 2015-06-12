@@ -803,9 +803,9 @@ Thanks [[http://whattheemacsd.com/my-misc.el-02.html][Magnar]]!
     :config (windmove-default-keybindings))
 #+END_SRC
 ** writegood-mode
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle yes
   (use-package-ensure writegood-mode
-    :diminish "")
+    :config (diminish 'writegood-mode))
 #+END_SRC
 * major-modes
 ** c++
