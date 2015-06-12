@@ -818,6 +818,7 @@ Thanks [[http://whattheemacsd.com/my-misc.el-02.html][Magnar]]!
 ** lisp
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun hb/configure-lisp-mode-hook ()
+    (sp-local-pair major-mode "'" nil :actions nil)
     (sp-local-pair major-mode "`" nil :actions nil))
   (mapcar (lambda (hook)
             (add-hook hook 'smartparens-strict-mode)
