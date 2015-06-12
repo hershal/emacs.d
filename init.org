@@ -691,9 +691,10 @@ general-general.
                  '("st"
                    "#+BEGIN_SRC emacs-lisp :tangle yes\n?\n#+END_SRC"
                    "<src lang=\"?\">\n\n</src>"))
+    (hb/bind-key "C-c c" 'org-capture)
     (setq org-capture-templates
-        '(("n" "Notes" entry (file "~/notes.org") "* %?\n")
-          ("s" "Stack" entry (file "~/stack.org") "\n* TODO %?\n"))))
+          '(("n" "Notes" entry (file "~/notes.org") "* %?\n")
+            ("s" "Stack" entry (file "~/stack.org") "\n* TODO %?\n"))))
 #+END_SRC
 *** package
 #+BEGIN_SRC emacs-lisp :tangle yes
