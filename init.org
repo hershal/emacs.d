@@ -841,8 +841,8 @@ Thanks [[http://whattheemacsd.com/my-misc.el-02.html][Magnar]]!
     (sp-local-pair 'org-mode "_" "_" :unless '(sp-point-after-word-p))
     (sp-local-pair 'org-mode "=" "=" :unless '(sp-point-after-word-p))
     (auto-fill-mode 1)
-    (writegood-mode 1)
-    (add-hook 'org-mode-hook 'hb/configure-org-mode-hook))
+    (writegood-mode 1))
+  (add-hook 'org-mode-hook 'hb/configure-org-mode-hook)
 #+END_SRC
 * macros
 ** hb/quotemeta
