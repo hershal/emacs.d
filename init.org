@@ -694,7 +694,8 @@ general-general.
     (hb/bind-key "C-c c" 'org-capture)
     (setq org-capture-templates
           '(("n" "Notes" entry (file "~/notes.org") "* %?\n")
-            ("s" "Stack" entry (file "~/stack.org") "\n* TODO %?\n"))))
+            ("s" "Stack" entry (file "~/stack.org") "\n* TODO %?\n")))
+    (hb/bind-key "C-c a" 'org-agenda))
 #+END_SRC
 *** package
 #+BEGIN_SRC emacs-lisp :tangle yes
