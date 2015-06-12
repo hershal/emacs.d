@@ -453,7 +453,7 @@ general-general.
 #+END_SRC
 *** package
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (use-package git-commit-mode
+  (use-package-ensure git-commit-mode
     :config
     (add-hook 'git-commit-mode-hook 'hb/configure-git-commit-mode))
 #+END_SRC
