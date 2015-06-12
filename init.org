@@ -331,6 +331,12 @@ general-general.
       ("c" courier-face                   "courier-face")))
 #+END_SRC
 * packages
+** ace-jump-mode
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package-ensure ace-jump-mode
+    :config
+    (hb/bind-key "C-z" 'ace-jump-word-mode))
+#+END_SRC
 ** ace-window
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package-ensure ace-window
