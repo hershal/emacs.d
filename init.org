@@ -701,11 +701,6 @@ general-general.
     :config
     (hb/configure-org))
 #+END_SRC
-** org-ac
-#+BEGIN_SRC emacs-lisp :tangle yes
-  (use-package-ensure org-ac
-    :config (org-ac/config-default))
-#+END_SRC
 ** undo-tree
 *** configuration
 Thanks [[http://whattheemacsd.com/my-misc.el-02.html][Magnar]]!
