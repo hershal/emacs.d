@@ -1052,7 +1052,7 @@ Open this file
   (find-file "~/.emacs.d/init.org")
 #+END_SRC
 
-* [0/15] todos
+* [0/16] todos
 :PROPERTIES:
 :visibility: overview
 :END:
@@ -1113,3 +1113,5 @@ This will fix writegood-mode and org-mode dependencies
 ** TODO investigate projectile
 ** TODO investigate flx-ido
 ** TODO :annoy: {mv,cp,rm}-current-buffer-file
+** TODO :convenience: add multi-term hydra
+** TODO :broken: fix smartparens
