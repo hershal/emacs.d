@@ -298,12 +298,8 @@ general-general.
       ("b"     hb/scroll-down-halfpage       "up half")
       ("SPC"   scroll-up                     "down full")
       ("S-SPC" scroll-down                   "up full")
-      ("s"     isearch-forward               "isearch")
-      ("v"     visual-line-mode              "visual-line")
-      ("a"     auto-fill-mode                "auto-fill-mode")
-      ("i"     set-fill-column               "fill-column")
-      ("o"     follow-mode-80-char           "follow-mode-80-char")
-      ("w"     ace-window                    "ace-window")))
+      ("/"     isearch-forward               "isearch")
+      ("o"     ace-window                    "ace-window")))
 #+END_SRC
 *** fold-this
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -320,6 +316,7 @@ general-general.
     (defhydra hb/options (hb-mode-map "M-o" :color blue)
       "options"
       ("v" visual-line-mode               "visual-line")
+      ("t" toggle-truncate-lines          "toggle-truncate-lines")
       ("a" auto-fill-mode                 "auto-fill-mode")
       ("f" set-fill-column                "fill-column")
       ("o" follow-mode-80-char-compliant  "follow-mode")
