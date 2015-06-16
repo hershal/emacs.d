@@ -54,6 +54,7 @@ Let's set some (sensible) defaults that don't go anywhere else.
 
 #+BEGIN_SRC emacs-lisp :tangle yes
   (setq ring-bell-function 'ignore
+        compilation-scroll-output t
         search-whitespace-regexp "[ \t\r\n\-]+"
         inhibit-startup-screen t)
 #+END_SRC
