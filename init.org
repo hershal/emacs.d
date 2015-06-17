@@ -324,7 +324,7 @@ general-general.
       ("o" ace-window                     "ace-window")
       ("l" follow-mode                    "follow-mode")
       ("w" writegood-mode                 "writegood-mode")
-      ("f" font-lock-fontify-buffer       "fontify-buffer")
+      ("f" follow-mode-80-char-compliant  "follow-mode-80")
       ("s" meslo-face                     "meslo-face")
       ("n" menlo-face                     "menlo-face")
       ("b" bitstream-face                 "bistream-face")
