@@ -272,7 +272,8 @@ general-general.
         kill-whole-line t
         display-time-24hr-format t
         revert-without-query '(".*")
-        shell-command-switch "-ic")
+        shell-command-switch "-ic"
+        dired-recursive-deletes 'always)
 
   (toggle-truncate-lines 1)
   (column-number-mode 1)
