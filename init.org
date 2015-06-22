@@ -324,6 +324,7 @@ general-general.
       ("a" auto-fill-mode                 "auto-fill-mode")
       ("i" set-fill-column                "fill-column")
       ("o" ace-window                     "ace-window")
+      ("d" ace-delete-window              "ace-delete-window")
       ("l" follow-mode                    "follow-mode")
       ("w" writegood-mode                 "writegood-mode")
       ("f" follow-mode-80-char-compliant  "follow-mode-80")
