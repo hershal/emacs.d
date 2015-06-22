@@ -878,7 +878,7 @@ Thanks to @EricCrosson.
     (interactive)
     (follow-mode 1)
     (split-window-horizontally)
-    (other-window 1 nil))
+    (balance-windows))
 #+END_SRC
 ** delete-trailing-whitespace-untabify
 I want this to be everywhere except in Makefiles.
