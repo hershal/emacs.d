@@ -311,7 +311,8 @@ general-general.
       "fold-this"
       ("f" fold-this "fold-this")
       ("u" fold-this-unfold-at-point "unfold-at-point")
-      ("a" fold-this-unfold-all "unfold-all")))
+      ("a" fold-this-unfold-all "unfold-all")
+      ("3" follow-split)))
 #+END_SRC
 *** options
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -869,6 +870,14 @@ Thanks to @EricCrosson.
     (delete-window)
     (balance-windows)
     (recenter-top-bottom))
+#+END_SRC
+** follow-split
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun follow-split ()
+    (interactive)
+    (follow-mode 1)
+    (split-window-horizontally)
+    (other-window 1 nil))
 #+END_SRC
 ** delete-trailing-whitespace-untabify
 I want this to be everywhere except in Makefiles.
