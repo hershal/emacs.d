@@ -9,3 +9,7 @@ Before we can go on to the new age, we must transfer our existing knowledge
   (when (file-exists-p hb-init-file)
       (load-file "~/emacs.d/init.el"))
 #+END_SRC
+** emacs-insert-bindings
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (bind-key "i" 'evil-emacs-state evil-normal-state-map)
+#+END_SRC
