@@ -444,6 +444,14 @@ I always live on the cutting edge.
   (use-package-ensure fic-mode
     :config (add-hook 'prog-mode-hook 'hb/configure-fic-mode))
 #+END_SRC
+** flycheck
+*** package
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package-ensure flycheck
+    :init (use-package-ensure flycheck-pos-tip)
+    :config
+    (setq flycheck-display-errors-function #'flycheck-pos-tip-error-messages))
+#+END_SRC
 ** fold-this
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package-ensure fold-this)
