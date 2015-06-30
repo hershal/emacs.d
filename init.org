@@ -826,7 +826,10 @@ Thanks [[http://whattheemacsd.com/my-misc.el-02.html][Magnar]]!
   (defun hb/configure-c-common-hook ()
     (setq c-basic-offset 4
           comment-start "/* "
-          comment-end " */"))
+          comment-end " */"
+          flycheck-gcc-language-standard "c++11"
+          flycheck-clang-language-standard "c++14")
+    )
   (add-hook 'c-mode-common-hook 'hb/configure-c-common-hook)
 #+END_SRC
 ** java
