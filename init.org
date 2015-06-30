@@ -400,6 +400,12 @@ general-general.
     (mapcar (lambda (backend) (add-to-list 'company-backends backend))
             '(company-c-headers)))
 #+END_SRC
+**** company-clang
+I always live on the cutting edge.
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun hb/configure-company-backends-company-clang ()
+    (setq company-clang-arguments "-std=c++14"))
+#+END_SRC
 *** package
 #+BEGIN_SRC emacs-lisp :tangle yes
     (use-package-ensure company
