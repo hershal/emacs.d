@@ -13,3 +13,8 @@ Before we can go on to the new age, we must transfer our existing knowledge
 #+BEGIN_SRC emacs-lisp :tangle yes
   (bind-key "i" 'evil-emacs-state evil-normal-state-map)
 #+END_SRC
+** other-bindings
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (evil-ex-define-cmd "q[uit]" 'kill-this-buffer)
+  (evil-ex-define-cmd "Q[uit]" 'kill-buffer-and-window)
+#+END_SRC
