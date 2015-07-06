@@ -469,6 +469,12 @@ I always live on the cutting edge.
     (add-hook 'c++-mode-hook 'hb/configure-flycheck-c++)
     (setq flycheck-display-errors-function #'flycheck-pos-tip-error-messages))
 #+END_SRC
+** flycheck-irony
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package-ensure flycheck-irony
+    :config
+    (flycheck-irony-setup))
+#+END_SRC
 ** fold-this
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package-ensure fold-this)
