@@ -374,6 +374,10 @@ general-general.
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package-ensure company-c-headers)
 #+END_SRC
+** company-irony
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package-ensure company-irony)
+#+END_SRC
 ** company-quickhelp
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package-ensure company-quickhelp
@@ -398,15 +402,19 @@ general-general.
 *** backends
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun hb/configure-company-backends ()
-    (setq company-backends (delete 'company-semantic company-backends))
+    (setq company-backends (delete 'company-dabbrev-code company-backends))
     (mapcar (lambda (backend) (add-to-list 'company-backends backend))
-            '(company-c-headers)))
+            '(company-c-headers company-irony)))
 #+END_SRC
 **** company-clang
 I always live on the cutting edge.
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun hb/configure-company-backends-company-clang ()
     (setq company-clang-arguments "-std=c++14"))
+#+END_SRC
+**** company-irony
+#+BEGIN_SRC emacs-lisp :tangle yes
+
 #+END_SRC
 *** package
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -637,6 +645,18 @@ I always live on the cutting edge.
     (setq ido-vertical-show-count t
           ido-use-faces t
           ido-vertical-define-keys 'C-n-C-p-up-down-left-right))
+#+END_SRC
+** irony
+*** configuration
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun hb/configure-irony ()
+    (add-hook 'irony-mode-hook 'company-irony-setup-begin-commands))
+#+END_SRC
+*** package
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package-ensure irony
+    :config
+    (hb/configure-irony))
 #+END_SRC
 ** multiple-cursors
 *** configuration
