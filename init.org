@@ -455,11 +455,18 @@ I always live on the cutting edge.
     :config (add-hook 'prog-mode-hook 'hb/configure-fic-mode))
 #+END_SRC
 ** flycheck
+*** major-modes
+**** c++
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun hb/configure-flycheck-c++ ()
+    (setq flycheck-clang-language-standard "c++14"))
+#+END_SRC
 *** package
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package-ensure flycheck
     :init (use-package-ensure flycheck-pos-tip)
     :config
+    (add-hook 'c++-mode-hook 'hb/configure-flycheck-c++)
     (setq flycheck-display-errors-function #'flycheck-pos-tip-error-messages))
 #+END_SRC
 ** fold-this
