@@ -275,7 +275,8 @@ general-general.
         display-time-24hr-format t
         revert-without-query '(".*")
         shell-command-switch "-ic"
-        dired-recursive-deletes 'always)
+        dired-recursive-deletes 'always
+        mouse-yank-at-point t)
 
   (toggle-truncate-lines 1)
   (column-number-mode 1)
