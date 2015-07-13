@@ -1177,7 +1177,10 @@ This should happen instead:
 ** TODO :convenience: integrate semantic/srefactor with c/c++
 ** TODO :annoy: get smartparens to close quotes properly
 ** TODO investigate req-package
-This will fix writegood-mode and org-mode dependencies
+This will fix writegood-mode and org-mode dependencies.
+*** proposed solution
+One way to fix this is to use-package-ensure both packages but do not
+configure until both packages are installed. Lazy-configuration.
 ** TODO investigate projectile
 ** TODO investigate flx-ido
 ** TODO :annoy: {mv,cp,rm}-current-buffer-file
