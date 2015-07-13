@@ -772,7 +772,8 @@ Thanks [[http://whattheemacsd.com/my-misc.el-02.html][Magnar]]!
             (set-marker m nil))
         ad-do-it))
     (setq undo-tree-visualizer-timestamps t
-          undo-tree-visualizer-diff t))
+          undo-tree-visualizer-diff t)
+    (add-to-list 'warning-suppress-types '(undo discard-info)))
 #+END_SRC
 *** package
 #+BEGIN_SRC emacs-lisp :tangle yes
