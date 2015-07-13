@@ -1120,7 +1120,7 @@ Open this file
   (find-file "~/.emacs.d/init.org")
 #+END_SRC
 
-* [0/16] todos
+* [0/19] todos
 :PROPERTIES:
 :visibility: overview
 :END:
@@ -1190,3 +1190,5 @@ configure until both packages are installed. Lazy-configuration.
 This should capitalize the line except on articles and words which are
 already capitalized (e.g. already-capitalized acroynms)
 ** TODO :smartparens: set up keyboard mapping for easy paren navigation
+** TODO :org:annoy: update the counters on save
+This is annoying as fuck
