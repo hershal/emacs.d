@@ -735,7 +735,8 @@ I always live on the cutting edge.
     (setq org-src-window-setup 'other-window
           org-startup-indented t
           org-hide-emphasis-markers t
-          org-startup-folded 'content)
+          org-startup-folded 'content
+          org-log-into-drawer "LOGBOOK")
     (after 'org-indent
       (diminish 'org-indent-mode ""))
     (hb/bind-key "C-x C-s" 'org-babel-tangle org-mode-map)
