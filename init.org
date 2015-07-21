@@ -277,7 +277,8 @@ general-general.
         display-time-24hr-format t
         revert-without-query '(".*")
         shell-command-switch "-ic"
-        dired-recursive-deletes 'always)
+        dired-recursive-deletes 'always
+        mouse-yank-at-point t)
 
   (toggle-truncate-lines 1)
   (column-number-mode 1)
@@ -736,7 +737,8 @@ I always live on the cutting edge.
     (setq org-src-window-setup 'other-window
           org-startup-indented t
           org-hide-emphasis-markers t
-          org-startup-folded 'content)
+          org-startup-folded 'content
+          org-log-into-drawer "LOGBOOK")
     (after 'org-indent
       (diminish 'org-indent-mode ""))
     (hb/bind-key "C-x C-s" 'org-babel-tangle org-mode-map)
@@ -773,7 +775,8 @@ Thanks [[http://whattheemacsd.com/my-misc.el-02.html][Magnar]]!
             (set-marker m nil))
         ad-do-it))
     (setq undo-tree-visualizer-timestamps t
-          undo-tree-visualizer-diff t))
+          undo-tree-visualizer-diff t)
+    (add-to-list 'warning-suppress-types '(undo discard-info)))
 #+END_SRC
 *** package
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1120,7 +1123,7 @@ Open this file
   (find-file "~/.emacs.d/init.org")
 #+END_SRC
 
-* [0/16] todos
+* [0/19] todos
 :PROPERTIES:
 :visibility: overview
 :END:
@@ -1177,9 +1180,18 @@ This should happen instead:
 ** TODO :convenience: integrate semantic/srefactor with c/c++
 ** TODO :annoy: get smartparens to close quotes properly
 ** TODO investigate req-package
-This will fix writegood-mode and org-mode dependencies
+This will fix writegood-mode and org-mode dependencies.
+*** proposed solution
+One way to fix this is to use-package-ensure both packages but do not
+configure until both packages are installed. Lazy-configuration.
 ** TODO investigate projectile
 ** TODO investigate flx-ido
 ** TODO :annoy: {mv,cp,rm}-current-buffer-file
 ** TODO :convenience: add multi-term hydra
 ** TODO :broken: fix smartparens
+** TODO :annoy: fix capitalize-line-dwim
+This should capitalize the line except on articles and words which are
+already capitalized (e.g. already-capitalized acroynms)
+** TODO :smartparens: set up keyboard mapping for easy paren navigation
+** TODO :org:annoy: update the counters on save
+This is annoying as fuck
