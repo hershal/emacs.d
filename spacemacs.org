@@ -2,18 +2,19 @@
 ** init.org
 Before we can go on to the new age, we must transfer our existing knowledge
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (defconst hb-init-org-file "~/emacs.d/init.org")
-  (defconst hb-init-file (replace-regexp-in-string ".org" ".el" hb-init-org-file))
+  (defconst hb-config-dir "~/.emacs.d.hershal/")
+  (defconst hb-init-org-file "init.org")
+  (defconst hb-init-file (concat hb-config-dir (replace-regexp-in-string ".org" ".el" hb-init-org-file)))
   (when (file-exists-p hb-init-org-file)
     (org-babel-tangle hb-init-file))
   (when (file-exists-p hb-init-file)
       (load-file "~/emacs.d/init.el"))
 #+END_SRC
-** emacs-insert-bindings
+* holy-mode
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (bind-key "i" 'evil-emacs-state evil-normal-state-map)
+  (setq dotspacemacs-editing-style 'emacs)
 #+END_SRC
-** other-bindings
+* other-bindings
 #+BEGIN_SRC emacs-lisp :tangle yes
   (evil-ex-define-cmd "q[uit]" 'kill-this-buffer)
   (evil-ex-define-cmd "Q[uit]" 'kill-buffer-and-window)
