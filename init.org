@@ -776,6 +776,8 @@ Thanks [[http://whattheemacsd.com/my-misc.el-02.html][Magnar]]!
         ad-do-it))
     (setq undo-tree-visualizer-timestamps t
           undo-tree-visualizer-diff t)
+    (when (not (boundp 'warning-suppress-types))
+      (setq warning-suppress-types '()))
     (add-to-list 'warning-suppress-types '(undo discard-info)))
 #+END_SRC
 *** package
