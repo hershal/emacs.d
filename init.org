@@ -848,6 +848,13 @@ Thanks [[http://whattheemacsd.com/my-misc.el-02.html][Magnar]]!
   (use-package-ensure transpose-frame
     :config (hb/bind-key "M-|" 'transpose-frame))
 #+END_SRC
+** web-mode
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package-ensure web-mode
+    :config
+    (mapcar (lambda (extension) (add-to-list 'auto-mode-alist '((concat "\\." extension "\\'") . web-mode)))
+            '("djhtml" "mustache" "erb" "as[cp]x" "[agj]sp" "tpl\\.php" "phtml" "html?")))
+#+END_SRC
 ** winner
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package-ensure winner
