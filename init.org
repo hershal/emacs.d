@@ -414,10 +414,6 @@ I always live on the cutting edge.
   (defun hb/configure-company-backends-company-clang ()
     (setq company-clang-arguments "-std=c++14"))
 #+END_SRC
-**** company-irony
-#+BEGIN_SRC emacs-lisp :tangle yes
-
-#+END_SRC
 *** package
 #+BEGIN_SRC emacs-lisp :tangle yes
     (use-package-ensure company
