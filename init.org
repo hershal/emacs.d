@@ -236,7 +236,6 @@ Some general-purpose keybindings.
     (hb/bind-key "C-c m"      'compile)
     (hb/bind-key "C-x C-b"    'ido-switch-buffer)
     (hb/bind-key "C-x O"      'ff-find-other-file)
-    (hb/bind-key "C-'"        'execute-extended-command)
     (hb/bind-key "C-x C-h"    'hb/delete-trailing-whitespace-untabify)
     (hb/bind-key "M-|"        'transpose-frame)
     (hb/bind-key "C-M-S-q"    'fill-region-as-paragraph)
