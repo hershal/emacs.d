@@ -332,6 +332,7 @@ general-general.
       ("l" follow-mode                    "follow-mode")
       ("w" writegood-mode                 "writegood-mode")
       ("f" follow-mode-80-char-compliant  "follow-mode-80")
+      ("r" helm-resume                    "helm-resume")
       ("s" meslo-face                     "meslo-face")
       ("n" menlo-face                     "menlo-face")
       ("b" bitstream-face                 "bistream-face")
