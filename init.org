@@ -729,6 +729,13 @@ I always live on the cutting edge.
     :config (hb/configure-mc))
 #+END_SRC
 ** org
+*** TODO capture
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun org-capture-datetree ()
+    (let ((level (nth 0 (org-heading-components)))
+          (headline (nth 4 (org-heading-components))))
+      level))
+#+END_SRC
 *** configuration
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun hb/configure-org ()
@@ -747,7 +754,9 @@ I always live on the cutting edge.
     (hb/bind-key "C-c c" 'org-capture)
     (setq org-capture-templates
           '(("n" "Notes" entry (file "~/notes.org") "* %?\n")
-            ("s" "Stack" entry (file "~/stack.org") "\n* TODO %?\n")))
+            ("s" "Stack" entry (file "~/stack.org") "\n* TODO %?\n")
+            ("w" "Weektree" entry (file+function "~/.emacs.d/test.org" org-capture-datetree)
+             "* %?\n")))
     (hb/bind-key "C-c a" 'org-agenda))
 #+END_SRC
 *** package
