@@ -361,11 +361,17 @@ general-general.
   (use-package-ensure bind-key)
 #+END_SRC
 ** bliss-theme
+*** configuration
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun hb/configure-bliss ()
+    (set-face-attribute 'highlight nil :foreground 'nil :underline 'nil :background "#222222"))
+#+END_SRC
+**** package
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package-ensure bliss-theme
     :config
     (load-theme 'bliss t)
-    (set-face-attribute 'highlight nil :foreground 'nil :underline 'nil :background "#222222"))
+    (hb/configure-bliss))
 #+END_SRC
 ** bury-successful-compilation
 #+BEGIN_SRC emacs-lisp :tangle yes
