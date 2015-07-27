@@ -306,7 +306,6 @@ general-general.
       ("SPC"   scroll-up                     "down full")
       ("S-SPC" scroll-down                   "up full")
       ("/"     isearch-forward               "isearch")
-      ("o"     ace-window                    "ace-window")
       ("r"     rotate-frame-clockwise        "rotclk")))
 #+END_SRC
 *** fold-this
