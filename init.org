@@ -439,6 +439,17 @@ I always live on the cutting edge.
   (use-package-ensure ediff
     :config (setq ediff-window-setup-function 'ediff-setup-windows-plain))
 #+END_SRC
+** eval-sexp-fu
+*** config
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun hb/configure-eval-sexp-fu ()
+    (turn-on-eval-sexp-fu-flash-mode))
+#+END_SRC
+*** package
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package-ensure eval-sexp-fu
+    :config (hb/configure-eval-sexp-fu))
+#+END_SRC
 ** expand-region
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package-ensure expand-region
