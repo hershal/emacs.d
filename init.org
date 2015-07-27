@@ -522,7 +522,8 @@ I always live on the cutting edge.
           helm-ff-newfile-prompt-p nil
           helm-buffer-max-length nil)
     (after 'helm-buffers
-      (hb/bind-key "C-s" 'helm-buffer-run-zgrep-all helm-buffer-map)))
+      (hb/bind-key "C-s" 'helm-buffer-run-zgrep-all helm-buffer-map))
+    (hb/bind-key "M-x" 'helm-M-x))
 #+END_SRC
 *** macros
 **** helm-power-buffer-list
