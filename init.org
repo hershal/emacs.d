@@ -364,7 +364,9 @@ general-general.
 *** configuration
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun hb/configure-bliss ()
-    (set-face-attribute 'highlight nil :foreground 'nil :underline 'nil :background "#222222"))
+    (set-face-attribute 'highlight nil :foreground 'nil :underline 'nil :background "#222222")
+    (set-background-color "#000000")
+    (set-foreground-color "#f0ffff"))
 #+END_SRC
 **** package
 #+BEGIN_SRC emacs-lisp :tangle yes
