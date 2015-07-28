@@ -770,6 +770,15 @@ Thanks [[http://emacs.stackexchange.com/questions/3798/how-do-i-make-pressing-re
           (headline (nth 4 (org-heading-components))))
       level))
 #+END_SRC
+*** macros
+**** org-save
+=org-babel-tangle= will automatically save the buffer.
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun org-save ()
+    (interactive)
+    (org-update-statistics-cookies t)
+    (org-babel-tangle))
+#+END_SRC
 *** configuration
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun hb/configure-org ()
@@ -782,7 +791,7 @@ Thanks [[http://emacs.stackexchange.com/questions/3798/how-do-i-make-pressing-re
                                (org-agenda-files :maxlevel . 3)))
     (after 'org-indent
       (diminish 'org-indent-mode ""))
-    (hb/bind-key "C-x C-s" 'org-babel-tangle org-mode-map)
+    (hb/bind-key "C-x C-s" 'org-save org-mode-map)
     (add-to-list 'org-structure-template-alist
                  '("st"
                    "#+BEGIN_SRC emacs-lisp :tangle yes\n?\n#+END_SRC"
@@ -1214,7 +1223,7 @@ Open this file
   (find-file "~/.emacs.d/init.org")
 #+END_SRC
 
-* [0/19] todos
+* [0/18] todos
 :PROPERTIES:
 :visibility: overview
 :END:
@@ -1284,5 +1293,3 @@ configure until both packages are installed. Lazy-configuration.
 This should capitalize the line except on articles and words which are
 already capitalized (e.g. already-capitalized acroynms)
 ** TODO :smartparens: set up keyboard mapping for easy paren navigation
-** TODO :org:annoy: update the counters on save
-This is annoying as fuck
