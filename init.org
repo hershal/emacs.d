@@ -849,7 +849,8 @@ Thanks [[http://whattheemacsd.com/my-misc.el-02.html][Magnar]]!
     :config
     (hb/bind-key "C-c g" 'magit-status)
     (setq magit-auto-revert-mode-lighter ""
-          magit-status-buffer-switch-function 'switch-to-buffer))
+          magit-status-buffer-switch-function 'switch-to-buffer
+          magit-push-always-verify nil))
 #+END_SRC
 ** monochrome-theme
 #+BEGIN_SRC emacs-lisp :tangle no
