@@ -526,8 +526,7 @@ I always live on the cutting edge.
           helm-ff-newfile-prompt-p nil
           helm-buffer-max-length nil)
     (after 'helm-buffers
-      (hb/bind-key "C-s" 'helm-buffer-run-zgrep-all helm-buffer-map))
-    (hb/bind-key "M-x" 'helm-M-x))
+      (hb/bind-key "C-s" 'helm-buffer-run-zgrep-all helm-buffer-map)))
 #+END_SRC
 *** macros
 **** helm-power-buffer-list
@@ -590,7 +589,8 @@ I always live on the cutting edge.
     (hb/bind-key "M-y" 'helm-show-kill-ring)
     (hb/bind-key "C-x C-f" 'helm-find-files)
     (hb/bind-key "M-i" 'helm-semantic-or-imenu)
-    (hb/bind-key "C-h A" 'helm-apropos))
+    (hb/bind-key "C-h A" 'helm-apropos)
+    (hb/bind-key "M-x" 'helm-M-x))
 #+END_SRC
 *** package
 #+BEGIN_SRC emacs-lisp :tangle yes
