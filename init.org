@@ -787,6 +787,7 @@ Thanks [[http://emacs.stackexchange.com/questions/3798/how-do-i-make-pressing-re
           org-hide-emphasis-markers t
           org-startup-folded 'content
           org-log-into-drawer "LOGBOOK"
+          org-use-sub-superscripts '{}
           org-refile-targets '((nil :maxlevel . 3)
                                (org-agenda-files :maxlevel . 3)))
     (after 'org-indent
