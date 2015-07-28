@@ -786,6 +786,11 @@ I always live on the cutting edge.
     :config
     (hb/configure-org))
 #+END_SRC
+** python
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun hb/configure-python-bindings ()
+    (define-key python-mode-map [remap end-of-defun] 'python-nav-end-of-defun))
+#+END_SRC
 ** undo-tree
 *** configuration
 Thanks [[http://whattheemacsd.com/my-misc.el-02.html][Magnar]]!
