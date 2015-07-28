@@ -408,7 +408,8 @@ general-general.
   (defun hb/configure-company-preferences ()
     (setq company-auto-complete t
           company-global-modes t
-          company-idle-delay 0.1))
+          company-idle-delay 0.1
+          company-auto-complete-chars (delete (string-to-char " ") company-auto-complete-chars)))
 #+END_SRC
 *** backends
 #+BEGIN_SRC emacs-lisp :tangle yes
