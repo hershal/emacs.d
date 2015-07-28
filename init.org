@@ -1223,16 +1223,10 @@ Open this file
   (find-file "~/.emacs.d/init.org")
 #+END_SRC
 
-* [0/18] todos
+* [0/10] todos
 :PROPERTIES:
 :visibility: overview
 :END:
-** TODO :org: find out how to use orgmode tags properly
-Reference [[http://orgmode.org/manual/Tags.html][the org manual]].
-** TODO :annoy:org: don't allow 'org-edit-special' to clobber my window config
-** TODO :annoy: make something similar to esc's should-have functions
-** TODO :annoy: delete-that-newly-opened-window
-- add to movement hydra ("d"?)
 ** TODO :annoy: reopen-in-other-window
 - add to movement hydra ("o"?)
 ** TODO :annoy:org: add org fly-dictate minor mode
@@ -1279,17 +1273,10 @@ This should happen instead:
 #+END_SRC
 ** TODO :convenience: integrate semantic/srefactor with c/c++
 ** TODO :annoy: get smartparens to close quotes properly
-** TODO investigate req-package
-This will fix writegood-mode and org-mode dependencies.
-*** proposed solution
-One way to fix this is to use-package-ensure both packages but do not
-configure until both packages are installed. Lazy-configuration.
 ** TODO investigate projectile
 ** TODO investigate flx-ido
-** TODO :annoy: {mv,cp,rm}-current-buffer-file
-** TODO :convenience: add multi-term hydra
-** TODO :broken: fix smartparens
 ** TODO :annoy: fix capitalize-line-dwim
 This should capitalize the line except on articles and words which are
 already capitalized (e.g. already-capitalized acroynms)
-** TODO :smartparens: set up keyboard mapping for easy paren navigation
+** TODO :smartparens:c:python: set up keyboard mappings for block navigation
+Bind keys for smartparens-lisp-style navigation in other major-modes
