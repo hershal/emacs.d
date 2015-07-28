@@ -408,7 +408,8 @@ general-general.
   (defun hb/configure-company-preferences ()
     (setq company-auto-complete t
           company-global-modes t
-          company-idle-delay 0.1))
+          company-idle-delay 0.1
+          company-auto-complete-chars (delete (string-to-char " ") company-auto-complete-chars)))
 #+END_SRC
 *** backends
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -502,18 +503,6 @@ I always live on the cutting edge.
   (use-package-ensure function-args
     :config (fa-config-default))
 #+END_SRC
-** git-commit-mode
-*** configuration
-#+BEGIN_SRC emacs-lisp :tangle yes
-  (defun hb/configure-git-commit-mode ()
-    (company-mode 0))
-#+END_SRC
-*** package
-#+BEGIN_SRC emacs-lisp :tangle yes
-  (use-package-ensure git-commit-mode
-    :config
-    (add-hook 'git-commit-mode-hook 'hb/configure-git-commit-mode))
-#+END_SRC
 ** graphviz-dot-mode
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package-ensure graphviz-dot-mode
@@ -526,7 +515,8 @@ I always live on the cutting edge.
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun hb/configure-helm ()
     (hb/configure-helm-bindings)
-    (hb/configure-helm-preferences))
+    (hb/configure-helm-preferences)
+    (hb/configure-helm-advice))
 #+END_SRC
 *** preferences
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -538,8 +528,7 @@ I always live on the cutting edge.
           helm-ff-newfile-prompt-p nil
           helm-buffer-max-length nil)
     (after 'helm-buffers
-      (hb/bind-key "C-s" 'helm-buffer-run-zgrep-all helm-buffer-map))
-    (hb/bind-key "M-x" 'helm-M-x))
+      (hb/bind-key "C-s" 'helm-buffer-run-zgrep-all helm-buffer-map)))
 #+END_SRC
 *** macros
 **** helm-power-buffer-list
@@ -594,6 +583,22 @@ I always live on the cutting edge.
     (setq helm-current-prefix-arg 4)
     (helm-buffer-run-zgrep))
 #+END_SRC
+**** helm-find-files-navigate-forward
+Thanks [[http://emacs.stackexchange.com/questions/3798/how-do-i-make-pressing-ret-in-helm-find-files-open-the-directory/7896#7896][Fu86]]!
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun fu/helm-find-files-navigate-forward (orig-fun &rest args)
+    (if (file-directory-p (helm-get-selection))
+        (apply orig-fun args)
+      (helm-maybe-exit-minibuffer)))
+#+END_SRC
+**** helm-find-files-navigate-back
+Thanks [[http://emacs.stackexchange.com/questions/3798/how-do-i-make-pressing-ret-in-helm-find-files-open-the-directory/7896#7896][Fu86]]!
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun fu/helm-find-files-navigate-back (orig-fun &rest args)
+    (if (= (length helm-pattern) (length (helm-find-files-initial-input)))
+        (helm-find-files-up-one-level 1)
+      (apply orig-fun args)))
+#+END_SRC
 *** bindings
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun hb/configure-helm-bindings ()
@@ -602,7 +607,18 @@ I always live on the cutting edge.
     (hb/bind-key "M-y" 'helm-show-kill-ring)
     (hb/bind-key "C-x C-f" 'helm-find-files)
     (hb/bind-key "M-i" 'helm-semantic-or-imenu)
-    (hb/bind-key "C-h A" 'helm-apropos))
+    (hb/bind-key "C-h A" 'helm-apropos)
+    (hb/bind-key "M-x" 'helm-M-x)
+    (hb/bind-key "RET" 'helm-execute-persistent-action helm-find-files-map)
+    (hb/bind-key "TAB" 'helm-execute-persistent-action helm-find-files-map))
+#+END_SRC
+*** advice
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun hb/configure-helm-advice ()
+    (advice-add 'helm-ff-delete-char-backward
+                :around #'fu/helm-find-files-navigate-back)
+    (advice-add 'helm-execute-persistent-action
+                :around #'fu/helm-find-files-navigate-forward))
 #+END_SRC
 *** package
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -754,6 +770,15 @@ I always live on the cutting edge.
           (headline (nth 4 (org-heading-components))))
       level))
 #+END_SRC
+*** macros
+**** org-save
+=org-babel-tangle= will automatically save the buffer.
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun org-save ()
+    (interactive)
+    (org-update-statistics-cookies t)
+    (org-babel-tangle))
+#+END_SRC
 *** configuration
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun hb/configure-org ()
@@ -766,7 +791,7 @@ I always live on the cutting edge.
                                (org-agenda-files :maxlevel . 3)))
     (after 'org-indent
       (diminish 'org-indent-mode ""))
-    (hb/bind-key "C-x C-s" 'org-babel-tangle org-mode-map)
+    (hb/bind-key "C-x C-s" 'org-save org-mode-map)
     (add-to-list 'org-structure-template-alist
                  '("st"
                    "#+BEGIN_SRC emacs-lisp :tangle yes\n?\n#+END_SRC"
@@ -839,7 +864,8 @@ Thanks [[http://whattheemacsd.com/my-misc.el-02.html][Magnar]]!
     :config
     (hb/bind-key "C-c g" 'magit-status)
     (setq magit-auto-revert-mode-lighter ""
-          magit-status-buffer-switch-function 'switch-to-buffer))
+          magit-status-buffer-switch-function 'switch-to-buffer
+          magit-push-always-verify nil))
 #+END_SRC
 ** monochrome-theme
 #+BEGIN_SRC emacs-lisp :tangle no
@@ -1158,22 +1184,54 @@ Not sure why this doesn't exist yet.
     (other-window 1 nil)
     (if (= prefix 1) (switch-to-next-buffer)))
 #+END_SRC
+** delete-current-buffer-file
+Originally from [[http://whattheemacsd.com/file-defuns.el-02.html][Magnars]], modified by me to remove the query.
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun delete-current-buffer-file ()
+    "Removes file connected to current buffer and kills buffer."
+    (interactive)
+    (let ((filename (buffer-file-name))
+          (buffer (current-buffer))
+          (name (buffer-name)))
+      (if (not (and filename (file-exists-p filename)))
+          (ido-kill-buffer)
+        (delete-file filename t)
+        (kill-buffer buffer)
+        (message "File '%s' successfully removed" filename))))
+#+END_SRC
+** rename-current-buffer-file
+Originally from [[http://whattheemacsd.com/file-defuns.el-01.html][Magnars]].
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun rename-current-buffer-file ()
+    "Renames current buffer and file it is visiting."
+    (interactive)
+    (let ((name (buffer-name))
+          (filename (buffer-file-name)))
+      (if (not (and filename (file-exists-p filename)))
+          (error "Buffer '%s' is not visiting a file!" name)
+        (let ((new-name (read-file-name "New name: " filename)))
+          (cond ((get-buffer new-name)
+                 (error "A buffer named '%s' already exists!" new-name))
+                (t
+                 (let ((dir (file-name-directory new-name)))
+                   (when (and (not (file-exists-p dir)) (yes-or-no-p (format "Create directory '%s'?" dir)))
+                     (make-directory dir t)))
+                 (rename-file filename new-name 1)
+                 (rename-buffer new-name)
+                 (set-visited-file-name new-name)
+                 (set-buffer-modified-p nil)
+                 (message "File '%s' successfully renamed to '%s'" name (file-name-nondirectory new-name))))))))
+#+END_SRC
 * conclusion
 Open this file
 #+BEGIN_SRC emacs-lisp :tangle yes
   (find-file "~/.emacs.d/init.org")
 #+END_SRC
 
-* [0/19] todos
+* [0/10] todos
 :PROPERTIES:
 :visibility: overview
 :END:
-** TODO :org: find out how to use orgmode tags properly
-Reference [[http://orgmode.org/manual/Tags.html][the org manual]].
-** TODO :annoy:org: don't allow 'org-edit-special' to clobber my window config
-** TODO :annoy: make something similar to esc's should-have functions
-** TODO :annoy: delete-that-newly-opened-window
-- add to movement hydra ("d"?)
 ** TODO :annoy: reopen-in-other-window
 - add to movement hydra ("o"?)
 ** TODO :annoy:org: add org fly-dictate minor mode
@@ -1220,19 +1278,10 @@ This should happen instead:
 #+END_SRC
 ** TODO :convenience: integrate semantic/srefactor with c/c++
 ** TODO :annoy: get smartparens to close quotes properly
-** TODO investigate req-package
-This will fix writegood-mode and org-mode dependencies.
-*** proposed solution
-One way to fix this is to use-package-ensure both packages but do not
-configure until both packages are installed. Lazy-configuration.
 ** TODO investigate projectile
 ** TODO investigate flx-ido
-** TODO :annoy: {mv,cp,rm}-current-buffer-file
-** TODO :convenience: add multi-term hydra
-** TODO :broken: fix smartparens
 ** TODO :annoy: fix capitalize-line-dwim
 This should capitalize the line except on articles and words which are
 already capitalized (e.g. already-capitalized acroynms)
-** TODO :smartparens: set up keyboard mapping for easy paren navigation
-** TODO :org:annoy: update the counters on save
-This is annoying as fuck
+** TODO :smartparens:c:python: set up keyboard mappings for block navigation
+Bind keys for smartparens-lisp-style navigation in other major-modes
