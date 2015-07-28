@@ -514,7 +514,8 @@ I always live on the cutting edge.
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun hb/configure-helm ()
     (hb/configure-helm-bindings)
-    (hb/configure-helm-preferences))
+    (hb/configure-helm-preferences)
+    (hb/configure-helm-advice))
 #+END_SRC
 *** preferences
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -581,6 +582,22 @@ I always live on the cutting edge.
     (setq helm-current-prefix-arg 4)
     (helm-buffer-run-zgrep))
 #+END_SRC
+**** helm-find-files-navigate-forward
+Thanks [[http://emacs.stackexchange.com/questions/3798/how-do-i-make-pressing-ret-in-helm-find-files-open-the-directory/7896#7896][Fu86]]!
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun fu/helm-find-files-navigate-forward (orig-fun &rest args)
+    (if (file-directory-p (helm-get-selection))
+        (apply orig-fun args)
+      (helm-maybe-exit-minibuffer)))
+#+END_SRC
+**** helm-find-files-navigate-back
+Thanks [[http://emacs.stackexchange.com/questions/3798/how-do-i-make-pressing-ret-in-helm-find-files-open-the-directory/7896#7896][Fu86]]!
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun fu/helm-find-files-navigate-back (orig-fun &rest args)
+    (if (= (length helm-pattern) (length (helm-find-files-initial-input)))
+        (helm-find-files-up-one-level 1)
+      (apply orig-fun args)))
+#+END_SRC
 *** bindings
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun hb/configure-helm-bindings ()
@@ -590,7 +607,17 @@ I always live on the cutting edge.
     (hb/bind-key "C-x C-f" 'helm-find-files)
     (hb/bind-key "M-i" 'helm-semantic-or-imenu)
     (hb/bind-key "C-h A" 'helm-apropos)
-    (hb/bind-key "M-x" 'helm-M-x))
+    (hb/bind-key "M-x" 'helm-M-x)
+    (hb/bind-key "RET" 'helm-execute-persistent-action helm-find-files-map)
+    (hb/bind-key "TAB" 'helm-execute-persistent-action helm-find-files-map))
+#+END_SRC
+*** advice
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun hb/configure-helm-advice ()
+    (advice-add 'helm-ff-delete-char-backward
+                :around #'fu/helm-find-files-navigate-back)
+    (advice-add 'helm-execute-persistent-action
+                :around #'fu/helm-find-files-navigate-forward))
 #+END_SRC
 *** package
 #+BEGIN_SRC emacs-lisp :tangle yes
