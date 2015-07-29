@@ -772,7 +772,7 @@ Thanks [[http://emacs.stackexchange.com/questions/3798/how-do-i-make-pressing-re
 #+END_SRC
 *** macros
 **** org-save
-=org-babel-tangle= will automatically save the buffer.
+Note: =org-babel-tangle= will automatically save the buffer.
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun org-save ()
     (interactive)
@@ -1198,7 +1198,7 @@ Originally from [[http://whattheemacsd.com/file-defuns.el-02.html][Magnars]], mo
           (ido-kill-buffer)
         (delete-file filename t)
         (kill-buffer buffer)
-        (message "File '%s' successfully removed" filename))))
+        (message "rm '%s'" filename))))
 #+END_SRC
 ** rename-current-buffer-file
 Originally from [[http://whattheemacsd.com/file-defuns.el-01.html][Magnars]].
@@ -1221,7 +1221,7 @@ Originally from [[http://whattheemacsd.com/file-defuns.el-01.html][Magnars]].
                  (rename-buffer new-name)
                  (set-visited-file-name new-name)
                  (set-buffer-modified-p nil)
-                 (message "File '%s' successfully renamed to '%s'" name (file-name-nondirectory new-name))))))))
+                 (message "mv '%s' '%s'" name (file-name-nondirectory new-name))))))))
 #+END_SRC
 * conclusion
 Open this file
