@@ -455,11 +455,41 @@ I always live on the cutting edge.
     :config (hb/configure-eval-sexp-fu))
 #+END_SRC
 ** expand-region
+*** bindings
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun hb/configure-expand-region-bindings ()
+    (hb/bind-key "C-=" 'er/expand-region)
+    (hb/bind-key "C-+" 'er/contract-region))
+#+END_SRC
+*** advice
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun hb/configure-expand-region-advice ()
+    (defadvice er/expand-region (around fill-out-region activate)
+      (if (or (not (region-active-p))
+              (eq last-command 'er/expand-region))
+          ad-do-it
+        (if (< (point) (mark))
+            (let ((beg (point)))
+              (goto-char (mark))
+              (end-of-line)
+              (forward-char 1)
+              (push-mark)
+              (goto-char beg)
+              (beginning-of-line))
+          (let ((end (point)))
+            (goto-char (mark))
+            (beginning-of-line)
+            (push-mark)
+            (goto-char end)
+            (end-of-line)
+            (forward-char 1))))))
+#+END_SRC
+*** package
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package-ensure expand-region
     :config
-    (hb/bind-key "C-=" 'er/expand-region)
-    (hb/bind-key "C-+" 'er/contract-region))
+    (hb/configure-expand-region-bindings)
+    (hb/configure-expand-region-advice))
 #+END_SRC
 ** fic-mode
 *** configuration
