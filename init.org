@@ -793,6 +793,30 @@ Thanks [[http://emacs.stackexchange.com/questions/3798/how-do-i-make-pressing-re
   (use-package-ensure multiple-cursors
     :config (hb/configure-mc))
 #+END_SRC
+** multi-term
+*** configuration
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun hb/configure-multi-term ()
+    (setq term-bind-key-alist
+          '(("C-n"           . term-send-down)
+            ("C-p"           . term-send-up)
+            ("C-s"           . term-send-raw)
+            ("C-r"           . term-send-raw)
+            ("C-y"           . term-paste)
+            ("M-DEL"         . term-send-backward-kill-word)
+            ("C-k"           . term-send-raw)
+            ("C-c C-z"       . term-stop-subjob)
+            ("C-z"           . term-stop-subjob)
+            ("C-c C-c"       . term-interrupt-subjob)
+            ("C-c C-a"       . term-send-home)
+            ("C-e"           . term-send-raw)))
+    (multi-term-keystroke-setup)
+#+END_SRC
+*** package
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package-ensure multi-term
+    :config)
+#+END_SRC
 ** org
 *** TODO capture
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1085,12 +1109,12 @@ Credits: @bbatsov, http://emacsredux.com/blog/2013/03/29/terminal-at-your-finger
   (defun visit-term-buffer ()
     "Create or visit a terminal buffer."
     (interactive)
-    (if (not (get-buffer "*ansi-term*"))
+    (if (not (get-buffer "*terminal<1>*"))
         (progn
           (split-window-sensibly (selected-window))
           (other-window 1)
-          (ansi-term (getenv "SHELL")))
-      (switch-to-buffer-other-window "*ansi-term*")))
+          (multi-term))
+      (switch-to-buffer-other-window "*terminal<1>*")))
   (hb/bind-key "C-c t" 'visit-term-buffer)
 #+END_SRC
 ** ido-goto-symbol
