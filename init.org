@@ -794,6 +794,13 @@ Thanks [[http://emacs.stackexchange.com/questions/3798/how-do-i-make-pressing-re
     :config (hb/configure-mc))
 #+END_SRC
 ** multi-term
+*** hook
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun hb/configure-multi-term-hook ()
+    ;; (bind-key "C-a" 'term-send-home term-mode-map)
+    ;; (bind-key "C-c C-a" 'term-send-home term-mode-map)
+    )
+#+END_SRC
 *** configuration
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun hb/configure-multi-term ()
@@ -806,16 +813,17 @@ Thanks [[http://emacs.stackexchange.com/questions/3798/how-do-i-make-pressing-re
             ("M-DEL"         . term-send-backward-kill-word)
             ("C-k"           . term-send-raw)
             ("C-c C-z"       . term-stop-subjob)
-            ("C-z"           . term-stop-subjob)
             ("C-c C-c"       . term-interrupt-subjob)
             ("C-c C-a"       . term-send-home)
             ("C-e"           . term-send-raw)))
     (multi-term-keystroke-setup)
+    (add-hook 'term-mode-hook 'hb/configure-multi-term-hook))
 #+END_SRC
 *** package
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package-ensure multi-term
-    :config)
+    :config
+    (hb/configure-multi-term))
 #+END_SRC
 ** org
 *** TODO capture
