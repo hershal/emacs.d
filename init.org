@@ -1101,16 +1101,16 @@ I want this to be everywhere except in Makefiles.
     (interactive)
     (scroll-down (window-half-height)))
 #+END_SRC
-** back-to-indentation-or-beginning
+** hb/c-a
 This frees up M-m by making C-a do double-duty as beginning-of-line
 and back-to-indentation
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (defun back-to-indentation-or-beginning ()
+  (defun hb/c-a ()
     (interactive)
-    (if (eq major-mode 'term-mode)
-        (term-send-raw)
-      (if (bolp) (back-to-indentation) (beginning-of-line))))
-  (hb/bind-key "C-a" 'back-to-indentation-or-beginning)
+    (case major-mode
+      (term-mode (term-send-raw))
+      (eshell-mode (eshell-bol))))
+  (hb/bind-key "C-a" 'hb/c-a)
 #+END_SRC
 ** visit-term-buffer
 Quickly visit an open term buffer
