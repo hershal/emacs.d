@@ -1109,7 +1109,8 @@ and back-to-indentation
     (interactive)
     (case major-mode
       (term-mode (term-send-raw))
-      (eshell-mode (eshell-bol))))
+      (eshell-mode (eshell-bol))
+      (t (if (bolp) (back-to-indentation) (beginning-of-line)))))
   (hb/bind-key "C-a" 'hb/c-a)
 #+END_SRC
 ** visit-term-buffer
