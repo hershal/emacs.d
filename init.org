@@ -1107,7 +1107,9 @@ and back-to-indentation
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun back-to-indentation-or-beginning ()
     (interactive)
-    (if (bolp) (back-to-indentation) (beginning-of-line)))
+    (if (eq major-mode 'term-mode)
+        (term-send-raw)
+      (if (bolp) (back-to-indentation) (beginning-of-line))))
   (hb/bind-key "C-a" 'back-to-indentation-or-beginning)
 #+END_SRC
 ** visit-term-buffer
