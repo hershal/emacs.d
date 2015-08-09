@@ -76,8 +76,8 @@ Set up hb-mode and hb-mode-map.
 #+END_SRC
 ** faces
 These are some faces that I like to skip around in sometimes. I mainly
-use either Menlo of courier these days, but maybe sometime I'd like to
-try out others. This makes trying out fonts easy.
+use either Menlo or Courier these days, sometimes I like to try out
+others. This makes switching out fonts easy.
 
 *** hb/set-frame-font
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -154,14 +154,17 @@ that version of bash.
     (hb/bind-key "s-U" 'vc-revert))
 #+END_SRC
 ** w32
+Windows is stupid.
+
 #+BEGIN_SRC emacs-lisp :tangle yes
   (if (equal window-system 'w32)
       (menu-bar-mode 0))
 #+END_SRC
 * general
 ** window-system
-These usually exist when using a window system. Let's make that not
-so.
+GUI elements usually clutter the entire environment. Let's remove all
+of that nonsense.
+
 #+BEGIN_SRC emacs-lisp :tangle yes
   (if (window-system)
       (progn (scroll-bar-mode 0)
@@ -1103,7 +1106,7 @@ I want this to be everywhere except in Makefiles.
 #+END_SRC
 ** hb/c-a
 This frees up M-m by making C-a do double-duty as beginning-of-line
-and back-to-indentation
+and back-to-indentation. Term-mode and eshell-mode are special-cased.
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun hb/c-a ()
     (interactive)
