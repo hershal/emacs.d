@@ -815,6 +815,7 @@ Thanks [[http://emacs.stackexchange.com/questions/3798/how-do-i-make-pressing-re
             ("C-s"           . term-send-raw)
             ("C-r"           . term-send-raw)
             ("C-y"           . term-paste)
+            ("C-<backspace>" . term-send-backward-kill-word)
             ("M-DEL"         . term-send-backward-kill-word)
             ("C-k"           . term-send-raw)
             ("C-c C-z"       . term-stop-subjob)
