@@ -807,6 +807,8 @@ Thanks [[http://emacs.stackexchange.com/questions/3798/how-do-i-make-pressing-re
     (setq term-bind-key-alist
           '(("C-n"           . term-send-down)
             ("C-p"           . term-send-up)
+            ("M-f"           . term-send-forward-word)
+            ("M-b"           . term-send-backward-word)
             ("C-s"           . term-send-raw)
             ("C-r"           . term-send-raw)
             ("C-y"           . term-paste)
