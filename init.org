@@ -76,8 +76,8 @@ Set up hb-mode and hb-mode-map.
 #+END_SRC
 ** faces
 These are some faces that I like to skip around in sometimes. I mainly
-use either Menlo of courier these days, but maybe sometime I'd like to
-try out others. This makes trying out fonts easy.
+use either Menlo or Courier these days, sometimes I like to try out
+others. This makes switching out fonts easy.
 
 *** hb/set-frame-font
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -154,14 +154,17 @@ that version of bash.
     (hb/bind-key "s-U" 'vc-revert))
 #+END_SRC
 ** w32
+Windows is stupid.
+
 #+BEGIN_SRC emacs-lisp :tangle yes
   (if (equal window-system 'w32)
       (menu-bar-mode 0))
 #+END_SRC
 * general
 ** window-system
-These usually exist when using a window system. Let's make that not
-so.
+GUI elements usually clutter the entire environment. Let's remove all
+of that nonsense.
+
 #+BEGIN_SRC emacs-lisp :tangle yes
   (if (window-system)
       (progn (scroll-bar-mode 0)
@@ -948,7 +951,8 @@ Thanks [[http://whattheemacsd.com/my-misc.el-02.html][Magnar]]!
 *** configuration
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun hb/configure-smartparens ()
-    (setq sp-paredit-bindings (acons "M-j" 'sp-join-sexp sp-paredit-bindings))
+    (setq sp-paredit-bindings (acons "M-j" 'sp-join-sexp sp-paredit-bindings)
+          sp-hybrid-kill-excessive-whitespace t)
     (sp-use-paredit-bindings)
     (hb/configure-smartparens-bindings))
 #+END_SRC
@@ -1103,14 +1107,17 @@ I want this to be everywhere except in Makefiles.
     (interactive)
     (scroll-down (window-half-height)))
 #+END_SRC
-** back-to-indentation-or-beginning
+** hb/c-a
 This frees up M-m by making C-a do double-duty as beginning-of-line
-and back-to-indentation
+and back-to-indentation. Term-mode and eshell-mode are special-cased.
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (defun back-to-indentation-or-beginning ()
+  (defun hb/c-a ()
     (interactive)
-    (if (bolp) (back-to-indentation) (beginning-of-line)))
-  (hb/bind-key "C-a" 'back-to-indentation-or-beginning)
+    (case major-mode
+      (term-mode (term-send-raw))
+      (eshell-mode (eshell-bol))
+      (t (if (bolp) (back-to-indentation) (beginning-of-line)))))
+  (hb/bind-key "C-a" 'hb/c-a)
 #+END_SRC
 ** visit-term-buffer
 Quickly visit an open term buffer
