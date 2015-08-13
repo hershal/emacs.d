@@ -418,7 +418,7 @@ general-general.
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun hb/configure-company-backends ()
     (setq company-backends (delete 'company-dabbrev-code company-backends))
-    (mapcar (lambda (backend) (add-to-list 'company-backends backend))
+    (mapc (lambda (backend) (add-to-list 'company-backends backend))
             '(company-c-headers company-irony)))
 #+END_SRC
 **** company-clang
@@ -981,7 +981,7 @@ Thanks [[http://whattheemacsd.com/my-misc.el-02.html][Magnar]]!
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package-ensure web-mode
     :config
-    (mapcar (lambda (extension) (add-to-list 'auto-mode-alist (cons (concat "\\." extension "\\'") 'web-mode)))
+    (mapc (lambda (extension) (add-to-list 'auto-mode-alist (cons (concat "\\." extension "\\'") 'web-mode)))
             '("djhtml" "mustache" "erb" "as[cp]x" "[agj]sp" "tpl\\.php" "phtml" "html?")))
 #+END_SRC
 ** winner
@@ -1024,7 +1024,7 @@ Thanks [[http://whattheemacsd.com/my-misc.el-02.html][Magnar]]!
   (defun hb/configure-lisp-mode-hook ()
     (sp-local-pair major-mode "'" nil :actions nil)
     (sp-local-pair major-mode "`" nil :actions nil))
-  (mapcar (lambda (hook)
+  (mapc (lambda (hook)
             (add-hook hook 'smartparens-strict-mode)
             (add-hook hook 'hb/configure-lisp-mode-hook))
           '(emacs-lisp-mode-hook lisp-mode-hook lisp-interaction-mode-hook))
