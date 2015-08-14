@@ -123,21 +123,20 @@ preferred font that exists on the current system. I also bind some
 keys and remove the menu-bar.
 
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (if (equal window-system 'x)
-      (progn
-        (cond
-         ((find-font (font-spec :name "Menlo"))
-          (menlo-face))
-         ((find-font (font-spec :name "Meslo LG S"))
-          (meslo-face))
-         ((find-font (font-spec :name "Bitstream Vera Sans Mono"))
-          (bitstream-face))
-         ((find-font (font-spec :name "-adobe-courier-medium-r-normal-*-*-*-100-100-*-60-iso10646-1"))
-          (courier-face)))
-        (hb/bind-key "s-u" 'revert-buffer)
-        (hb/bind-key "s-U" 'vc-revert)
-        (hb/bind-key "s-L" 'goto-line)
-        (menu-bar-mode 0)))
+  (defun hb/configure-os-linux ()
+      (cond
+       ((find-font (font-spec :name "Menlo"))
+        (menlo-face))
+       ((find-font (font-spec :name "Meslo LG S"))
+        (meslo-face))
+       ((find-font (font-spec :name "Bitstream Vera Sans Mono"))
+        (bitstream-face))
+       ((find-font (font-spec :name "-adobe-courier-medium-r-normal-*-*-*-100-100-*-60-iso10646-1"))
+        (courier-face)))
+    (hb/bind-key "s-u" 'revert-buffer)
+    (hb/bind-key "s-U" 'vc-revert)
+    (hb/bind-key "s-L" 'goto-line)
+    (menu-bar-mode 0))
 #+END_SRC
 ** osx
 On OSX, I decrease the font size and turn on the menu-bar since it
@@ -145,20 +144,19 @@ doesn't impact screen real-estate. If ports is in use, I try to use
 that version of bash.
 
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (if (equal window-system 'ns)
-      (progn
-        (hb/set-frame-font "Menlo" 10)
-        (menu-bar-mode 1)
-        (if (file-exists-p "/opt/local/bin/bash")
-            (setq shell-file-name "/opt/local/bin/bash")))
+  (defun hb/configure-os-osx ()
+    (hb/set-frame-font "Menlo" 10)
+    (menu-bar-mode 1)
+    (if (file-exists-p "/opt/local/bin/bash")
+        (setq shell-file-name "/opt/local/bin/bash"))
     (hb/bind-key "s-U" 'vc-revert))
 #+END_SRC
 ** w32
 Windows is stupid.
 
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (if (equal window-system 'w32)
-      (menu-bar-mode 0))
+  (defun hb/configure-os-win ()
+    (menu-bar-mode 0))
 #+END_SRC
 * general
 ** window-system
@@ -166,11 +164,17 @@ GUI elements usually clutter the entire environment. Let's remove all
 of that nonsense.
 
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (if (window-system)
-      (progn (scroll-bar-mode 0)
-             (tool-bar-mode 0)
-             (blink-cursor-mode 0)
-             (set-fringe-mode 0)))
+  (defun hb/configure-window-system ()
+    (if (window-system)
+        (progn (scroll-bar-mode 0)
+               (tool-bar-mode 0)
+               (blink-cursor-mode 0)
+               (set-fringe-mode 0)))
+    (case (window-system)
+      (x (hb/configure-os-linux))
+      (ns (hb/configure-os-osx))
+      (w32 (hb/configure-os-win))))
+  (hb/configure-window-system)
 #+END_SRC
 ** portables
 Activate display-battery-mode. Not sure what happens when I'm on a
