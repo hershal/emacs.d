@@ -164,6 +164,7 @@ GUI elements usually clutter the entire environment. Let's remove all
 of that nonsense.
 
 #+BEGIN_SRC emacs-lisp :tangle yes
+  (require 'cl)
   (defun hb/configure-window-system ()
     (if (window-system)
         (progn (scroll-bar-mode 0)
