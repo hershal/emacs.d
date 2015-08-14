@@ -797,6 +797,15 @@ Thanks [[http://emacs.stackexchange.com/questions/3798/how-do-i-make-pressing-re
     :config (hb/configure-mc))
 #+END_SRC
 ** multi-term
+*** macros
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun term-switch-mode ()
+    (interactive)
+    (if (term-in-char-mode)
+      (term-line-mode)
+      (term-char-mode)))
+  (bind-key "C-j" 'term-switch-mode term-mode-map)
+#+END_SRC
 *** hook
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun hb/configure-multi-term-hook ()
