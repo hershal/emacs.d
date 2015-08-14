@@ -809,7 +809,6 @@ Thanks [[http://emacs.stackexchange.com/questions/3798/how-do-i-make-pressing-re
     (if (term-in-char-mode)
       (term-line-mode)
       (term-char-mode)))
-  (bind-key "C-j" 'term-switch-mode term-mode-map)
 #+END_SRC
 *** hook
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -837,7 +836,8 @@ Thanks [[http://emacs.stackexchange.com/questions/3798/how-do-i-make-pressing-re
             ("C-c C-a"       . term-send-home)
             ("C-e"           . term-send-raw)))
     (multi-term-keystroke-setup)
-    (add-hook 'term-mode-hook 'hb/configure-multi-term-hook))
+    (add-hook 'term-mode-hook 'hb/configure-multi-term-hook)
+    (bind-key "C-j" 'term-switch-mode term-mode-map))
 #+END_SRC
 *** package
 #+BEGIN_SRC emacs-lisp :tangle yes
