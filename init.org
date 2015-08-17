@@ -307,14 +307,14 @@ general-general.
     (setq scroll-amount 10)
     (defhydra hb/hydra-movement (hb-mode-map "M-m" :color red)
       "movement"
-      ("j"     (scroll-up scroll-amount)     "down")
-      ("k"     (scroll-down scroll-amount)   "up")
-      ("f"     hb/scroll-up-halfpage         "down half")
-      ("b"     hb/scroll-down-halfpage       "up half")
-      ("SPC"   scroll-up                     "down full")
-      ("S-SPC" scroll-down                   "up full")
-      ("/"     isearch-forward               "isearch")
-      ("r"     rotate-frame-clockwise        "rotclk")))
+      ("j"     (scroll-up-command scroll-amount)    "down")
+      ("k"     (scroll-down-command scroll-amount)  "up")
+      ("f"     hb/scroll-up-halfpage                "down half")
+      ("b"     hb/scroll-down-halfpage              "up half")
+      ("SPC"   scroll-up-command                    "down full")
+      ("S-SPC" scroll-down-command                  "up full")
+      ("/"     isearch-forward                      "isearch")
+      ("r"     rotate-frame-clockwise               "rotclk")))
 #+END_SRC
 *** fold-this
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1116,11 +1116,11 @@ I want this to be everywhere except in Makefiles.
 
   (defun hb/scroll-up-halfpage ()
     (interactive)
-    (scroll-up (window-half-height)))
+    (scroll-up-command (window-half-height)))
 
   (defun hb/scroll-down-halfpage ()
     (interactive)
-    (scroll-down (window-half-height)))
+    (scroll-down-command (window-half-height)))
 #+END_SRC
 ** hb/c-a
 This frees up M-m by making C-a do double-duty as beginning-of-line
@@ -1316,7 +1316,7 @@ Open this file
   (find-file "~/.emacs.d/init.org")
 #+END_SRC
 
-* [0/10] todos
+* [0/11] todos
 :PROPERTIES:
 :visibility: overview
 :END:
@@ -1373,3 +1373,4 @@ This should capitalize the line except on articles and words which are
 already capitalized (e.g. already-capitalized acroynms)
 ** TODO :smartparens:c:python: set up keyboard mappings for block navigation
 Bind keys for smartparens-lisp-style navigation in other major-modes
+** TODO :annoy: fix scroll-up-command
