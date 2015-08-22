@@ -364,10 +364,13 @@ general-general.
 ** bliss-theme
 *** configuration
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (defun hb/configure-bliss ()
-    (set-face-attribute 'highlight nil :foreground 'nil :underline 'nil :background "#222222")
-    (set-background-color "#000000")
-    (set-foreground-color "#f0ffff"))
+  (defun hb/configure-bliss (&optional frame)
+    (let ((the-frame (if frame frame (selected-frame))))
+      (with-selected-frame the-frame
+        (set-face-attribute 'highlight nil :foreground 'nil :underline 'nil :background "#222222")
+        (set-background-color "#000000")
+        (set-foreground-color "#f0ffff"))))
+  (add-hook 'after-make-frame-functions 'hb/configure-bliss)
 #+END_SRC
 **** package
 #+BEGIN_SRC emacs-lisp :tangle yes
