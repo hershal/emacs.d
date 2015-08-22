@@ -1,6 +1,11 @@
-/.mc-lists.el
+/*.el
 /ac-comphist.dat
 /auto-save-list/
 /elpa/
-/init.el
-/spacemacs.el
+/bookmarks
+/semanticdb
+/recentf
+/history
+/url
+/eshell
+/ido.last

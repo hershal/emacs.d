@@ -76,8 +76,8 @@ Set up hb-mode and hb-mode-map.
 #+END_SRC
 ** faces
 These are some faces that I like to skip around in sometimes. I mainly
-use either Menlo of courier these days, but maybe sometime I'd like to
-try out others. This makes trying out fonts easy.
+use either Menlo or Courier these days, sometimes I like to try out
+others. This makes switching out fonts easy.
 
 *** hb/set-frame-font
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -123,21 +123,20 @@ preferred font that exists on the current system. I also bind some
 keys and remove the menu-bar.
 
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (if (equal window-system 'x)
-      (progn
-        (cond
-         ((find-font (font-spec :name "Menlo"))
-          (menlo-face))
-         ((find-font (font-spec :name "Meslo LG S"))
-          (meslo-face))
-         ((find-font (font-spec :name "Bitstream Vera Sans Mono"))
-          (bitstream-face))
-         ((find-font (font-spec :name "-adobe-courier-medium-r-normal-*-*-*-100-100-*-60-iso10646-1"))
-          (courier-face)))
-        (hb/bind-key "s-u" 'revert-buffer)
-        (hb/bind-key "s-U" 'vc-revert)
-        (hb/bind-key "s-L" 'goto-line)
-        (menu-bar-mode 0)))
+  (defun hb/configure-os-linux ()
+      (cond
+       ((find-font (font-spec :name "Menlo"))
+        (menlo-face))
+       ((find-font (font-spec :name "Meslo LG S"))
+        (meslo-face))
+       ((find-font (font-spec :name "Bitstream Vera Sans Mono"))
+        (bitstream-face))
+       ((find-font (font-spec :name "-adobe-courier-medium-r-normal-*-*-*-100-100-*-60-iso10646-1"))
+        (courier-face)))
+    (hb/bind-key "s-u" 'revert-buffer)
+    (hb/bind-key "s-U" 'vc-revert)
+    (hb/bind-key "s-L" 'goto-line)
+    (menu-bar-mode 0))
 #+END_SRC
 ** osx
 On OSX, I decrease the font size and turn on the menu-bar since it
@@ -145,29 +144,38 @@ doesn't impact screen real-estate. If ports is in use, I try to use
 that version of bash.
 
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (if (equal window-system 'ns)
-      (progn
-        (hb/set-frame-font "Menlo" 10)
-        (menu-bar-mode 1)
-        (if (file-exists-p "/opt/local/bin/bash")
-            (setq shell-file-name "/opt/local/bin/bash")))
+  (defun hb/configure-os-osx ()
+    (hb/set-frame-font "Menlo" 10)
+    (menu-bar-mode 1)
+    (if (file-exists-p "/opt/local/bin/bash")
+        (setq shell-file-name "/opt/local/bin/bash"))
     (hb/bind-key "s-U" 'vc-revert))
 #+END_SRC
 ** w32
+Windows is stupid.
+
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (if (equal window-system 'w32)
-      (menu-bar-mode 0))
+  (defun hb/configure-os-win ()
+    (menu-bar-mode 0))
 #+END_SRC
 * general
 ** window-system
-These usually exist when using a window system. Let's make that not
-so.
+GUI elements usually clutter the entire environment. Let's remove all
+of that nonsense.
+
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (if (window-system)
-      (progn (scroll-bar-mode 0)
-             (tool-bar-mode 0)
-             (blink-cursor-mode 0)
-             (set-fringe-mode 0)))
+  (require 'cl)
+  (defun hb/configure-window-system ()
+    (if (window-system)
+        (progn (scroll-bar-mode 0)
+               (tool-bar-mode 0)
+               (blink-cursor-mode 0)
+               (set-fringe-mode 0)))
+    (case (window-system)
+      (x (hb/configure-os-linux))
+      (ns (hb/configure-os-osx))
+      (w32 (hb/configure-os-win))))
+  (hb/configure-window-system)
 #+END_SRC
 ** portables
 Activate display-battery-mode. Not sure what happens when I'm on a
@@ -418,7 +426,7 @@ general-general.
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun hb/configure-company-backends ()
     (setq company-backends (delete 'company-dabbrev-code company-backends))
-    (mapcar (lambda (backend) (add-to-list 'company-backends backend))
+    (mapc (lambda (backend) (add-to-list 'company-backends backend))
             '(company-c-headers company-irony)))
 #+END_SRC
 **** company-clang
@@ -458,11 +466,41 @@ I always live on the cutting edge.
     :config (hb/configure-eval-sexp-fu))
 #+END_SRC
 ** expand-region
+*** bindings
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun hb/configure-expand-region-bindings ()
+    (hb/bind-key "C-=" 'er/expand-region)
+    (hb/bind-key "C-+" 'er/contract-region))
+#+END_SRC
+*** advice
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun hb/configure-expand-region-advice ()
+    (defadvice er/expand-region (around fill-out-region activate)
+      (if (or (not (region-active-p))
+              (eq last-command 'er/expand-region))
+          ad-do-it
+        (if (< (point) (mark))
+            (let ((beg (point)))
+              (goto-char (mark))
+              (end-of-line)
+              (forward-char 1)
+              (push-mark)
+              (goto-char beg)
+              (beginning-of-line))
+          (let ((end (point)))
+            (goto-char (mark))
+            (beginning-of-line)
+            (push-mark)
+            (goto-char end)
+            (end-of-line)
+            (forward-char 1))))))
+#+END_SRC
+*** package
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package-ensure expand-region
     :config
-    (hb/bind-key "C-=" 'er/expand-region)
-    (hb/bind-key "C-+" 'er/contract-region))
+    (hb/configure-expand-region-bindings)
+    (hb/configure-expand-region-advice))
 #+END_SRC
 ** fic-mode
 *** configuration
@@ -613,8 +651,9 @@ Thanks [[http://emacs.stackexchange.com/questions/3798/how-do-i-make-pressing-re
     (hb/bind-key "M-i" 'helm-semantic-or-imenu)
     (hb/bind-key "C-h A" 'helm-apropos)
     (hb/bind-key "M-x" 'helm-M-x)
-    (hb/bind-key "RET" 'helm-execute-persistent-action helm-find-files-map)
-    (hb/bind-key "TAB" 'helm-execute-persistent-action helm-find-files-map))
+    (after 'helm-files
+          (hb/bind-key "RET" 'helm-execute-persistent-action helm-find-files-map)
+          (hb/bind-key "TAB" 'helm-execute-persistent-action helm-find-files-map)))
 #+END_SRC
 *** advice
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -766,6 +805,50 @@ Thanks [[http://emacs.stackexchange.com/questions/3798/how-do-i-make-pressing-re
   (use-package-ensure multiple-cursors
     :config (hb/configure-mc))
 #+END_SRC
+** multi-term
+*** macros
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun term-switch-mode ()
+    (interactive)
+    (if (term-in-char-mode)
+      (term-line-mode)
+      (term-char-mode)))
+#+END_SRC
+*** hook
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun hb/configure-multi-term-hook ()
+    ;; (bind-key "C-a" 'term-send-home term-mode-map)
+    ;; (bind-key "C-c C-a" 'term-send-home term-mode-map)
+    )
+#+END_SRC
+*** configuration
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun hb/configure-multi-term ()
+    (setq term-bind-key-alist
+          '(("C-n"           . term-send-down)
+            ("C-p"           . term-send-up)
+            ("M-f"           . term-send-forward-word)
+            ("M-b"           . term-send-backward-word)
+            ("C-s"           . term-send-raw)
+            ("C-r"           . term-send-raw)
+            ("C-y"           . term-paste)
+            ("C-<backspace>" . term-send-backward-kill-word)
+            ("M-DEL"         . term-send-backward-kill-word)
+            ("C-k"           . term-send-raw)
+            ("C-c C-z"       . term-stop-subjob)
+            ("C-c C-c"       . term-interrupt-subjob)
+            ("C-c C-a"       . term-send-home)
+            ("C-e"           . term-send-raw)))
+    (multi-term-keystroke-setup)
+    (add-hook 'term-mode-hook 'hb/configure-multi-term-hook)
+    (bind-key "C-j" 'term-switch-mode term-mode-map))
+#+END_SRC
+*** package
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package-ensure multi-term
+    :config
+    (hb/configure-multi-term))
+#+END_SRC
 ** org
 *** TODO capture
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -887,7 +970,8 @@ Thanks [[http://whattheemacsd.com/my-misc.el-02.html][Magnar]]!
 *** configuration
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun hb/configure-smartparens ()
-    (setq sp-paredit-bindings (acons "M-j" 'sp-join-sexp sp-paredit-bindings))
+    (setq sp-paredit-bindings (acons "M-j" 'sp-join-sexp sp-paredit-bindings)
+          sp-hybrid-kill-excessive-whitespace t)
     (sp-use-paredit-bindings)
     (hb/configure-smartparens-bindings))
 #+END_SRC
@@ -932,7 +1016,7 @@ Reference
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package-ensure web-mode
     :config
-    (mapcar (lambda (extension) (add-to-list 'auto-mode-alist (cons (concat "\\." extension "\\'") 'web-mode)))
+    (mapc (lambda (extension) (add-to-list 'auto-mode-alist (cons (concat "\\." extension "\\'") 'web-mode)))
             '("djhtml" "mustache" "erb" "as[cp]x" "[agj]sp" "tpl\\.php" "phtml" "html?")))
 #+END_SRC
 ** winner
@@ -975,7 +1059,7 @@ Reference
   (defun hb/configure-lisp-mode-hook ()
     (sp-local-pair major-mode "'" nil :actions nil)
     (sp-local-pair major-mode "`" nil :actions nil))
-  (mapcar (lambda (hook)
+  (mapc (lambda (hook)
             (add-hook hook 'smartparens-strict-mode)
             (add-hook hook 'hb/configure-lisp-mode-hook))
           '(emacs-lisp-mode-hook lisp-mode-hook lisp-interaction-mode-hook))
@@ -1066,14 +1150,17 @@ I want this to be everywhere except in Makefiles.
     (interactive)
     (scroll-down (window-half-height)))
 #+END_SRC
-** back-to-indentation-or-beginning
+** hb/c-a
 This frees up M-m by making C-a do double-duty as beginning-of-line
-and back-to-indentation
+and back-to-indentation. Term-mode and eshell-mode are special-cased.
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (defun back-to-indentation-or-beginning ()
+  (defun hb/c-a ()
     (interactive)
-    (if (bolp) (back-to-indentation) (beginning-of-line)))
-  (hb/bind-key "C-a" 'back-to-indentation-or-beginning)
+    (case major-mode
+      (term-mode (term-send-raw))
+      (eshell-mode (eshell-bol))
+      (t (if (bolp) (back-to-indentation) (beginning-of-line)))))
+  (hb/bind-key "C-a" 'hb/c-a)
 #+END_SRC
 ** visit-term-buffer
 Quickly visit an open term buffer
@@ -1082,12 +1169,12 @@ Credits: @bbatsov, http://emacsredux.com/blog/2013/03/29/terminal-at-your-finger
   (defun visit-term-buffer ()
     "Create or visit a terminal buffer."
     (interactive)
-    (if (not (get-buffer "*ansi-term*"))
+    (if (not (get-buffer "*terminal<1>*"))
         (progn
           (split-window-sensibly (selected-window))
           (other-window 1)
-          (ansi-term (getenv "SHELL")))
-      (switch-to-buffer-other-window "*ansi-term*")))
+          (multi-term))
+      (switch-to-buffer-other-window "*terminal<1>*")))
   (hb/bind-key "C-c t" 'visit-term-buffer)
 #+END_SRC
 ** ido-goto-symbol
