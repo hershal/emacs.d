@@ -902,6 +902,23 @@ Thanks [[http://whattheemacsd.com/my-misc.el-02.html][Magnar]]!
     (show-smartparens-global-mode)
     (hb/configure-smartparens))
 #+END_SRC
+** TODO swift
+I need to configure more stuff here:
+- flycheck
+- cask?
+- imenu
+- [[https://github.com/roupam/fruitstrap][fruitstrap]] [[http://roupam.github.io/#sec-5][configuration here]]
+Reference
+*** configuration
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun hb/configure-swift ()
+    (add-to-list 'flycheck-checkers 'swift))
+#+END_SRC
+*** package
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package-ensure swift-mode
+    :config (hb/configure-swift))
+#+END_SRC
 ** transpose-frame
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package-ensure transpose-frame
@@ -969,6 +986,13 @@ Thanks [[http://whattheemacsd.com/my-misc.el-02.html][Magnar]]!
     (writegood-mode 1)
     (company-mode 0))
   (add-hook 'org-mode-hook 'hb/configure-org-mode-hook)
+#+END_SRC
+** swift
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun hb/configure-swift-mode-hook ()
+    (setq comment-start "/* "
+          comment-end " */"))
+  (add-hook 'swift-mode-hook 'hb/configure-swift-mode-hook)
 #+END_SRC
 * macros
 ** hb/quotemeta
