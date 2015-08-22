@@ -602,6 +602,7 @@ Thanks [[http://emacs.stackexchange.com/questions/3798/how-do-i-make-pressing-re
 *** bindings
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun hb/configure-helm-bindings ()
+    (require 'helm-files)
     (hb/bind-key "C-x b" 'hb/helm-power-buffer-list)
     (hb/bind-key "C-x B" 'hb/helm-same-mode-buffers)
     (hb/bind-key "M-y" 'helm-show-kill-ring)
