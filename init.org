@@ -871,6 +871,7 @@ Note: =org-babel-tangle= will automatically save the buffer.
           org-startup-folded 'content
           org-log-into-drawer "LOGBOOK"
           org-use-sub-superscripts '{}
+          org-export-with-sub-superscripts nil
           org-refile-targets '((nil :maxlevel . 3)
                                (org-agenda-files :maxlevel . 3)))
     (after 'org-indent
