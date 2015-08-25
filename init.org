@@ -372,10 +372,13 @@ general-general.
 ** bliss-theme
 *** configuration
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (defun hb/configure-bliss ()
-    (set-face-attribute 'highlight nil :foreground 'nil :underline 'nil :background "#222222")
-    (set-background-color "#000000")
-    (set-foreground-color "#f0ffff"))
+  (defun hb/configure-bliss (&optional frame)
+    (let ((the-frame (if frame frame (selected-frame))))
+      (with-selected-frame the-frame
+        (set-face-attribute 'highlight nil :foreground 'nil :underline 'nil :background "#222222")
+        (set-background-color "#000000")
+        (set-foreground-color "#f0ffff"))))
+  (add-hook 'after-make-frame-functions 'hb/configure-bliss)
 #+END_SRC
 **** package
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -639,6 +642,7 @@ Thanks [[http://emacs.stackexchange.com/questions/3798/how-do-i-make-pressing-re
 *** bindings
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun hb/configure-helm-bindings ()
+    (require 'helm-files)
     (hb/bind-key "C-x b" 'hb/helm-power-buffer-list)
     (hb/bind-key "C-x B" 'hb/helm-same-mode-buffers)
     (hb/bind-key "M-y" 'helm-show-kill-ring)
@@ -986,6 +990,23 @@ Thanks [[http://whattheemacsd.com/my-misc.el-02.html][Magnar]]!
     (show-smartparens-global-mode)
     (hb/configure-smartparens))
 #+END_SRC
+** TODO swift
+I need to configure more stuff here:
+- flycheck
+- cask?
+- imenu
+- [[https://github.com/roupam/fruitstrap][fruitstrap]] [[http://roupam.github.io/#sec-5][configuration here]]
+Reference
+*** configuration
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun hb/configure-swift ()
+    (add-to-list 'flycheck-checkers 'swift))
+#+END_SRC
+*** package
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package-ensure swift-mode
+    :config (hb/configure-swift))
+#+END_SRC
 ** transpose-frame
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package-ensure transpose-frame
@@ -1053,6 +1074,13 @@ Thanks [[http://whattheemacsd.com/my-misc.el-02.html][Magnar]]!
     (writegood-mode 1)
     (company-mode 0))
   (add-hook 'org-mode-hook 'hb/configure-org-mode-hook)
+#+END_SRC
+** swift
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun hb/configure-swift-mode-hook ()
+    (setq comment-start "/* "
+          comment-end " */"))
+  (add-hook 'swift-mode-hook 'hb/configure-swift-mode-hook)
 #+END_SRC
 * macros
 ** hb/quotemeta
