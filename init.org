@@ -538,8 +538,7 @@ I always live on the cutting edge.
 #+END_SRC
 ** function-args
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (use-package-ensure function-args
-    :config (fa-config-default))
+  (use-package-ensure function-args)
 #+END_SRC
 ** graphviz-dot-mode
 #+BEGIN_SRC emacs-lisp :tangle yes
