@@ -290,7 +290,6 @@ general-general.
   (toggle-truncate-lines 1)
   (column-number-mode 1)
   (size-indication-mode 1)
-  (set-cursor-color "Red")
 #+END_SRC
 
 ** hydras
@@ -375,7 +374,8 @@ general-general.
   (defun hb/configure-bliss ()
     (set-face-attribute 'highlight nil :foreground 'nil :underline 'nil :background "#222222")
     (set-background-color "#000000")
-    (set-foreground-color "#f0ffff"))
+    (set-foreground-color "#f0ffff")
+    (set-cursor-color "Red"))
 #+END_SRC
 **** package
 #+BEGIN_SRC emacs-lisp :tangle yes
