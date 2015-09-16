@@ -392,6 +392,10 @@ general-general.
   (use-package-ensure bury-successful-compilation
     :config (bury-successful-compilation))
 #+END_SRC
+** cmake
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package-ensure cmake-mode)
+#+END_SRC
 ** company-c-headers
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package-ensure company-c-headers)
