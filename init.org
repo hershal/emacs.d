@@ -652,7 +652,8 @@ Thanks [[http://emacs.stackexchange.com/questions/3798/how-do-i-make-pressing-re
     (hb/bind-key "M-x" 'helm-M-x)
     (after 'helm-files
           (hb/bind-key "RET" 'helm-execute-persistent-action helm-find-files-map)
-          (hb/bind-key "TAB" 'helm-execute-persistent-action helm-find-files-map)))
+          (hb/bind-key "TAB" 'helm-execute-persistent-action helm-find-files-map)
+          (hb/bind-key "C-c C-d" '(lambda () (interactive) (helm-select-nth-action 0)) helm-find-files-map)))
 #+END_SRC
 *** advice
 #+BEGIN_SRC emacs-lisp :tangle yes
